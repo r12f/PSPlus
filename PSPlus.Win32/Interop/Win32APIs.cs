@@ -5,10 +5,11 @@ namespace PSPlus.Win32.Interop
 {
     public unsafe static class Win32APIs
     {
-        // Attributes
+        // Destory
         [DllImport("user32.dll")]
         public static extern bool DestroyWindow(IntPtr hwnd);
 
+        // Attributes
         [DllImport("user32.dll")]
         public static extern int GetWindowLong(IntPtr hwnd, int nIndex);
 
@@ -27,15 +28,86 @@ namespace PSPlus.Win32.Interop
         [DllImport("user32.dll")]
         public static extern ushort SetWindowWord(IntPtr hwnd, int nIndex, ushort wNewWord);
 
+        // Window State Functions
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        public static extern bool IsWindowEnabled(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern bool EnableWindow(IntPtr hwnd, bool bEnable);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetActiveWindow();
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetActiveWindow(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetCapture();
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetCapture(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetFocus();
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetFocus(IntPtr hwnd);
+
+        // Window Access Functions
+        [DllImport("user32.dll")]
+        public static extern IntPtr WindowFromPoint(Win32Point Point);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr ChildWindowFromPoint(IntPtr hwnd, Win32Point point);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr ChildWindowFromPointEx(IntPtr hwnd, Win32Point point, uint uFlags);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetTopWindow(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetWindow(IntPtr hwnd, uint nCmd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetLastActivePopup(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern bool IsChild(IntPtr hwnd, IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetParent(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetParent(IntPtr hwnd, IntPtr hWndNewParent);
+
         // Message Functions
         [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessageA(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll")]
-        public static extern bool PostMessage(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessageW(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll")]
-        public static extern bool SendNotifyMessage(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessageTimeoutA(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam, uint flags, uint timeout, IntPtr* result);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessageTimeoutW(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam, uint flags, uint timeout, IntPtr* result);
+
+        [DllImport("user32.dll")]
+        public static extern bool PostMessageA(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        public static extern bool PostMessageW(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        public static extern bool SendNotifyMessageA(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        public static extern bool SendNotifyMessageW(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
 
         // Window Text Functions
         [DllImport("user32.dll")]
@@ -102,13 +174,13 @@ namespace PSPlus.Win32.Interop
         public static extern bool BringWindowToTop(IntPtr hwnd);
 
         [DllImport("user32.dll")]
-        public static extern bool GetWindowRect(IntPtr hwnd, ref Win32Rect* lpRect);
+        public static extern bool GetWindowRect(IntPtr hwnd, Win32Rect* lpRect);
 
         [DllImport("user32.dll")]
-        public static extern bool GetClientRect(IntPtr hwnd, ref Win32Rect* lpRect);
+        public static extern bool GetClientRect(IntPtr hwnd, Win32Rect* lpRect);
 
         [DllImport("user32.dll")]
-        public static extern bool GetWindowPlacement(IntPtr hwnd, ref Win32WindowPlacement* lpwndpl);
+        public static extern bool GetWindowPlacement(IntPtr hwnd, Win32WindowPlacement* lpwndpl);
 
         [DllImport("user32.dll")]
         public static extern bool SetWindowPlacement(IntPtr hwnd, Win32WindowPlacement* lpwndpl);
@@ -192,23 +264,10 @@ namespace PSPlus.Win32.Interop
 
         // Timer Functions
         [DllImport("user32.dll")]
+        public static extern IntPtr SetTimer(IntPtr hwnd, UIntPtr nIDEvent, uint uElapse, IntPtr lpTimerProc);
+
+        [DllImport("user32.dll")]
         public static extern bool KillTimer(IntPtr hwnd, UIntPtr nIDEvent);
-
-        // Window State Functions
-        [DllImport("user32.dll")]
-        public static extern bool IsWindowEnabled(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern bool EnableWindow(IntPtr hwnd, bool bEnable);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SetActiveWindow(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SetCapture(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SetFocus(IntPtr hwnd);
 
         // Dialog-Box Item Functions
         [DllImport("user32.dll")]
@@ -292,31 +351,6 @@ namespace PSPlus.Win32.Interop
 
         [DllImport("user32.dll")]
         public static extern bool EnableScrollBar(IntPtr hwnd, uint uSBFlags, uint uArrowFlags);
-
-        // Window Access Functions
-        [DllImport("user32.dll")]
-        public static extern IntPtr ChildWindowFromPoint(IntPtr hwnd, Win32Point point);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr ChildWindowFromPointEx(IntPtr hwnd, Win32Point point, uint uFlags);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetTopWindow(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetWindow(IntPtr hwnd, uint nCmd);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetLastActivePopup(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern bool IsChild(IntPtr hwnd, IntPtr hWnd);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetParent(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SetParent(IntPtr hwnd, IntPtr hWndNewParent);
 
         // Window Tree Access
         [DllImport("user32.dll")]

@@ -71,5 +71,21 @@ Describe "GenericCollectionFactories" {
             $collection.Count | Should Be 0
             $collection.ContainsKey(1) | Should Be $false
         }
+
+        It "Should be able to convert an object list to an dictionary with automated type detection" {
+            $processes = @(Get-Process)
+            $processes.Count | Should Not Be 0
+
+            $collection = $processes | ConvertTo-Dictionary { $_.Id } { $_ }
+            $collection.Count | Should Not Be 0
+        }
+
+        It "Should be able to convert an object list to an dictionary with type set to System.Object" {
+            $processes = @(Get-Process)
+            $processes.Count | Should Not Be 0
+
+            $collection = $processes | ConvertTo-Dictionary { $_.Id } { $_ } -GenericValue
+            $collection.Count | Should Not Be 0
+        }
     }
 }

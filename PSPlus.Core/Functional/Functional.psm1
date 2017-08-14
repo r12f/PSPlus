@@ -35,16 +35,16 @@ function Test-All
 {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true)]
-        [ScriptBlock] $predicate,
+        [Parameter(Position = 0, Mandatory = $true)]
+        [ScriptBlock] $Predicate,
 
         [Parameter(ValueFromPipeline = $true)]
-        $object
+        $Object
     )
 
     process
     {
-        $result = ForEach-Object $predicate -InputObject $object
+        $result = ForEach-Object $Predicate -InputObject $Object
         if (-not $result)
         {
             $false
