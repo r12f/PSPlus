@@ -18,7 +18,7 @@ namespace PSPlus.Win32
 
         public bool ShowWindow(int show)
         {
-            return Win32Interop.ShowWindow(Hwnd, show);
+            return Win32APIs.ShowWindow(Hwnd, show);
         }
     }
 }

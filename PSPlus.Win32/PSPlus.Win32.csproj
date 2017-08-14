@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cmdlets\NewWindowControlCmdlet.cs" />
-    <Compile Include="Win32Interop.cs" />
+    <Compile Include="Interop\Win32APIs.cs" />
     <Compile Include="WindowControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
