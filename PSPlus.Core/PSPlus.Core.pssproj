@@ -30,9 +30,12 @@
   <ItemGroup>
     <Folder Include="Functional\" />
     <Folder Include="Loader\" />
+    <Folder Include="Collections\" />
     <Folder Include="Pipeline\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\GenericCollectionFactories.psm1" />
+    <Compile Include="Collections\GenericCollectionFactories.tests.ps1" />
     <Compile Include="Functional\Functional.psm1" />
     <Compile Include="Functional\Functional.tests.ps1" />
     <Compile Include="Loader\Loader.psm1" />
