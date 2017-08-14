@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PSPlus.Win32.Interop;
+using System;
 
 namespace PSPlus.Win32
 {
