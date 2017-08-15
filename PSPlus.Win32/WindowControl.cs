@@ -20,11 +20,6 @@ namespace PSPlus.Win32
             return new WindowControl(hwnd);
         }
 
-        public WindowControl(ulong hwnd)
-        {
-            Hwnd = (IntPtr)hwnd;
-        }
-
         public WindowControl(IntPtr hwnd)
         {
             Hwnd = hwnd;

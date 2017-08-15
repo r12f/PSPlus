@@ -28,8 +28,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="Build\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Build\PostBuild.ps1" />
     <Compile Include="PSPlus.psd1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

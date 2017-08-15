@@ -1,4 +1,5 @@
-﻿using System.Management.Automation;
+﻿using System;
+using System.Management.Automation;
 
 namespace PSPlus.Win32.Cmdlets
 {
@@ -7,7 +8,7 @@ namespace PSPlus.Win32.Cmdlets
     public class NewWindowControlCmdlet : Cmdlet
     {
         [Parameter(Position = 0, ValueFromPipeline = true)]
-        public ulong Hwnd { get; set; }
+        public IntPtr Hwnd { get; set; }
 
         protected override void ProcessRecord()
         {
