@@ -26,12 +26,6 @@ namespace PSPlus.Win32.Interop
         [DllImport("user32.dll")]
         public static extern IntPtr SetWindowLongPtr(IntPtr hwnd, int nIndex, IntPtr dwNewLong);
 
-        [DllImport("user32.dll")]
-        public static extern ushort GetWindowWord(IntPtr hwnd, int nIndex);
-
-        [DllImport("user32.dll")]
-        public static extern ushort SetWindowWord(IntPtr hwnd, int nIndex, ushort wNewWord);
-
         // Window State Functions
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();

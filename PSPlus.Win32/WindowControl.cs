@@ -55,16 +55,6 @@ namespace PSPlus.Win32
             return Win32APIs.SetWindowLongPtr(Hwnd, nIndex, dwNewLong);
         }
 
-        public ushort GetWindowWord(int nIndex)
-        {
-            return Win32APIs.GetWindowWord(Hwnd, nIndex);
-        }
-
-        public ushort SetWindowWord(int nIndex, ushort wNewWord)
-        {
-            return Win32APIs.SetWindowWord(Hwnd, nIndex, wNewWord);
-        }
-
         public bool IsWindowEnabled()
         {
             return Win32APIs.IsWindowEnabled(Hwnd);
