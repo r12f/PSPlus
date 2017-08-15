@@ -322,7 +322,10 @@ namespace PSPlus.Win32.Interop
         public static extern bool SetDlgItemInt(IntPtr hwnd, int nID, uint nValue, bool bSigned);
 
         [DllImport("user32.dll")]
-        public static extern bool SetDlgItemText(IntPtr hwnd, int nID, [MarshalAs(UnmanagedType.LPStr)] string lpszString);
+        public static extern bool SetDlgItemTextA(IntPtr hwnd, int nID, IntPtr lpszString);
+
+        [DllImport("user32.dll")]
+        public static extern bool SetDlgItemTextW(IntPtr hwnd, int nID, IntPtr lpszString);
 
         // Scrolling Functions
         [DllImport("user32.dll")]
@@ -367,7 +370,10 @@ namespace PSPlus.Win32.Interop
         public static extern bool FlashWindow(IntPtr hwnd, bool bInvert);
 
         [DllImport("user32.dll")]
-        public static extern int MessageBox(IntPtr hwnd, [MarshalAs(UnmanagedType.LPStr)] string lpszText, [MarshalAs(UnmanagedType.LPStr)] string lpszCaption, uint uType);
+        public static extern int MessageBoxA(IntPtr hwnd, IntPtr lpszText, IntPtr lpszCaption, uint uType);
+
+        [DllImport("user32.dll")]
+        public static extern int MessageBoxW(IntPtr hwnd, IntPtr lpszText, IntPtr lpszCaption, uint uType);
 
         // Clipboard Functions
         [DllImport("user32.dll")]
@@ -408,7 +414,10 @@ namespace PSPlus.Win32.Interop
 
         // Help Functions
         [DllImport("user32.dll")]
-        public static extern bool WinHelp(IntPtr hwnd, [MarshalAs(UnmanagedType.LPStr)] string lpszHelp, uint nCmd, uint dwData);
+        public static extern bool WinHelpA(IntPtr hwnd, IntPtr lpszHelp, uint nCmd, uint dwData);
+
+        [DllImport("user32.dll")]
+        public static extern bool WinHelpW(IntPtr hwnd, IntPtr lpszHelp, uint nCmd, uint dwData);
 
         [DllImport("user32.dll")]
         public static extern bool SetWindowContextHelpId(IntPtr hwnd, uint dwContextHelpId);
