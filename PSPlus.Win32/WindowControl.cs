@@ -14,24 +14,6 @@ namespace PSPlus.Win32
             return new WindowControl(hwnd);
         }
 
-        public static WindowControl GetActiveWindow()
-        {
-            IntPtr hwnd = Win32APIs.GetActiveWindow();
-            return new WindowControl(hwnd);
-        }
-
-        public static WindowControl GetCapture()
-        {
-            IntPtr hwnd = Win32APIs.GetCapture();
-            return new WindowControl(hwnd);
-        }
-
-        public static WindowControl GetFocus()
-        {
-            IntPtr hwnd = Win32APIs.GetFocus();
-            return new WindowControl(hwnd);
-        }
-
         public static WindowControl WindowFromPoint(Win32Point point)
         {
             IntPtr hwnd = Win32APIs.WindowFromPoint(point);
@@ -98,19 +80,52 @@ namespace PSPlus.Win32
             return Win32APIs.EnableWindow(Hwnd, bEnable);
         }
 
+        public IntPtr GetActiveWindow()
+        {
+            using (AttachThreadInputScope scope = new AttachThreadInputScope(GetWindowThreadID()))
+            {
+                return Win32APIs.GetActiveWindow();
+            }
+        }
+
         public IntPtr SetActiveWindow()
         {
-            return Win32APIs.SetActiveWindow(Hwnd);
+            using (AttachThreadInputScope scope = new AttachThreadInputScope(GetWindowThreadID()))
+            {
+                return Win32APIs.SetActiveWindow(Hwnd);
+            }
+        }
+
+        public IntPtr GetCapture()
+        {
+            using (AttachThreadInputScope scope = new AttachThreadInputScope(GetWindowThreadID()))
+            {
+                return Win32APIs.GetCapture();
+            }
         }
 
         public IntPtr SetCapture()
         {
-            return Win32APIs.SetCapture(Hwnd);
+            using (AttachThreadInputScope scope = new AttachThreadInputScope(GetWindowThreadID()))
+            {
+                return Win32APIs.SetCapture(Hwnd);
+            }
+        }
+
+        public IntPtr GetFocus()
+        {
+            using (AttachThreadInputScope scope = new AttachThreadInputScope(GetWindowThreadID()))
+            {
+                return Win32APIs.GetFocus();
+            }
         }
 
         public IntPtr SetFocus()
         {
-            return Win32APIs.SetFocus(Hwnd);
+            using (AttachThreadInputScope scope = new AttachThreadInputScope(GetWindowThreadID()))
+            {
+                return Win32APIs.SetFocus(Hwnd);
+            }
         }
 
         public IntPtr ChildWindowFromPoint(Win32Point point)
@@ -382,24 +397,69 @@ namespace PSPlus.Win32
             }
         }
 
-        public bool ClientToScreen(Win32Rect* lpRect)
+        public Win32Rect ClientToScreen(Win32Rect rect)
         {
-            return Win32APIs.ClientToScreen(Hwnd, lpRect);
+            Win32Rect screenRect = rect;
+            ClientToScreenInPlace(ref screenRect);
+            return screenRect;
         }
 
-        public bool ScreenToClient(Win32Point* lpPoint)
+        public bool ClientToScreenInPlace(ref Win32Rect rect)
         {
-            return Win32APIs.ScreenToClient(Hwnd, lpPoint);
+            unsafe
+            {
+                fixed (Win32Rect* lpRect = &rect)
+                {
+                    return Win32APIs.ClientToScreen(Hwnd, lpRect);
+                }
+            }
         }
 
-        public bool ScreenToClient(Win32Rect* lpRect)
+        public Win32Point ScreenToClient(Win32Point rect)
         {
-            return Win32APIs.ScreenToClient(Hwnd, lpRect);
+            Win32Point clientPoint = rect;
+            ScreenToClientInPlace(ref clientPoint);
+            return clientPoint;
         }
 
-        public int MapWindowPoints(IntPtr hWndTo, Win32Point* lpPoint, uint nCount)
+        public bool ScreenToClientInPlace(ref Win32Point point)
         {
-            return Win32APIs.MapWindowPoints(Hwnd, hWndTo, lpPoint, nCount);
+            unsafe
+            {
+                fixed (Win32Point* lpPoint = &point)
+                {
+                    return Win32APIs.ScreenToClient(Hwnd, lpPoint);
+                }
+            }
+        }
+
+        public Win32Rect ScreenToClient(Win32Rect rect)
+        {
+            Win32Rect clientRect = rect;
+            ScreenToClientInPlace(ref clientRect);
+            return clientRect;
+        }
+
+        public bool ScreenToClientInPlace(ref Win32Rect rect)
+        {
+            unsafe
+            {
+                fixed (Win32Rect* lpRect = &rect)
+                {
+                    return Win32APIs.ScreenToClient(Hwnd, lpRect);
+                }
+            }
+        }
+
+        public int MapWindowPoints(IntPtr hWndTo, Win32Point[] point)
+        {
+            unsafe
+            {
+                fixed (Win32Point* pointPtr = point)
+                {
+                    return Win32APIs.MapWindowPoints(Hwnd, hWndTo, pointPtr, (uint)point.Length);
+                }
+            }
         }
 
         public IntPtr GetDC()
@@ -437,29 +497,42 @@ namespace PSPlus.Win32
             Win32APIs.SetRedraw(Hwnd, bRedraw);
         }
 
-        public bool GetUpdateRect(Win32Rect* lpRect, bool bErase)
+        public Win32Rect GetUpdateRect(bool bErase)
         {
-            return Win32APIs.GetUpdateRect(Hwnd, lpRect, bErase);
+            Win32Rect rect;
+
+            unsafe
+            {
+                Win32APIs.GetUpdateRect(Hwnd, &rect, bErase);
+            }
+
+            return rect;
         }
 
-        public int GetUpdateRgn(IntPtr hRgn, bool bErase)
-        {
-            return Win32APIs.GetUpdateRgn(Hwnd, hRgn, bErase);
-        }
+        // public int GetUpdateRgn(IntPtr hRgn, bool bErase)
+        // {
+        //     return Win32APIs.GetUpdateRgn(Hwnd, hRgn, bErase);
+        // }
 
         public bool Invalidate(bool bErase)
         {
             return Win32APIs.Invalidate(Hwnd, bErase);
         }
 
-        public bool InvalidateRect(Win32Rect* lpRect, bool bErase)
+        public bool InvalidateRect(Win32Rect rect, bool bErase)
         {
-            return Win32APIs.InvalidateRect(Hwnd, lpRect, bErase);
+            unsafe
+            {
+                return Win32APIs.InvalidateRect(Hwnd, &rect, bErase);
+            }
         }
 
-        public bool ValidateRect(Win32Rect* lpRect)
+        public bool ValidateRect(Win32Rect rect)
         {
-            return Win32APIs.ValidateRect(Hwnd, lpRect);
+            unsafe
+            {
+                return Win32APIs.ValidateRect(Hwnd, &rect);
+            }
         }
 
         public void InvalidateRgn(IntPtr hRgn, bool bErase)
@@ -475,6 +548,11 @@ namespace PSPlus.Win32
         public bool ShowWindow(int nCmdShow)
         {
             return Win32APIs.ShowWindow(Hwnd, nCmdShow);
+        }
+
+        public bool ShowWindowAsync(int nCmdShow)
+        {
+            return Win32APIs.ShowWindowAsync(Hwnd, nCmdShow);
         }
 
         public bool IsWindowVisible()
@@ -497,9 +575,12 @@ namespace PSPlus.Win32
             return Win32APIs.LockWindowUpdate(Hwnd, bLock);
         }
 
-        public bool RedrawWindow(Win32Rect* lpRectUpdate, IntPtr hRgnUpdate, uint flags)
+        public bool RedrawWindow(Win32Rect rectUpdate, IntPtr hRgnUpdate, uint flags)
         {
-            return Win32APIs.RedrawWindow(Hwnd, lpRectUpdate, hRgnUpdate, flags);
+            unsafe
+            {
+                return Win32APIs.RedrawWindow(Hwnd, &rectUpdate, hRgnUpdate, flags);
+            }
         }
 
         public IntPtr SetTimer(UIntPtr nIDEvent, uint uElapse, IntPtr lpTimerProc)
@@ -522,34 +603,33 @@ namespace PSPlus.Win32
             return Win32APIs.CheckRadioButton(Hwnd, nIDFirstButton, nIDLastButton, nIDCheckButton);
         }
 
-        public int DlgDirList(string pathSpec, int nIDListBox, int nIDStaticPath, uint nFileType)
+        public uint GetDlgItemInt(int nID, ref bool? translated, bool bSigned)
         {
-            return Win32APIs.DlgDirListW(Hwnd, lpPathSpec, nIDListBox, nIDStaticPath, nFileType);
+            unsafe
+            {
+                bool tempTranslated = false;
+
+                uint result = Win32APIs.GetDlgItemInt(Hwnd, nID, &tempTranslated, bSigned);
+                if (translated.HasValue)
+                {
+                    translated = tempTranslated;
+                }
+
+                return result;
+            }
         }
 
-        public int DlgDirListComboBoxA(IntPtr lpPathSpec, int nIDComboBox, int nIDStaticPath, uint nFileType)
+        public uint GetDlgItemText(int nID, string text, int nMaxCount)
         {
-            return Win32APIs.DlgDirListComboBoxA(Hwnd, lpPathSpec, nIDComboBox, nIDStaticPath, nFileType);
-        }
+            byte[] textBuffer = Encoding.Unicode.GetBytes(text);
 
-        public bool DlgDirSelectEx(string s, int nCount, int nIDListBox)
-        {
-            return Win32APIs.DlgDirSelectExW(Hwnd, lpString, nCount, nIDListBox);
-        }
-
-        public bool DlgDirSelectComboBox(string s, int nCount, int nIDComboBox)
-        {
-            return Win32APIs.DlgDirSelectComboBoxW(Hwnd, lpString, nCount, nIDComboBox);
-        }
-
-        public uint GetDlgItemInt(int nID, bool* lpTrans, bool bSigned)
-        {
-            return Win32APIs.GetDlgItemInt(Hwnd, nID, lpTrans, bSigned);
-        }
-
-        public uint GetDlgItemText(int nID, string s, int nMaxCount)
-        {
-            return Win32APIs.GetDlgItemTextW(Hwnd, nID, lpStr, nMaxCount);
+            unsafe
+            {
+                fixed (byte* textBufferPtr = textBuffer)
+                {
+                    return Win32APIs.GetDlgItemTextW(Hwnd, nID, new IntPtr(textBufferPtr), nMaxCount);
+                }
+            }
         }
 
         public IntPtr GetNextDlgGroupItem(IntPtr hWndCtl, bool bPrevious)
@@ -577,9 +657,17 @@ namespace PSPlus.Win32
             return Win32APIs.SetDlgItemInt(Hwnd, nID, nValue, bSigned);
         }
 
-        public bool SetDlgItemText(int nID, string s)
+        public bool SetDlgItemText(int nID, string text)
         {
-            return Win32APIs.SetDlgItemTextW(Hwnd, nID, lpszString);
+            byte[] textBuffer = Encoding.Unicode.GetBytes(text);
+
+            unsafe
+            {
+                fixed (byte* textBufferPtr = textBuffer)
+                {
+                    return Win32APIs.SetDlgItemTextW(Hwnd, nID, new IntPtr(textBufferPtr));
+                }
+            }
         }
 
         public int GetScrollPos(int nBar)
@@ -587,24 +675,37 @@ namespace PSPlus.Win32
             return Win32APIs.GetScrollPos(Hwnd, nBar);
         }
 
-        public bool GetScrollRange(int nBar, int* lpMinPos, int* lpMaxPos)
+        public bool GetScrollRange(int nBar, ref int minPos, ref int maxPos)
         {
-            return Win32APIs.GetScrollRange(Hwnd, lpMinPos, lpMaxPos);
+            unsafe
+            {
+                fixed (int* minPosPtr = &minPos)
+                {
+                    fixed (int* maxPosPtr = &maxPos)
+                    {
+                        return Win32APIs.GetScrollRange(Hwnd, nBar, minPosPtr, maxPosPtr);
+                    }
+                }
+            }
         }
 
-        public bool ScrollWindow(int xAmount, int yAmount, Win32Rect* lpRect, Win32Rect* lpClipRect)
+        public bool ScrollWindow(int xAmount, int yAmount, Win32Rect rect, Win32Rect clipRect)
         {
-            return Win32APIs.ScrollWindow(Hwnd, xAmount, yAmount, lpRect, lpClipRect);
+            unsafe
+            {
+                return Win32APIs.ScrollWindow(Hwnd, xAmount, yAmount, &rect, &clipRect);
+            }
         }
 
-        public int ScrollWindowEx(int dx, int dy, Win32Rect* lpRectScroll, Win32Rect* lpRectClip, IntPtr hRgnUpdate, Win32Rect* lpRectUpdate, uint uFlags)
+        public int ScrollWindowEx(int dx, int dy, Win32Rect rectScroll, Win32Rect rectClip, IntPtr hRgnUpdate, ref Win32Rect rectUpdate, uint uFlags)
         {
-            return Win32APIs.ScrollWindowEx(Hwnd, dx, dy, lpRectScroll, lpRectClip, hRgnUpdate, lpRectUpdate, uFlags);
-        }
-
-        public int ScrollWindowEx(int dx, int dy, uint uFlags, Win32Rect* lpRectScroll, Win32Rect* lpRectClip, IntPtr hRgnUpdate, Win32Rect* lpRectUpdate)
-        {
-            return Win32APIs.ScrollWindowEx(Hwnd, dx, dy, uFlags, lpRectScroll, lpRectClip, hRgnUpdate, lpRectUpdate);
+            unsafe
+            {
+                fixed (Win32Rect* rectUpdatePtr = &rectUpdate)
+                {
+                    return Win32APIs.ScrollWindowEx(Hwnd, dx, dy, &rectScroll, &rectClip, hRgnUpdate, rectUpdatePtr, uFlags);
+                }
+            }
         }
 
         public int SetScrollPos(int nBar, int nPos, bool bRedraw)
@@ -649,7 +750,19 @@ namespace PSPlus.Win32
 
         public int MessageBox(string text, string caption, uint uType)
         {
-            return Win32APIs.MessageBoxW(Hwnd, lpszText, lpszCaption, uType);
+            byte[] textBuffer = Encoding.Unicode.GetBytes(text);
+            byte[] captionBuffer = Encoding.Unicode.GetBytes(caption);
+
+            unsafe
+            {
+                fixed (byte* textBufferPtr = textBuffer)
+                {
+                    fixed (byte* captionBufferPtr = captionBuffer)
+                    {
+                        return Win32APIs.MessageBoxW(Hwnd, new IntPtr(textBufferPtr), new IntPtr(captionBufferPtr), uType);
+                    }
+                }
+            }
         }
 
         public bool ChangeClipboardChain(IntPtr hWndNewNext)
@@ -709,7 +822,15 @@ namespace PSPlus.Win32
 
         public bool WinHelp(string help, uint nCmd, uint dwData)
         {
-            return Win32APIs.WinHelpW(lpszHelp, nCmd, dwData);
+            byte[] helpBuffer = Encoding.Unicode.GetBytes(help);
+
+            unsafe
+            {
+                fixed (byte* helpBufferPtr = helpBuffer)
+                {
+                    return Win32APIs.WinHelpW(Hwnd, new IntPtr(helpBufferPtr), nCmd, dwData);
+                }
+            }
         }
 
         public bool SetWindowContextHelpId(uint dwContextHelpId)
@@ -722,22 +843,35 @@ namespace PSPlus.Win32
             return Win32APIs.GetWindowContextHelpId(Hwnd);
         }
 
-        public bool GetScrollInfo(int nBar, Win32ScrollInfo* lpScrollInfo)
+        public Win32ScrollInfo GetScrollInfo(int nBar)
         {
-            return Win32APIs.GetScrollInfo(Hwnd, nBar, lpScrollInfo);
+            Win32ScrollInfo scrollInfo;
+
+            unsafe
+            {
+                Win32APIs.GetScrollInfo(Hwnd, nBar, &scrollInfo);
+            }
+
+            return scrollInfo;
         }
 
-        public int SetScrollInfo(int nBar, Win32ScrollInfo* lpScrollInfo, bool bRedraw)
+        public int SetScrollInfo(int nBar, Win32ScrollInfo scrollInfo, bool bRedraw)
         {
-            return Win32APIs.SetScrollInfo(Hwnd, nBar, lpScrollInfo, bRedraw);
+            unsafe
+            {
+                return Win32APIs.SetScrollInfo(Hwnd, nBar, &scrollInfo, bRedraw);
+            }
         }
 
-        public bool IsDialogMessage(Win32Msg* lpMsg)
+        public bool IsDialogMessage(Win32Msg msg)
         {
-            return Win32APIs.IsDialogMessage(Hwnd, lpMsg);
+            unsafe
+            {
+                return Win32APIs.IsDialogMessage(Hwnd, &msg);
+            }
         }
 
-        public int GetWindowRgn(ref IntPtr hRgn)
+        public int GetWindowRgn(IntPtr hRgn)
         {
             return Win32APIs.GetWindowRgn(Hwnd, hRgn);
         }
@@ -754,22 +888,27 @@ namespace PSPlus.Win32
 
         public uint GetWindowThreadID()
         {
-            return Win32APIs.GetWindowThreadID(Hwnd);
+            unsafe
+            {
+                return Win32APIs.GetWindowThreadProcessId(Hwnd, null);
+            }
         }
 
         public uint GetWindowProcessID()
         {
-            return Win32APIs.GetWindowProcessID(Hwnd);
+            uint processId = 0;
+
+            unsafe
+            {
+                Win32APIs.GetWindowThreadProcessId(Hwnd, &processId);
+            }
+
+            return processId;
         }
 
         public bool IsWindowUnicode()
         {
             return Win32APIs.IsWindowUnicode(Hwnd);
-        }
-
-        public bool ShowWindowAsync(int nCmdShow)
-        {
-            return Win32APIs.ShowWindowAsync(Hwnd, nCmdShow);
         }
     }
 }

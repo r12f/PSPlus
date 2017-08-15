@@ -2,8 +2,13 @@
 
 Describe "Win32" {
     Context "When trying to use window control" {
+        $notepad = Start-Process notepad -PassThru
+        $notepadWindowControl = New-WindowControl $notepad.MainWindowHandle
+
         It "Should be able to create window control" {
-            New-WindowControl 0x10010 | Should Not Be $null
+            $notepadWindowControl | Should Not Be $null
         }
+
+        $notepad.Kill()
     }
 }

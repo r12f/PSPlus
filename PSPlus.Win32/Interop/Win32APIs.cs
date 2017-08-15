@@ -5,6 +5,10 @@ namespace PSPlus.Win32.Interop
 {
     public unsafe static class Win32APIs
     {
+        // Thread input
+        [DllImport("user32.dll")]
+        public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
+
         // Destory
         [DllImport("user32.dll")]
         public static extern bool DestroyWindow(IntPtr hwnd);
@@ -341,9 +345,6 @@ namespace PSPlus.Win32.Interop
         public static extern int ScrollWindowEx(IntPtr hwnd, int dx, int dy, Win32Rect* lpRectScroll, Win32Rect* lpRectClip, IntPtr hRgnUpdate, Win32Rect* lpRectUpdate, uint uFlags);
 
         [DllImport("user32.dll")]
-        public static extern int ScrollWindowEx(IntPtr hwnd, int dx, int dy, uint uFlags, Win32Rect* lpRectScroll, Win32Rect* lpRectClip, IntPtr hRgnUpdate, Win32Rect* lpRectUpdate);
-
-        [DllImport("user32.dll")]
         public static extern int SetScrollPos(IntPtr hwnd, int nBar, int nPos, bool bRedraw);
 
         [DllImport("user32.dll")]
@@ -436,7 +437,7 @@ namespace PSPlus.Win32.Interop
         public static extern bool IsDialogMessage(IntPtr hwnd, Win32Msg* lpMsg);
 
         [DllImport("user32.dll")]
-        public static extern int GetWindowRgn(IntPtr hwnd, ref IntPtr hRgn);
+        public static extern int GetWindowRgn(IntPtr hwnd, IntPtr hRgn);
 
         [DllImport("user32.dll")]
         public static extern int SetWindowRgn(IntPtr hwnd, IntPtr hRgn, bool bRedraw);
@@ -445,10 +446,7 @@ namespace PSPlus.Win32.Interop
         public static extern IntPtr DeferWindowPos(IntPtr hwnd, IntPtr hWinPosInfo, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
 
         [DllImport("user32.dll")]
-        public static extern uint GetWindowThreadID(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern uint GetWindowProcessID(IntPtr hwnd);
+        public static extern uint GetWindowThreadProcessId(IntPtr hwnd, uint* processId);
 
         [DllImport("user32.dll")]
         public static extern bool IsWindow(IntPtr hwnd);

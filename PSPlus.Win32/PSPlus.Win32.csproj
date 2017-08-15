@@ -47,6 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachThreadInputScope.cs" />
+    <Compile Include="Cmdlets\GetDesktopWindowCmdlet.cs" />
+    <Compile Include="Cmdlets\GetForegroundWindowCmdlet.cs" />
+    <Compile Include="Cmdlets\GetWindowFromPointCmdlet.cs" />
+    <Compile Include="Cmdlets\GetWindowsCmdlet.cs" />
     <Compile Include="Cmdlets\NewWindowControlCmdlet.cs" />
     <Compile Include="Interop\Win32APIs.cs" />
     <Compile Include="Interop\Win32Msg.cs" />
