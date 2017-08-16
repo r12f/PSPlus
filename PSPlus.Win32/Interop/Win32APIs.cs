@@ -28,6 +28,9 @@ namespace PSPlus.Win32.Interop
 
         // Window State Functions
         [DllImport("user32.dll")]
+        public static extern IntPtr GetDesktopWindow();
+
+        [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
 
         [DllImport("user32.dll")]
@@ -47,6 +50,9 @@ namespace PSPlus.Win32.Interop
 
         [DllImport("user32.dll")]
         public static extern IntPtr SetCapture(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetFocus();
@@ -123,13 +129,6 @@ namespace PSPlus.Win32.Interop
         [DllImport("user32.dll")]
         public static extern int GetWindowTextLength(IntPtr hwnd);
 
-        // Font Functions
-        [DllImport("user32.dll")]
-        public static extern void SetFont(IntPtr hwnd, IntPtr hFont, bool bRedraw);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetFont(IntPtr hwnd);
-
         // Menu Functions (non-child windows only)
         [DllImport("user32.dll")]
         public static extern IntPtr GetMenu(IntPtr hwnd);
@@ -188,13 +187,7 @@ namespace PSPlus.Win32.Interop
         public static extern bool ClientToScreen(IntPtr hwnd, Win32Point* lpPoint);
 
         [DllImport("user32.dll")]
-        public static extern bool ClientToScreen(IntPtr hwnd, Win32Rect* lpRect);
-
-        [DllImport("user32.dll")]
         public static extern bool ScreenToClient(IntPtr hwnd, Win32Point* lpPoint);
-
-        [DllImport("user32.dll")]
-        public static extern bool ScreenToClient(IntPtr hwnd, Win32Rect* lpRect);
 
         [DllImport("user32.dll")]
         public static extern int MapWindowPoints(IntPtr hwnd, IntPtr hWndTo, Win32Point* lpPoint, uint nCount);

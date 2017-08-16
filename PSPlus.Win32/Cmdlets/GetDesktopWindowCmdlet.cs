@@ -1,6 +1,14 @@
-﻿namespace PSPlus.Win32.Cmdlets
+﻿using System.Management.Automation;
+
+namespace PSPlus.Win32.Cmdlets
 {
-    class GetDesktopWindowCmdlet
+    [Cmdlet(VerbsCommon.Get, "DesktopWindow")]
+    [OutputType(typeof(WindowControl))]
+    public class GetDesktopWindowCmdlet : Cmdlet
     {
+        protected override void ProcessRecord()
+        {
+            WriteObject(WindowControl.GetDesktopWindow());
+        }
     }
 }

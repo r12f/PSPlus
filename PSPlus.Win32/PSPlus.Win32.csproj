@@ -54,6 +54,7 @@
     <Compile Include="Cmdlets\GetWindowsCmdlet.cs" />
     <Compile Include="Cmdlets\NewWindowControlCmdlet.cs" />
     <Compile Include="Interop\Win32APIs.cs" />
+    <Compile Include="Interop\Win32Consts.cs" />
     <Compile Include="Interop\Win32Msg.cs" />
     <Compile Include="Interop\Win32Point.cs" />
     <Compile Include="Interop\Win32Rect.cs" />
@@ -65,8 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Powershell\PSPlus.Win32.Consts.psm1" />
     <None Include="PSPlus.Win32.psd1" />
-    <None Include="PSPlus.Win32.tests.ps1" />
+    <None Include="Powershell\PSPlus.Win32.tests.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -74,6 +76,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>powershell $(SolutionDir)Build\PostBuild.ps1
-copy /Y $(TargetPath) $(ProjectDir)$(TargetFileName)</PostBuildEvent>
+copy /Y $(TargetPath) $(ProjectDir)Powershell\$(TargetFileName)</PostBuildEvent>
   </PropertyGroup>
 </Project>
