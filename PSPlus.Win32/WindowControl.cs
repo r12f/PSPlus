@@ -1,5 +1,6 @@
 ﻿using PSPlus.Win32.Interop;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace PSPlus.Win32
@@ -155,6 +156,16 @@ namespace PSPlus.Win32
         public WindowControl GetWindow(uint nCmd)
         {
             return new WindowControl(Win32APIs.GetWindow(Hwnd, nCmd));
+        }
+
+        public IEnumerable<WindowControl> GetChildren()
+        {
+            WindowControl childWindow = GetWindow(Win32Consts.GW_CHILD);
+            while (childWindow.IsWindow())
+            {
+                yield return childWindow;
+                childWindow = childWindow.GetWindow(Win32Consts.GW_HWNDNEXT);
+            }
         }
 
         public WindowControl GetLastActivePopup()
