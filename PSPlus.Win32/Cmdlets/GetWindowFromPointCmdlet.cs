@@ -21,7 +21,7 @@ namespace PSPlus.Win32.Cmdlets
 
         protected override void BeginProcessing()
         {
-            if (Parent != null)
+            if (Parent != IntPtr.Zero)
             {
                 _parentWindow = new WindowControl(Parent);
             }

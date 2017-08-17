@@ -17,13 +17,13 @@ namespace PSPlus.Win32.Cmdlets
 
         public GetWindowsCmdlet()
         {
-            RecursiveDepth = -1;
+            RecursiveDepth = 1;
         }
 
         protected override void ProcessRecord()
         {
             WindowControl root = null;
-            if (Parent == null)
+            if (Parent == IntPtr.Zero)
             {
                 root = WindowControl.GetDesktopWindow();
             }
@@ -40,12 +40,17 @@ namespace PSPlus.Win32.Cmdlets
                 var windowWithDepth = windows.Pop();
 
                 var window = windowWithDepth.Key;
-                WriteObject(window);
-
                 var depth = windowWithDepth.Value;
-                if (RecursiveDepth != -1 && depth >= RecursiveDepth)
+
+                // Skip the root
+                if (depth > 0)
                 {
-                    break;
+                    WriteObject(window);
+                }
+
+                if (RecursiveDepth != 0 && depth >= RecursiveDepth)
+                {
+                    continue;
                 }
 
                 foreach (var childWindow in window.GetChildren().Reverse())

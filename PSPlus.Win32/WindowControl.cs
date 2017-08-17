@@ -188,6 +188,11 @@ namespace PSPlus.Win32
             return Win32APIs.SetParent(Hwnd, hWndNewParent);
         }
 
+        public WindowControl GetAncestor(uint flags)
+        {
+            return new WindowControl(Win32APIs.GetAncestor(Hwnd, flags));
+        }
+
         public IntPtr SendMessageA(uint message, IntPtr wParam, IntPtr lParam)
         {
             return Win32APIs.SendMessageA(Hwnd, message, wParam, lParam);
@@ -315,10 +320,7 @@ namespace PSPlus.Win32
 
         public bool MoveWindow(Win32Rect rect, bool bRepaint)
         {
-            unsafe
-            {
-                return Win32APIs.MoveWindow(Hwnd, &rect, bRepaint);
-            }
+            return MoveWindow(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top, bRepaint);
         }
 
         public bool SetWindowPos(IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint nFlags)
@@ -328,10 +330,7 @@ namespace PSPlus.Win32
 
         public bool SetWindowPos(IntPtr hWndInsertAfter, Win32Rect rect, uint nFlags)
         {
-            unsafe
-            {
-                return Win32APIs.SetWindowPos(Hwnd, hWndInsertAfter, &rect, nFlags);
-            }
+            return SetWindowPos(hWndInsertAfter, rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top, nFlags);
         }
 
         public uint ArrangeIconicWindows()

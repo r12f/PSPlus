@@ -22,13 +22,41 @@ namespace PSPlus.Win32.Interop
         public const int GWLP_ID = -12;
 
         // GetWindow
-        public const int GW_HWNDFIRST = 0;
-        public const int GW_HWNDLAST = 1;
-        public const int GW_HWNDNEXT = 2;
-        public const int GW_HWNDPREV = 3;
-        public const int GW_OWNER = 4;
-        public const int GW_CHILD = 5;
-        public const int GW_ENABLEDPOPUP = 6;
+        public const uint GW_HWNDFIRST = 0;
+        public const uint GW_HWNDLAST = 1;
+        public const uint GW_HWNDNEXT = 2;
+        public const uint GW_HWNDPREV = 3;
+        public const uint GW_OWNER = 4;
+        public const uint GW_CHILD = 5;
+        public const uint GW_ENABLEDPOPUP = 6;
+
+        // GetAncestor
+        public const uint GA_PARENT = 1;
+        public const uint GA_ROOT = 2;
+        public const uint GA_ROOTOWNER = 3;
+
+        // SetWindowPos Flags
+        public const uint SWP_NOSIZE = 0x0001;
+        public const uint SWP_NOMOVE = 0x0002;
+        public const uint SWP_NOZORDER = 0x0004;
+        public const uint SWP_NOREDRAW = 0x0008;
+        public const uint SWP_NOACTIVATE = 0x0010;
+        public const uint SWP_FRAMECHANGED = 0x0020;
+        public const uint SWP_SHOWWINDOW = 0x0040;
+        public const uint SWP_HIDEWINDOW = 0x0080;
+        public const uint SWP_NOCOPYBITS = 0x0100;
+        public const uint SWP_NOOWNERZORDER = 0x0200;
+        public const uint SWP_NOSENDCHANGING = 0x0400;
+        public const uint SWP_DRAWFRAME = SWP_FRAMECHANGED;
+        public const uint SWP_NOREPOSITION = SWP_NOOWNERZORDER;
+        public const uint SWP_DEFERERASE = 0x2000;
+        public const uint SWP_ASYNCWINDOWPOS = 0x4000;
+
+        // HWND insert positions
+        public static readonly IntPtr HWND_TOP = (IntPtr)0;
+        public static readonly IntPtr HWND_BOTTOM = (IntPtr)1;
+        public static readonly IntPtr HWND_TOPMOST = (IntPtr)(-1);
+        public static readonly IntPtr HWND_NOTOPMOST = (IntPtr)(-2);
 
         // Window styles
         public const int WS_OVERLAPPED = 0x00000000;
@@ -109,9 +137,9 @@ namespace PSPlus.Win32.Interop
         public const int SW_MAX = 11;
 
         // ChildWindowFromPointEx Flags
-        public const int CWP_ALL = 0x0000;
-        public const int CWP_SKIPINVISIBLE = 0x0001;
-        public const int CWP_SKIPDISABLED = 0x0002;
-        public const int CWP_SKIPTRANSPARENT = 0x0004;
+        public const uint CWP_ALL = 0x0000;
+        public const uint CWP_SKIPINVISIBLE = 0x0001;
+        public const uint CWP_SKIPDISABLED = 0x0002;
+        public const uint CWP_SKIPTRANSPARENT = 0x0004;
     }
 }

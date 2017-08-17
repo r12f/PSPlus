@@ -56,6 +56,7 @@
     <Compile Include="Interop\Win32APIs.cs" />
     <Compile Include="Interop\Win32Consts.cs" />
     <Compile Include="Interop\Win32Msg.cs" />
+    <Compile Include="Interop\Win32MsgIds.cs" />
     <Compile Include="Interop\Win32Point.cs" />
     <Compile Include="Interop\Win32Rect.cs" />
     <Compile Include="Interop\Win32ScrollInfo.cs" />

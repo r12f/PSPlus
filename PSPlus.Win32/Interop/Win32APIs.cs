@@ -88,6 +88,9 @@ namespace PSPlus.Win32.Interop
         [DllImport("user32.dll")]
         public static extern IntPtr SetParent(IntPtr hwnd, IntPtr hWndNewParent);
 
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetAncestor(IntPtr hwnd, uint gaFlags);
+
         // Message Functions
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessageA(IntPtr hwnd, uint message, IntPtr wParam, IntPtr lParam);
@@ -156,13 +159,7 @@ namespace PSPlus.Win32.Interop
         public static extern bool MoveWindow(IntPtr hwnd, int x, int y, int nWidth, int nHeight, bool bRepaint);
 
         [DllImport("user32.dll")]
-        public static extern bool MoveWindow(IntPtr hwnd, Win32Rect* lpRect, bool bRepaint);
-
-        [DllImport("user32.dll")]
         public static extern bool SetWindowPos(IntPtr hwnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint nFlags);
-
-        [DllImport("user32.dll")]
-        public static extern bool SetWindowPos(IntPtr hwnd, IntPtr hWndInsertAfter, Win32Rect* lpRect, uint nFlags);
 
         [DllImport("user32.dll")]
         public static extern uint ArrangeIconicWindows(IntPtr hwnd);

@@ -9,6 +9,16 @@ Describe "Win32" {
         }
     }
 
+    Context "When trying to enumerate all the top level windows" {
+        It "Should be able to enumerate all the top level windows" {
+            $topLevelWindows = Get-Windows
+            foreach ($topLevelWindow in $topLevelWindows) {
+                $topLevelWindow.IsWindow() | Should Be $true
+                $topLevelWindow.GetWindowLong($Win32Consts.GWL_STYLE) -band $Win32Consts::WS_CHILD | Should Be 0
+            }
+        }
+    }
+
     Context "When trying to use window control" {
         $notepad = Start-Process notepad -PassThru
         do
@@ -116,6 +126,21 @@ Describe "Win32" {
             $currentWindow.Hwnd | Should Be $notepadWindowControl.Hwnd
         }
 
+        It "Should be able to enumerate the child windows by calling GetChildren" {
+            foreach ($childWindow in $notepadWindowControl.GetChildren()) {
+                $childWindow.IsWindow() | Should Be $true
+                $childWindow.GetParent().Hwnd | Should Be $notepadWindowControl.Hwnd
+            }
+        }
+
+        It "Should be able to enumerate the child windows calling Get-Windows" {
+            $childWindows = Get-Windows -Parent $notepadWindowControl.Hwnd
+            foreach ($childWindow in $childWindows) {
+                $childWindow.IsWindow() | Should Be $true
+                $childWindow.GetParent().Hwnd | Should Be $notepadWindowControl.Hwnd
+            }
+        }
+
         It "Should be able to get and set the window text" {
             $titleLength = $notepadWindowControl.GetWindowTextLength()
             $titleLength | Should Not Be 0
@@ -187,6 +212,29 @@ Describe "Win32" {
             $clientPointInScreenCoord = $notepadWindowControl.ClientToScreen($clientPoint)
             $clientPointInScreenCoord.X | Should Be $clientRectInScreenCoord.Left
             $clientPointInScreenCoord.Y | Should Be $clientRectInScreenCoord.Top
+        }
+
+        It "Should be able to resize the window" {
+            $notepadWindowControl.MoveWindow(0, 0, 640, 480, $true)
+            $windowRect = $notepadWindowControl.GetWindowRect()
+            $windowRect.Left | Should Be 0
+            $windowRect.Top | Should Be 0
+            $windowRect.Right | Should Be 640
+            $windowRect.Bottom | Should Be 480
+
+            $notepadWindowControl.SetWindowPos(0, 100, 200, 300, 200, $Win32Consts.SWP_NOZORDER)
+            $windowRect = $notepadWindowControl.GetWindowRect()
+            $windowRect.Left | Should Be 100
+            $windowRect.Top | Should Be 200
+            $windowRect.Right | Should Be 400
+            $windowRect.Bottom | Should Be 400
+        }
+
+        It "Should be able to send the message" {
+            $notepadWindowControl.IsWindow() | Should Be $true
+
+            $notepadWindowControl.SendMessageW($Win32MsgIds::WM_CLOSE, 0, 0);
+            $notepadWindowControl.IsWindow() | Should Be $false
         }
 
         $notepad.Kill()
