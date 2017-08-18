@@ -81,6 +81,11 @@ Describe "Win32" {
             $notepadWindowControl.IsWindow() | Should Be $true
         }
 
+        It "Should be able to get the process id and thread id" {
+            $notepadWindowControl.GetWindowProcessId() | Should Be $notepad.Id
+            $notepadWindowControl.GetWindowThreadId() | Should Not Be 0
+        }
+
         It "Should be able to get window data" {
             $style32 = $notepadWindowControl.GetWindowLong($Win32Consts::GWL_STYLE)
             $style32 | Should Not Be 0
