@@ -42,6 +42,26 @@ namespace PSPlus.Win32
             return Win32APIs.DestroyWindow(Hwnd);
         }
 
+        public uint GetWindowThreadID()
+        {
+            unsafe
+            {
+                return Win32APIs.GetWindowThreadProcessId(Hwnd, null);
+            }
+        }
+
+        public uint GetWindowProcessID()
+        {
+            uint processId = 0;
+
+            unsafe
+            {
+                Win32APIs.GetWindowThreadProcessId(Hwnd, &processId);
+            }
+
+            return processId;
+        }
+
         public int GetWindowLong(int nIndex)
         {
             return Win32APIs.GetWindowLong(Hwnd, nIndex);
@@ -904,26 +924,6 @@ namespace PSPlus.Win32
         public IntPtr DeferWindowPos(IntPtr hWinPosInfo, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags)
         {
             return Win32APIs.DeferWindowPos(Hwnd, hWinPosInfo, hWndInsertAfter, x, y, cx, cy, uFlags);
-        }
-
-        public uint GetWindowThreadID()
-        {
-            unsafe
-            {
-                return Win32APIs.GetWindowThreadProcessId(Hwnd, null);
-            }
-        }
-
-        public uint GetWindowProcessID()
-        {
-            uint processId = 0;
-
-            unsafe
-            {
-                Win32APIs.GetWindowThreadProcessId(Hwnd, &processId);
-            }
-
-            return processId;
         }
 
         public bool IsWindowUnicode()

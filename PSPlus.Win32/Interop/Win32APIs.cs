@@ -9,11 +9,20 @@ namespace PSPlus.Win32.Interop
         [DllImport("user32.dll")]
         public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
 
-        // Destory
+        // Life time
+        [DllImport("user32.dll")]
+        public static extern bool IsWindow(IntPtr hwnd);
+
         [DllImport("user32.dll")]
         public static extern bool DestroyWindow(IntPtr hwnd);
 
         // Attributes
+        [DllImport("user32.dll")]
+        public static extern uint GetWindowThreadProcessId(IntPtr hwnd, uint* processId);
+
+        [DllImport("user32.dll")]
+        public static extern bool IsWindowUnicode(IntPtr hwnd);
+
         [DllImport("user32.dll")]
         public static extern int GetWindowLong(IntPtr hwnd, int nIndex);
 
@@ -236,6 +245,9 @@ namespace PSPlus.Win32.Interop
         public static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
 
         [DllImport("user32.dll")]
+        public static extern bool ShowWindowAsync(IntPtr hwnd, int nCmdShow);
+
+        [DllImport("user32.dll")]
         public static extern bool IsWindowVisible(IntPtr hwnd);
 
         [DllImport("user32.dll")]
@@ -428,17 +440,5 @@ namespace PSPlus.Win32.Interop
 
         [DllImport("user32.dll")]
         public static extern IntPtr DeferWindowPos(IntPtr hwnd, IntPtr hWinPosInfo, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
-
-        [DllImport("user32.dll")]
-        public static extern uint GetWindowThreadProcessId(IntPtr hwnd, uint* processId);
-
-        [DllImport("user32.dll")]
-        public static extern bool IsWindow(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern bool IsWindowUnicode(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern bool ShowWindowAsync(IntPtr hwnd, int nCmdShow);
     }
 }

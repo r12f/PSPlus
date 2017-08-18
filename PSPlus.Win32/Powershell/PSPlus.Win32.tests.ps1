@@ -210,6 +210,21 @@ Describe "Win32" {
             $sysmenu | Should Not Be $null
         }
 
+        It "Should be able to get and change the visibility state" {
+            $notepadWindowControl.ShowWindow($Win32Consts::SW_SHOWNORMAL);
+            $isVisible = $notepadWindowControl.IsWindowVisible()
+            $isVisible | Should Be $true
+
+            $notepadWindowControl.ShowWindow($Win32Consts::SW_HIDE);
+            $isVisible = $notepadWindowControl.IsWindowVisible()
+            $isVisible | Should Be $false
+
+            $notepadWindowControl.ShowWindow($Win32Consts::SW_SHOWNORMAL);
+            $isVisible = $notepadWindowControl.IsWindowVisible()
+            $isVisible | Should Be $true
+        }
+
+
         It "Should be able to check and change the minimized and maximized state" {
             $notepadWindowControl.ShowWindow($Win32Consts::SW_SHOWMAXIMIZED);
             $isMaximized = $notepadWindowControl.IsZoomed()
