@@ -207,6 +207,17 @@ Describe "Win32" {
             $title.StartsWith("Test_") | Should Be $true
         }
 
+        It "Should be able to get the class name" {
+            $className = $notepadWindowControl.GetClassName()
+            $className | Should Not Be $null
+            $className | Should Not Be ''
+        }
+
+        It "Should be able to get the class long" {
+            $wndProc = $notepadWindowControl.GetClassLongPtr($Win32Consts::GCLP_WNDPROC)
+            $wndProc | Should Not Be 0
+        }
+
         It "Should be able to get menu" {
             $menu = $notepadWindowControl.GetMenu()
             $menu | Should Not Be $null

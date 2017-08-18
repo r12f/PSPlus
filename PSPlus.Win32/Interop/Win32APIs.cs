@@ -24,16 +24,28 @@ namespace PSPlus.Win32.Interop
         public static extern bool IsWindowUnicode(IntPtr hwnd);
 
         [DllImport("user32.dll")]
-        public static extern int GetWindowLong(IntPtr hwnd, int nIndex);
+        public static extern int GetWindowLongA(IntPtr hwnd, int nIndex);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr GetWindowLongPtr(IntPtr hwnd, int nIndex);
+        public static extern int GetWindowLongW(IntPtr hwnd, int nIndex);
 
         [DllImport("user32.dll")]
-        public static extern int SetWindowLong(IntPtr hwnd, int nIndex, int dwNewLong);
+        public static extern IntPtr GetWindowLongPtrA(IntPtr hwnd, int nIndex);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr SetWindowLongPtr(IntPtr hwnd, int nIndex, IntPtr dwNewLong);
+        public static extern IntPtr GetWindowLongPtrW(IntPtr hwnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern int SetWindowLongA(IntPtr hwnd, int nIndex, int dwNewLong);
+
+        [DllImport("user32.dll")]
+        public static extern int SetWindowLongW(IntPtr hwnd, int nIndex, int dwNewLong);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetWindowLongPtrA(IntPtr hwnd, int nIndex, IntPtr dwNewLong);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetWindowLongPtrW(IntPtr hwnd, int nIndex, IntPtr dwNewLong);
 
         // Window State Functions
         [DllImport("user32.dll")]
@@ -440,5 +452,33 @@ namespace PSPlus.Win32.Interop
 
         [DllImport("user32.dll")]
         public static extern IntPtr DeferWindowPos(IntPtr hwnd, IntPtr hWinPosInfo, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
+
+        // Class Operations
+        [DllImport("user32.dll")]
+        public static extern int GetClassNameW(IntPtr hwnd, IntPtr lpszStringBuf, int nMaxCount);
+
+        [DllImport("user32.dll")]
+        public static extern int GetClassLongA(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern int GetClassLongW(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern int SetClassLongA(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        [DllImport("user32.dll")]
+        public static extern int SetClassLongW(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetClassLongPtrA(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetClassLongPtrW(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetClassLongPtrA(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetClassLongPtrW(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
     }
 }

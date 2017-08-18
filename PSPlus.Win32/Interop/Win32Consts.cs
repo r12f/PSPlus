@@ -119,6 +119,41 @@ namespace PSPlus.Win32.Interop
         public const int WS_EX_OVERLAPPEDWINDOW = WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE;
         public const int WS_EX_PALETTEWINDOW = WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST;
 
+        // GetClassLong / SetClassLong
+        public const int GCL_MENUNAME = -8;
+        public const int GCL_HBRBACKGROUND = -10;
+        public const int GCL_HCURSOR = -12;
+        public const int GCL_HICON = -14;
+        public const int GCL_HMODULE = -16;
+        public const int GCL_CBWNDEXTRA = -18;
+        public const int GCL_CBCLSEXTRA = -20;
+        public const int GCL_WNDPROC = -24;
+        public const int GCL_STYLE = -26;
+        public const int GCW_ATOM = -32;
+        public const int GCL_HICONSM = -34;
+        public const int GCLP_MENUNAME = -8;
+        public const int GCLP_HBRBACKGROUND = -10;
+        public const int GCLP_HCURSOR = -12;
+        public const int GCLP_HICON = -14;
+        public const int GCLP_HMODULE = -16;
+        public const int GCLP_WNDPROC = -24;
+        public const int GCLP_HICONSM = -34;
+
+        // Class styles
+        public const int CS_VREDRAW = 0x0001;
+        public const int CS_HREDRAW = 0x0002;
+        public const int CS_DBLCLKS = 0x0008;
+        public const int CS_OWNDC = 0x0020;
+        public const int CS_CLASSDC = 0x0040;
+        public const int CS_PARENTDC = 0x0080;
+        public const int CS_NOCLOSE = 0x0200;
+        public const int CS_SAVEBITS = 0x0800;
+        public const int CS_BYTEALIGNCLIENT = 0x1000;
+        public const int CS_BYTEALIGNWINDOW = 0x2000;
+        public const int CS_GLOBALCLASS = 0x4000;
+        public const int CS_IME = 0x00010000;
+        public const int CS_DROPSHADOW = 0x00020000;
+
         // Show window
         public const int SW_HIDE = 0;
         public const int SW_SHOWNORMAL = 1;

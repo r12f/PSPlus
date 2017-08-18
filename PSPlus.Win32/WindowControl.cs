@@ -64,7 +64,7 @@ namespace PSPlus.Win32
 
         public int GetWindowLong(int nIndex)
         {
-            return Win32APIs.GetWindowLong(Hwnd, nIndex);
+            return Win32APIs.GetWindowLongW(Hwnd, nIndex);
         }
 
         public IntPtr GetWindowLongPtr(int nIndex)
@@ -74,12 +74,12 @@ namespace PSPlus.Win32
                 return (IntPtr)GetWindowLong(nIndex);
             }
 
-            return Win32APIs.GetWindowLongPtr(Hwnd, nIndex);
+            return Win32APIs.GetWindowLongPtrW(Hwnd, nIndex);
         }
 
         public int SetWindowLong(int nIndex, int dwNewLong)
         {
-            return Win32APIs.SetWindowLong(Hwnd, nIndex, dwNewLong);
+            return Win32APIs.SetWindowLongW(Hwnd, nIndex, dwNewLong);
         }
 
         public IntPtr SetWindowLongPtr(int nIndex, IntPtr dwNewLong)
@@ -89,7 +89,7 @@ namespace PSPlus.Win32
                 return (IntPtr)SetWindowLong(nIndex, (int)dwNewLong);
             }
 
-            return Win32APIs.SetWindowLongPtr(Hwnd, nIndex, dwNewLong);
+            return Win32APIs.SetWindowLongPtrW(Hwnd, nIndex, dwNewLong);
         }
 
         public bool IsWindowEnabled()
@@ -929,6 +929,51 @@ namespace PSPlus.Win32
         public bool IsWindowUnicode()
         {
             return Win32APIs.IsWindowUnicode(Hwnd);
+        }
+
+        public string GetClassName()
+        {
+            unsafe
+            {
+                // The maximum length of a classname is 256.
+                byte[] textBuffer = new byte[257 * 2];
+                fixed (byte* textBufferPtr = textBuffer)
+                {
+                    Win32APIs.GetClassNameW(Hwnd, new IntPtr(textBufferPtr), 257);
+                }
+                return Encoding.Unicode.GetString(textBuffer);
+            }
+        }
+
+        public int GetClassLong(int nIndex)
+        {
+            return Win32APIs.GetClassLongW(Hwnd, nIndex);
+        }
+
+        public int SetClassLong(int nIndex, int dwNewLong)
+        {
+            return Win32APIs.SetClassLongW(Hwnd, nIndex, dwNewLong);
+        }
+
+        public IntPtr GetClassLongPtr(int nIndex)
+        {
+            if (!Environment.Is64BitProcess)
+            {
+                return (IntPtr)GetClassLong(nIndex);
+            }
+
+            var ret = Win32APIs.GetClassLongPtrW(Hwnd, nIndex);
+            return ret;
+        }
+
+        public IntPtr SetClassLongPtr(int nIndex, IntPtr dwNewLong)
+        {
+            if (!Environment.Is64BitProcess)
+            {
+                return (IntPtr)SetClassLong(nIndex, (int)dwNewLong);
+            }
+
+            return Win32APIs.SetClassLongPtrW(Hwnd, nIndex, dwNewLong);
         }
     }
 }
