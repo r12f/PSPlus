@@ -136,10 +136,18 @@ namespace PSPlus.Win32.Interop
         public const int SW_FORCEMINIMIZE = 11;
         public const int SW_MAX = 11;
 
-        // ChildWindowFromPointEx Flags
+        // ChildWindowFromPointEx flags
         public const uint CWP_ALL = 0x0000;
         public const uint CWP_SKIPINVISIBLE = 0x0001;
         public const uint CWP_SKIPDISABLED = 0x0002;
         public const uint CWP_SKIPTRANSPARENT = 0x0004;
+
+        // ScrollInfo flags
+        public const uint SIF_RANGE = 0x0001;
+        public const uint SIF_PAGE = 0x0002;
+        public const uint SIF_POS = 0x0004;
+        public const uint SIF_DISABLENOSCROLL = 0x0008;
+        public const uint SIF_TRACKPOS = 0x0010;
+        public const uint SIF_ALL = (SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS);
     }
 }

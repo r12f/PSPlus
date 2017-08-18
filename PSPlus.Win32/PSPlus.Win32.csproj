@@ -48,6 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachThreadInputScope.cs" />
+    <Compile Include="Cmdlets\DataStructureFactories\NewWin32PointCmdlet.cs" />
+    <Compile Include="Cmdlets\DataStructureFactories\NewWin32RectCmdlet.cs" />
+    <Compile Include="Cmdlets\DataStructureFactories\NewWin32ScrollInfoCmdlet.cs" />
+    <Compile Include="Cmdlets\DataStructureFactories\NewWin32SizeCmdlet.cs" />
+    <Compile Include="Cmdlets\DataStructureFactories\NewWin32WindowPlacementCmdlet.cs" />
     <Compile Include="Cmdlets\GetDesktopWindowCmdlet.cs" />
     <Compile Include="Cmdlets\GetForegroundWindowCmdlet.cs" />
     <Compile Include="Cmdlets\GetWindowFromPointCmdlet.cs" />
@@ -73,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Cmdlets\DesktopLayout\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
