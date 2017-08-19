@@ -209,14 +209,14 @@ Describe "Win32" {
             $title | Should Not Be $null
             $title | Should Not Be ''
 
-            $newTitle = "Test_" + $title;
+            $newTitle = $title + "_test";
             $notepadWindowControl.SetWindowText($newTitle) | Should Be $true
 
             $title = $notepadWindowControl.GetWindowText()
             $title | Should Not Be $null
             $title | Should Not Be ''
             $title | Should Be $newTitle
-            $title.StartsWith("Test_") | Should Be $true
+            $title.EndsWith("_test") | Should Be $true
         }
 
         It "Should be able to get the class name" {

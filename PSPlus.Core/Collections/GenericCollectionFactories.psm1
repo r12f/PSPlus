@@ -53,14 +53,14 @@ function ConvertTo-Set
             }
             else
             {
-                $valueType = $value.GetType().FullName
+                $valueType = $Object.GetType().FullName
             }
             $set = New-GenericSet $valueType
         }
 
-        if (!$set.Contains($value))
+        if (!$set.Contains($Object))
         {
-            $set.Add($value)
+            $set.Add($Object)
         }
     }
 
