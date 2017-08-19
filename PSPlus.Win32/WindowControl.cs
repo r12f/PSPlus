@@ -289,7 +289,7 @@ namespace PSPlus.Win32
                 {
                     Win32APIs.GetWindowTextW(Hwnd, new IntPtr(textBufferPtr), textLength + 1);
                 }
-                return Encoding.Unicode.GetString(textBuffer);
+                return Encoding.Unicode.GetString(textBuffer, 0, textLength * 2);
             }
         }
 
@@ -668,7 +668,7 @@ namespace PSPlus.Win32
                     Win32APIs.GetDlgItemTextW(Hwnd, nID, new IntPtr(textBufferPtr), textLength + 1);
                 }
 
-                return Encoding.Unicode.GetString(textBuffer);
+                return Encoding.Unicode.GetString(textBuffer, 0, textLength * 2);
             }
         }
 
@@ -936,12 +936,13 @@ namespace PSPlus.Win32
             unsafe
             {
                 // The maximum length of a classname is 256.
+                int textLength = 0;
                 byte[] textBuffer = new byte[257 * 2];
                 fixed (byte* textBufferPtr = textBuffer)
                 {
-                    Win32APIs.GetClassNameW(Hwnd, new IntPtr(textBufferPtr), 257);
+                    textLength = Win32APIs.GetClassNameW(Hwnd, new IntPtr(textBufferPtr), 257);
                 }
-                return Encoding.Unicode.GetString(textBuffer);
+                return Encoding.Unicode.GetString(textBuffer, 0, textLength * 2);
             }
         }
 

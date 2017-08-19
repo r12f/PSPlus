@@ -36,6 +36,18 @@ Describe "Win32" {
         It "Should be able to create Win32 window placement" {
             $win32WindowPlacement = New-Win32WindowPlacement 
             $win32WindowPlacement | Should Not Be $null
+            $win32WindowPlacement.Length | Should Not Be 0
+
+            # We cannot assign the values in the nested structures directly:
+            # See MSDN: https://msdn.microsoft.com/en-us/library/aa288471(v=vs.71).aspx
+            $win32WindowPlacement.MinPosition.X = 1
+            $win32WindowPlacement.MinPosition.X | Should Be 0
+            $win32WindowPlacement.MinPosition.Y = 2
+            $win32WindowPlacement.MinPosition.Y | Should Be 0
+
+            $win32WindowPlacement.MinPosition = New-Win32Point 1 2
+            $win32WindowPlacement.MinPosition.X | Should Be 1
+            $win32WindowPlacement.MinPosition.Y | Should Be 2
         }
     }
 
@@ -215,7 +227,7 @@ Describe "Win32" {
 
         It "Should be able to get the class long" {
             $wndProc = $notepadWindowControl.GetClassLongPtr($Win32Consts::GCLP_WNDPROC)
-            $wndProc | Should Not Be 0
+            $wndProc | Should Not Be $null
         }
 
         It "Should be able to get menu" {
@@ -308,6 +320,59 @@ Describe "Win32" {
             $notepadWindowControl.IsWindow() | Should Be $true
             #$notepadWindowControl.SendMessageW($Win32MsgIds::WM_CLOSE, 0, 0);
             #$notepadWindowControl.IsWindow() | Should Be $false
+        }
+
+        $notepad.Kill()
+    }
+
+    Context "When trying to use desktop layout" {
+        $notepad = Start-Process notepad -PassThru
+
+        do
+        {
+            Sleep 1
+        }
+        while ($notepad.MainWindowHandle -eq 0)
+
+        $notepadWindowControl = New-WindowControl $notepad.MainWindowHandle
+
+        It "Should be able to generate the layout rules and restore from it" {
+            $notepadWindowControl.MoveWindow(0, 0, 640, 480, $true)
+
+            $layoutRules = New-DesktopLayoutRulesFromCurrentLayout -IncludeProcessNames "notepad" -ExcludeClassNames "IME"
+            $layoutRules.Count | Should Not Be 0
+
+            $notepadWindowControl.MoveWindow(100, 100, 320, 240, $true)
+
+            Restore-DesktopLayoutFromLayoutRules $layoutRules
+            
+            $windowRect = $notepadWindowControl.GetWindowRect()
+            $windowRect.Left | Should Be 0
+            $windowRect.Top | Should Be 0
+            $windowRect.Right | Should Be 640
+            $windowRect.Bottom | Should Be 480
+        }
+
+        It "Should be able to generate the layout rules to file" {
+            $layoutRulesFile = New-TemporaryFile
+
+            $notepadWindowControl.MoveWindow(0, 0, 640, 480, $true)
+
+            Save-DesktopLayout -FilePath $layoutRulesFile -IncludeProcessNames "notepad" -ExcludeClassNames "IME"
+            $savedLayoutRules = Get-Content $layoutRulesFile | ConvertFrom-Json
+            $savedLayoutRules.Count | Should Not Be 0
+
+            $notepadWindowControl.MoveWindow(100, 100, 320, 240, $true)
+
+            Restore-DesktopLayout $layoutRulesFile
+
+            $windowRect = $notepadWindowControl.GetWindowRect()
+            $windowRect.Left | Should Be 0
+            $windowRect.Top | Should Be 0
+            $windowRect.Right | Should Be 640
+            $windowRect.Bottom | Should Be 480
+
+            Remove-Item $layoutRulesFile
         }
 
         $notepad.Kill()

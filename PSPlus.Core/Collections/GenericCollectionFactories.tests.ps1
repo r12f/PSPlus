@@ -54,6 +54,16 @@ Describe "GenericCollectionFactories" {
             $collection.Count | Should Be 0
             $collection.Contains(1) | Should Be $false
         }
+
+        It "Should be able to convert objects from pipeline to a set with automated type detection" {
+            $processIds = Get-Process | % { $_.Id } | ConvertTo-Set
+            $processIds.Count | Should Not Be 0
+        }
+
+        It "Should be able to convert objects from pipeline to an set with type set to System.Object" {
+            $processIds = Get-Process | % { $_.Id } | ConvertTo-Set -GenericValue
+            $processIds.Count | Should Not Be 0
+        }
     }
 
     Context "When using dictionary" {

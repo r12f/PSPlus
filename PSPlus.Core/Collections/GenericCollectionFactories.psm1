@@ -26,6 +26,50 @@ function New-GenericSet([string] $typeName)
     return New-Object $collectionTypeName
 }
 
+function ConvertTo-Set
+{
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline = $true)]
+        $Object,
+
+        [Parameter(Mandatory = $false)]
+        [switch] $GenericValue
+    )
+    
+    begin
+    {
+        $set = $null
+    }
+
+    process
+    {
+        if ($set -eq $null)
+        {
+            $valueType = $null;
+            if ($GenericValue)
+            {
+                $valueType = "System.Object"
+            }
+            else
+            {
+                $valueType = $value.GetType().FullName
+            }
+            $set = New-GenericSet $valueType
+        }
+
+        if (!$set.Contains($value))
+        {
+            $set.Add($value)
+        }
+    }
+
+    end
+    {
+        $set
+    }
+}
+
 function New-GenericDictionary([string] $keyTypeName, [string] $valueTypeName)
 {
     $collectionTypeName = "System.Collections.Generic.Dictionary[$keyTypeName, $valueTypeName]"

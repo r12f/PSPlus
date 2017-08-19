@@ -73,15 +73,14 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Powershell\PSPlus.Win32.Consts.psm1" />
+    <None Include="Powershell\PSPlus.Win32.DesktopLayout.psm1" />
     <None Include="PSPlus.Win32.psd1" />
     <None Include="Powershell\PSPlus.Win32.tests.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cmdlets\DesktopLayout\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>powershell $(SolutionDir)Build\PostBuild.ps1

@@ -9,7 +9,14 @@ namespace PSPlus.Win32.Cmdlets
     {
         protected override void ProcessRecord()
         {
-            WriteObject(new Win32WindowPlacement());
+            Win32WindowPlacement placement = new Win32WindowPlacement();
+
+            unsafe
+            {
+                placement.Length = (uint)sizeof(Win32WindowPlacement);
+            }
+
+            WriteObject(placement);
         }
     }
 }
