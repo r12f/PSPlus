@@ -122,6 +122,8 @@ Describe "Diagnostics" {
 
     Context "When trying to watch events" {
         It "Should be able to watch events" {
+            Get-EtwTraceSession -Name "TestSession" | Stop-EtwTraceSession
+
             $onEvent = {
                 param($e, $watcherManager, $watchOptions)
                 $e | Should Not Be $null

@@ -5,8 +5,8 @@ using System.Management.Automation;
 
 namespace PSPlus.Diagnostics
 {
-    [Cmdlet(VerbsCommon.Watch, "ETWEvents")]
-    public class WatchETWEventsCmdlet : Cmdlet
+    [Cmdlet(VerbsCommon.Watch, "EtwEvents")]
+    public class WatchEtwEventsCmdlet : Cmdlet
     {
         #region Parameters
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = true)]

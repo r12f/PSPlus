@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="Cmdlets\NewEventWatcherOptionsCmdlet.cs" />
     <Compile Include="Cmdlets\NewEventSourceDefinitionCmdlet.cs" />
-    <Compile Include="Cmdlets\WatchETWEventsCmdlet.cs" />
+    <Compile Include="Cmdlets\WatchEtwEventsCmdlet.cs" />
     <Compile Include="EventTracing\EventWatcher.cs" />
     <Compile Include="EventTracing\EventWatcherManager.cs" />
     <Compile Include="EventTracing\EventSourceDefinition.cs" />
