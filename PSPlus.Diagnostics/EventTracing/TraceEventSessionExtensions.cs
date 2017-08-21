@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PSPlus.Diagnostics.EtwEvent
+namespace PSPlus.Diagnostics.EventTracing
 {
     public static class TraceEventSessionExtensions
     {

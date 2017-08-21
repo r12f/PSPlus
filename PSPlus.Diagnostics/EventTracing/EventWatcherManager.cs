@@ -7,7 +7,7 @@ using System.Management.Automation;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PSPlus.Diagnostics.EtwEvent
+namespace PSPlus.Diagnostics.EventTracing
 {
     internal sealed class EventWatcherManager : IEventWatcherManager, IDisposable
     {

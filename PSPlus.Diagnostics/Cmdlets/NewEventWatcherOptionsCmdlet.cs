@@ -1,4 +1,4 @@
-﻿using PSPlus.Diagnostics.EtwEvent;
+﻿using PSPlus.Diagnostics.EventTracing;
 using System.Collections.Generic;
 using System.Management.Automation;
 

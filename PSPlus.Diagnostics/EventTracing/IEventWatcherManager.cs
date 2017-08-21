@@ -1,4 +1,4 @@
-﻿namespace PSPlus.Diagnostics.EtwEvent
+﻿namespace PSPlus.Diagnostics.EventTracing
 {
     public interface IEventWatcherManager
     {

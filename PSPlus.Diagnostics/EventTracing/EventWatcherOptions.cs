@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Management.Automation;
 
-namespace PSPlus.Diagnostics.EtwEvent
+namespace PSPlus.Diagnostics.EventTracing
 {
     public class EventWatcherOptions
     {

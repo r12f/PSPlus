@@ -3,7 +3,7 @@ using Microsoft.Diagnostics.Tracing.Session;
 using System;
 using System.Collections.Generic;
 
-namespace PSPlus.Diagnostics.EtwEvent
+namespace PSPlus.Diagnostics.EventTracing
 {
     public sealed class EventSourceDefinition
     {

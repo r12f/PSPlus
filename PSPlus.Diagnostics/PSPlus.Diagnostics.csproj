@@ -57,13 +57,13 @@
     <Compile Include="Cmdlets\NewEventWatcherOptionsCmdlet.cs" />
     <Compile Include="Cmdlets\NewEventSourceDefinitionCmdlet.cs" />
     <Compile Include="Cmdlets\WatchETWEventsCmdlet.cs" />
-    <Compile Include="EtwEvent\EventWatcher.cs" />
-    <Compile Include="EtwEvent\EventWatcherManager.cs" />
-    <Compile Include="EtwEvent\EventSourceDefinition.cs" />
-    <Compile Include="EtwEvent\IEventWatcherManager.cs" />
-    <Compile Include="EtwEvent\TraceEventSessionExtensions.cs" />
+    <Compile Include="EventTracing\EventWatcher.cs" />
+    <Compile Include="EventTracing\EventWatcherManager.cs" />
+    <Compile Include="EventTracing\EventSourceDefinition.cs" />
+    <Compile Include="EventTracing\IEventWatcherManager.cs" />
+    <Compile Include="EventTracing\TraceEventSessionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EtwEvent\EventWatcherOptions.cs" />
+    <Compile Include="EventTracing\EventWatcherOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

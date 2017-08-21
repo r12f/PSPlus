@@ -3,7 +3,7 @@ using Microsoft.Diagnostics.Tracing.Session;
 using System;
 using System.Threading.Tasks;
 
-namespace PSPlus.Diagnostics.EtwEvent
+namespace PSPlus.Diagnostics.EventTracing
 {
     internal sealed class EventWatcher : IDisposable
     {
