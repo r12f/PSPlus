@@ -6,7 +6,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>MyApplication</RootNamespace>
     <AssemblyName>MyApplication</AssemblyName>
-    <Name>PSPlus.Core</Name>
+    <Name>PSPlus.Runtime</Name>
+    <ProjectHome />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,7 +42,7 @@
     <Compile Include="Loader\Loader.psm1" />
     <Compile Include="Loader\Loader.tests.ps1" />
     <Compile Include="Pipeline\Pipeline.psm1" />
-    <Compile Include="PSPlus.Core.psd1" />
+    <Compile Include="PSPlus.Runtime.psd1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />
