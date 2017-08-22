@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PSPlus.Diagnostics.EventTracing
 {
-    internal sealed class EventWatcher : IDisposable
+    public sealed class EventWatcher : IDisposable
     {
         private EventWatcherManager _watcherManager;
         private EventWatcherOptions _watcherOptions;

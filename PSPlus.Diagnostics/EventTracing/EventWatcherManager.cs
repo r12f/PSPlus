@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PSPlus.Diagnostics.EventTracing
 {
-    internal sealed class EventWatcherManager : IEventWatcherManager, IDisposable
+    public sealed class EventWatcherManager : IEventWatcherManager, IDisposable
     {
         private class CallbackTask
         {
