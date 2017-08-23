@@ -13,7 +13,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\Output\Binaries\Debug\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\Output\Objects\PSPlus.Tests\</BaseIntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -22,7 +22,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\Output\Binaries\Release\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\Output\Objects\PSPlus.Tests\</BaseIntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -31,7 +31,7 @@
     <Compile Include="PSPlus.Modules.Crypto.tests.ps1" />
     <Compile Include="PSPlus.Modules.IO.tests.ps1" />
     <Compile Include="PSPlus.Modules.Runtime.Functional.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Runtime.Loader.tests.ps1" />
+    <Compile Include="PSPlus.Modules.Runtime.TypeSystem.tests.ps1" />
     <Compile Include="PSPlus.Modules.Runtime.Collections.tests.ps1" />
     <Compile Include="PSPlus.Modules.Diagnostics.tests.ps1" />
     <Compile Include="PSPlus.Modules.Win32.tests.ps1" />

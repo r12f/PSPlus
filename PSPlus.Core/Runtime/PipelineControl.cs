@@ -1,6 +1,6 @@
 ﻿using System.Management.Automation;
 
-namespace PSPlus.Core
+namespace PSPlus.Core.Runtime
 {
     public class PipelineControl
     {

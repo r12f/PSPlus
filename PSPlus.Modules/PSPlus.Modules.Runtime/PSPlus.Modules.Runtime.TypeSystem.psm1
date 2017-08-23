@@ -28,3 +28,27 @@ function Import-NativeFunctions([String] $className, [NativeFunctionSignature[]]
 
     return Add-Type -MemberDefinition $functionsToInject -Name $className -Namespace PSPlus -PassThru 
 }
+
+function Get-Type
+{
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0, ValueFromPipeline = $true, Mandatory = $true)]
+        [object] $InputObject,
+
+        [Parameter(Mandatory = $false)]
+        [switch] $All = $false
+    )
+
+    process
+    {
+        $type = $InputObject.GetType()
+        $type
+
+        if (!$All)
+        {
+            Stop-UpstreamCommands($PSCmdlet)
+        }
+    }
+}
+

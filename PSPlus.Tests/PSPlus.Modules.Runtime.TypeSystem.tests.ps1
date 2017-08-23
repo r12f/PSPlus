@@ -1,6 +1,6 @@
 ﻿Import-Module "$PSScriptRoot\..\Output\Publish\PSPlus.psd1" -Force
 
-Describe "Runtime.Loader" {
+Describe "Runtime.TypeSystem" {
     Context "When trying to call native functions" {
         It "Should be able to register a single native function." {
             $win32FunctionSigs = @(New-NativeFunctionSignature "user32.dll" "IntPtr GetDesktopWindow()")
@@ -49,6 +49,19 @@ Describe "Runtime.Loader" {
             $win32Functions = Import-NativeFunctions "Win32It4" $win32FunctionSigs
             $desktopWindow = $win32Functions::GetDesktopWindow()
             $desktopWindow | Should Not Be 0
+        }
+    }
+
+    Context "When trying to get the object type" {
+        It "Should be able to get the first object type." {
+            $type = 1..5 | Get-Type
+            $type | Should Be (1).GetType()
+        }
+
+        It "Should be able to get all object types." {
+            $types = 1..5 | Get-Type -All
+            $types.Count | Should Be 5
+            $types[0] | Should Be (1).GetType()
         }
     }
 }

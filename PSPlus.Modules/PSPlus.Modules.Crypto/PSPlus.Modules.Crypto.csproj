@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\Output\Binaries\Debug\</OutputPath>
-    <BaseIntermediateOutputPath>..\..\Output\Objects\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\Output\Objects\PSPlus.Modules.Crypto\</BaseIntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\Output\Binaries\Release\</OutputPath>
-    <BaseIntermediateOutputPath>..\..\Output\Objects\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\Output\Objects\PSPlus.Modules.Crypto\</BaseIntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

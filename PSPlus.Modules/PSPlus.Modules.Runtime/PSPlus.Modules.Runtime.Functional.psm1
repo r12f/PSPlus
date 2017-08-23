@@ -11,12 +11,12 @@ function Test-Any
         [ScriptBlock] $predicate,
 
         [Parameter(ValueFromPipeline = $true)]
-        $Object
+        $InputObject
     )
 
     process
     {
-        $result = ForEach-Object $predicate -InputObject $Object
+        $result = ForEach-Object $predicate -InputObject $InputObject
         if ($result)
         {
             $true
@@ -39,12 +39,12 @@ function Test-All
         [ScriptBlock] $Predicate,
 
         [Parameter(ValueFromPipeline = $true)]
-        $Object
+        $InputObject
     )
 
     process
     {
-        $result = ForEach-Object $Predicate -InputObject $Object
+        $result = ForEach-Object $Predicate -InputObject $InputObject
         if (-not $result)
         {
             $false
