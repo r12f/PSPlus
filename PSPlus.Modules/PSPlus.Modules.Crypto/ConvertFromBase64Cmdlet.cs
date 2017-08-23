@@ -1,5 +1,5 @@
 ﻿using PSPlus.Core;
-using System;
+using PSPlus.Core.Crypto;
 using System.Management.Automation;
 using System.Text;
 
@@ -14,16 +14,14 @@ namespace PSPlus.Modules.Crypto
 
         protected override void ProcessRecord()
         {
-            byte[] buffer = Convert.FromBase64String(InputObject);
-
             string encodingName = EncodingName;
             if (string.IsNullOrWhiteSpace(encodingName))
             {
-                encodingName = "unicode";
+                encodingName = "utf-8";
             }
 
             Encoding encoding = Encoding.GetEncoding(encodingName);
-            string decodedString = encoding.GetString(buffer);
+            string decodedString = Base64.DecodeString(InputObject, encoding);
             WriteObject(decodedString);
         }
     }

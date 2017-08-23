@@ -1,5 +1,5 @@
 ﻿using PSPlus.Core;
-using System;
+using PSPlus.Core.Crypto;
 using System.Management.Automation;
 using System.Text;
 
@@ -17,12 +17,11 @@ namespace PSPlus.Modules.Crypto
             string encodingName = EncodingName;
             if (string.IsNullOrWhiteSpace(encodingName))
             {
-                encodingName = "unicode";
+                encodingName = "utf-8";
             }
 
             Encoding encoding = Encoding.GetEncoding(encodingName);
-            byte[] buffer = encoding.GetBytes(InputObject);
-            string encodedString = Convert.ToBase64String(buffer);
+            string encodedString = Base64.EncodeString(InputObject, encoding);
             WriteObject(encodedString);
         }
     }
