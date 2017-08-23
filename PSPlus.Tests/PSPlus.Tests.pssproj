@@ -28,6 +28,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PSPlus.Modules.IO.tests.ps1" />
     <Compile Include="PSPlus.Modules.Runtime.Functional.tests.ps1" />
     <Compile Include="PSPlus.Modules.Runtime.Loader.tests.ps1" />
     <Compile Include="PSPlus.Modules.Runtime.Collections.tests.ps1" />

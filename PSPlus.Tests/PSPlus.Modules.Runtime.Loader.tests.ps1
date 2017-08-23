@@ -1,6 +1,6 @@
 ﻿Import-Module "$PSScriptRoot\..\Output\Publish\PSPlus.psd1" -Force
 
-Describe "Loader" {
+Describe "Runtime.Loader" {
     Context "When trying to call native functions" {
         It "Should be able to register a single native function." {
             $win32FunctionSigs = @(New-NativeFunctionSignature "user32.dll" "IntPtr GetDesktopWindow()")

@@ -1,6 +1,6 @@
 ﻿Import-Module "$PSScriptRoot\..\Output\Publish\PSPlus.psd1" -Force
 
-Describe "Functional" {
+Describe "Runtime.Functional" {
     Context "When test any" {
         It "Should return true if any object matches the predicate" {
             1..10 | Test-Any { $_ -gt 5 } | Should Be $true

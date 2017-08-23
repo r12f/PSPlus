@@ -1,6 +1,6 @@
 ﻿Import-Module "$PSScriptRoot\..\Output\Publish\PSPlus.psd1" -Force
 
-Describe "Collection" {
+Describe "Runtime.Collection" {
     Context "When using list" {
         It "Should be able to use list" {
             $collection = New-GenericList "int"
