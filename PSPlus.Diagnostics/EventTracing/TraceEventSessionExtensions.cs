@@ -1,5 +1,4 @@
 ﻿using Microsoft.Diagnostics.Tracing.Session;
-using System;
 using System.Collections.Generic;
 
 namespace PSPlus.Diagnostics.EventTracing

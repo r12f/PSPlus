@@ -1,16 +1,13 @@
 ﻿using PSPlus.Core;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
 
 namespace PSPlus.Modules.IO
 {
     [Cmdlet(VerbsCommon.Get, "FileExtension")]
     [OutputType(typeof(string))]
-    public class GetFileExtensionCmdlet : CmdletBaseWithInputObject
+    public class GetFileExtensionCmdlet : CmdletBaseWithInputObject<string>
     {
         protected override void ProcessRecord()
         {

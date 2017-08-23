@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Management.Automation;
-using System.Text;
+﻿using System.Management.Automation;
 
 namespace PSPlus.Core
 {
-    public class CmdletBaseWithInputObject : Cmdlet
+    public class CmdletBaseWithInputObject<T> : Cmdlet
     {
         [Parameter(Position = 0, ValueFromPipeline = true, Mandatory = true)]
-        public string InputObject;
+        public T InputObject;
     }
 }

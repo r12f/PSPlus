@@ -1,16 +1,13 @@
 ﻿using PSPlus.Core;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
 
 namespace PSPlus.Modules.IO
 {
     [Cmdlet(VerbsCommon.Rename, "FileExtension")]
     [OutputType(typeof(string))]
-    public class RenameFileExtensionCmdlet : CmdletBaseWithInputObject
+    public class RenameFileExtensionCmdlet : CmdletBaseWithInputObject<string>
     {
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = true, Mandatory = true)]
         public string Extension;
