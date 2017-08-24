@@ -1,4 +1,5 @@
 ﻿using PSPlus.Core;
+using PSPlus.Core.Cmdlets;
 using System;
 using System.Management.Automation;
 
@@ -8,7 +9,7 @@ namespace PSPlus.Modules.Crypto
     [OutputType(typeof(string))]
     public class ConvertFromBase64ByteArrayCmdlet : CmdletBaseWithInputObject<string>
     {
-        protected override void ProcessRecord()
+        protected override void ProcessRecordInEH()
         {
             byte[] buffer = Convert.FromBase64String(InputObject);
             WriteObject(buffer);

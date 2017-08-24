@@ -1,4 +1,5 @@
 ﻿using PSPlus.Core;
+using PSPlus.Core.Cmdlets;
 using System;
 using System.IO;
 using System.Management.Automation;
@@ -12,7 +13,7 @@ namespace PSPlus.Modules.IO
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = true, Mandatory = true)]
         public string Extension;
 
-        protected override void ProcessRecord()
+        protected override void ProcessRecordInEH()
         {
             if (string.IsNullOrWhiteSpace(InputObject))
             {

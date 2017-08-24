@@ -50,6 +50,7 @@
     <Compile Include="ConvertFromBase64ToByteArrayCmdlet.cs" />
     <Compile Include="ConvertToBase64FromByteArrayCmdlet.cs" />
     <Compile Include="ConvertToBase64Cmdlet.cs" />
+    <Compile Include="GetStringHashCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
