@@ -1,14 +1,16 @@
 #
-# Functional.psm1
+# PSPlus.Modules.Runtime.Functional.psm1
 #
+# These functions cannot be implemented by C#, because we cannot properly set the $_ variable in the ScriptBlock.
+# The API to change the $_ is supported in Powershell 4, but it makes the "closure" goes away, even after calling GetNewClosure.
 
 # Test-Any
 function Test-Any
 {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true)]
-        [ScriptBlock] $predicate,
+        [Parameter(Position = 0, Mandatory = $true)]
+        [ScriptBlock] $Predicate,
 
         [Parameter(ValueFromPipeline = $true)]
         $InputObject
@@ -16,11 +18,11 @@ function Test-Any
 
     process
     {
-        $result = ForEach-Object $predicate -InputObject $InputObject
+        $result = ForEach-Object $Predicate -InputObject $InputObject
         if ($result)
         {
             $true
-            Stop-UpstreamCommands($PSCmdlet)
+            Stop-UpstreamCommands $PSCmdlet
         }
     }
 
@@ -48,7 +50,7 @@ function Test-All
         if (-not $result)
         {
             $false
-            Stop-UpstreamCommands($PSCmdlet)
+            Stop-UpstreamCommands $PSCmdlet
         }
     }
 

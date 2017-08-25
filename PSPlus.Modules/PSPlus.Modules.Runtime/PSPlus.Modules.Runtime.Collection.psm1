@@ -1,28 +1,54 @@
 #
-# GenericCollectionFactories.psm1
+# PSPlus.Modules.Runtime.Collection.psm1
 #
+# These cmdlets are hard to be implmeneted in C#, because we cannot change the type system of existing assembly.
+# So to create new types in C#, we have to dynamically create an assembly. And powershell already take care of everything for us.
 
-function New-GenericList([string] $typeName)
+function New-GenericList
 {
-    $collectionTypeName = "System.Collections.Generic.List[$typeName]"
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0, ValueFromPipeline = $true, Mandatory = $true)]
+        [string] $InputObject
+    )
+
+    $collectionTypeName = "System.Collections.Generic.List[$InputObject]"
     return New-Object $collectionTypeName
 }
 
-function New-GenericQueue([string] $typeName)
+function New-GenericQueue
 {
-    $collectionTypeName = "System.Collections.Generic.Queue[$typeName]"
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0, ValueFromPipeline = $true, Mandatory = $true)]
+        [string] $InputObject
+    )
+
+    $collectionTypeName = "System.Collections.Generic.Queue[$InputObject]"
     return New-Object $collectionTypeName
 }
 
-function New-GenericStack([string] $typeName)
+function New-GenericStack
 {
-    $collectionTypeName = "System.Collections.Generic.Stack[$typeName]"
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0, ValueFromPipeline = $true, Mandatory = $true)]
+        [string] $InputObject
+    )
+
+    $collectionTypeName = "System.Collections.Generic.Stack[$InputObject]"
     return New-Object $collectionTypeName
 }
 
-function New-GenericSet([string] $typeName)
+function New-GenericSet
 {
-    $collectionTypeName = "System.Collections.Generic.HashSet[$typeName]"
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0, ValueFromPipeline = $true, Mandatory = $true)]
+        [string] $InputObject
+    )
+
+    $collectionTypeName = "System.Collections.Generic.HashSet[$InputObject]"
     return New-Object $collectionTypeName
 }
 
@@ -30,8 +56,8 @@ function ConvertTo-Set
 {
     [CmdletBinding()]
     param(
-        [Parameter(ValueFromPipeline = $true)]
-        $Object,
+        [Parameter(Position = 0, ValueFromPipeline = $true, Mandatory = $true)]
+        [object] $InputObject,
 
         [Parameter(Mandatory = $false)]
         [switch] $GenericValue
@@ -53,14 +79,14 @@ function ConvertTo-Set
             }
             else
             {
-                $valueType = $Object.GetType().FullName
+                $valueType = $InputObject.GetType().FullName
             }
             $set = New-GenericSet $valueType
         }
 
-        if (!$set.Contains($Object))
+        if (!$set.Contains($InputObject))
         {
-            $set.Add($Object)
+            $set.Add($InputObject)
         }
     }
 
@@ -70,9 +96,18 @@ function ConvertTo-Set
     }
 }
 
-function New-GenericDictionary([string] $keyTypeName, [string] $valueTypeName)
+function New-GenericDictionary
 {
-    $collectionTypeName = "System.Collections.Generic.Dictionary[$keyTypeName, $valueTypeName]"
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true, Mandatory = $true)]
+        [string] $KeyTypeName,
+
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $true)]
+        [string] $ValueTypeName
+    )
+
+    $collectionTypeName = "System.Collections.Generic.Dictionary[$KeyTypeName, $ValueTypeName]"
     return New-Object $collectionTypeName
 }
 
@@ -87,7 +122,7 @@ function ConvertTo-Dictionary
         [ScriptBlock] $ToValue,
 
         [Parameter(ValueFromPipeline = $true)]
-        $Object,
+        [object] $InputObject,
 
         [Parameter(Mandatory = $false)]
         [switch] $GenericValue
@@ -100,8 +135,8 @@ function ConvertTo-Dictionary
 
     process
     {
-        $key = ForEach-Object $ToKey -InputObject $Object
-        $value = ForEach-Object $ToValue -InputObject $Object
+        $key = ForEach-Object $ToKey -InputObject $InputObject
+        $value = ForEach-Object $ToValue -InputObject $InputObject
 
         if ($dictionary -eq $null)
         {

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
 
 namespace PSPlus.Core.Cmdlets
 {
@@ -45,7 +42,15 @@ namespace PSPlus.Core.Cmdlets
             }
             catch (Exception e)
             {
-                ThrowTerminatingError(new ErrorRecord(e, ErrorType.InvalidOperation, ErrorCategory.InvalidOperation, this));
+                if (e.GetType().FullName.StartsWith("System.Management.Automation"))
+                {
+                    // If the exception is a powershell control exception, rethrow it.
+                    throw;
+                }
+                else
+                {
+                    ThrowTerminatingError(new ErrorRecord(e, ErrorType.InvalidOperation, ErrorCategory.InvalidOperation, this));
+                }
             }
         }
     }

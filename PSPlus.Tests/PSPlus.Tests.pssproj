@@ -31,9 +31,10 @@
     <Compile Include="PSPlus.Modules.Crypto.tests.ps1" />
     <Compile Include="PSPlus.Modules.IO.tests.ps1" />
     <Compile Include="PSPlus.Modules.Runtime.Functional.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Runtime.TypeSystem.tests.ps1" />
+    <Compile Include="PSPlus.Modules.Runtime.Loader.tests.ps1" />
     <Compile Include="PSPlus.Modules.Runtime.Collections.tests.ps1" />
     <Compile Include="PSPlus.Modules.Diagnostics.tests.ps1" />
+    <Compile Include="PSPlus.Modules.Runtime.Reflection.tests.ps1" />
     <Compile Include="PSPlus.Modules.Win32.tests.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

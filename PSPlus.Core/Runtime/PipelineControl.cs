@@ -1,12 +1,14 @@
-﻿using System.Management.Automation;
+﻿using System;
+using System.Management.Automation;
 
 namespace PSPlus.Core.Runtime
 {
-    public class PipelineControl
+    public static class PipelineControl
     {
-        public static void Stop(Cmdlet cmdlet)
+        public static void StopUpstreamCommands(Cmdlet cmdlet)
         {
-            throw (System.Exception) System.Activator.CreateInstance(typeof(Cmdlet).Assembly.GetType("System.Management.Automation.StopUpstreamCommandsException"), cmdlet);
+            Type exceptionType = typeof(Cmdlet).Assembly.GetType("System.Management.Automation.StopUpstreamCommandsException");
+            throw (System.Exception) System.Activator.CreateInstance(exceptionType, cmdlet);
         }
     }
 }

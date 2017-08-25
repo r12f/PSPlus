@@ -1,5 +1,4 @@
-﻿using PSPlus.Core;
-using PSPlus.Core.Cmdlets;
+﻿using PSPlus.Core.Cmdlets;
 using System;
 using System.IO;
 using System.Management.Automation;
