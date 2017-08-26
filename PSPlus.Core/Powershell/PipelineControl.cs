@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Management.Automation;
 
-namespace PSPlus.Core.Runtime
+namespace PSPlus.Core.Powershell
 {
     public static class PipelineControl
     {

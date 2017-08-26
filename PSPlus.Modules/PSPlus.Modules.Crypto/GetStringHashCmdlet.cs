@@ -1,5 +1,5 @@
-﻿using PSPlus.Core.Cmdlets;
-using PSPlus.Core.Crypto;
+﻿using PSPlus.Core.Crypto;
+using PSPlus.Core.Powershell.Cmdlets;
 using PSPlus.Core.Text;
 using System;
 using System.Management.Automation;

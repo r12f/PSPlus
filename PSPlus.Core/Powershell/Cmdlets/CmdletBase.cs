@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Management.Automation;
 
-namespace PSPlus.Core.Cmdlets
+namespace PSPlus.Core.Powershell.Cmdlets
 {
     public class CmdletBase : Cmdlet
     {

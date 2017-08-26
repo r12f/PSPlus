@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cmdlets\CmdletBase.cs" />
-    <Compile Include="Cmdlets\CmdletBaseWithInputObject.cs" />
+    <Compile Include="Powershell\Cmdlets\CmdletBase.cs" />
+    <Compile Include="Powershell\Cmdlets\CmdletBaseWithInputObject.cs" />
     <Compile Include="Crypto\Base64.cs" />
     <Compile Include="Crypto\HashAlgorithmFactory.cs" />
     <Compile Include="Crypto\HashGenerator.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="ErrorType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\ByteArrayExtensions.cs" />
-    <Compile Include="Runtime\PipelineControl.cs" />
+    <Compile Include="Powershell\PipelineControl.cs" />
     <Compile Include="Text\EncodingFactory.cs" />
     <Compile Include="Win32\AttachThreadInputScope.cs" />
     <Compile Include="Win32\Interop\Win32APIs.cs" />
