@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PSPlus.Core.Win32.Interop
+namespace PSPlus.Core.Windows.Win32.Interop
 {
     public static class Win32Consts
     {

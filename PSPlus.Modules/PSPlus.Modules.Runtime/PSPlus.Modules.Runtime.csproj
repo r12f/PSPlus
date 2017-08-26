@@ -49,6 +49,12 @@
     <Compile Include="Environments\SetEnvironmentVariableCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\GetTypeCmdlet.cs" />
+    <Compile Include="Windows\Core\TestIs32BitsOSCmdlet.cs" />
+    <Compile Include="Windows\Core\TestIs32BitsPowershellCmdlet.cs" />
+    <Compile Include="Windows\Core\TestIs32BitsProcessCmdlet.cs" />
+    <Compile Include="Windows\Core\TestIs64BitsOSCmdlet.cs" />
+    <Compile Include="Windows\Core\TestIs64BitsPowershellCmdlet.cs" />
+    <Compile Include="Windows\Core\TestIs64BitsProcessCmdlet.cs" />
     <Compile Include="Text\ConvertToHexStringCmdlet.cs" />
   </ItemGroup>
   <ItemGroup>

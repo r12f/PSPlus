@@ -1,7 +1,7 @@
-﻿using PSPlus.Core.Win32.Interop;
+﻿using PSPlus.Core.Windows.Win32.Interop;
 using System;
 
-namespace PSPlus.Core.Win32
+namespace PSPlus.Core.Windows.Win32
 {
     public class AttachThreadInputScope : IDisposable
     {

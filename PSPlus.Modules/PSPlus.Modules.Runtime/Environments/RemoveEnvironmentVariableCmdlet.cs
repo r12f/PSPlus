@@ -1,6 +1,5 @@
 ﻿using PSPlus.Core.Powershell.Cmdlets;
 using System;
-using System.Collections.Generic;
 using System.Management.Automation;
 
 namespace PSPlus.Modules.Runtime.Environments

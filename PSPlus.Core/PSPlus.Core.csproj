@@ -55,21 +55,24 @@
     <Compile Include="Crypto\HashGenerator.cs" />
     <Compile Include="Crypto\HashResult.cs" />
     <Compile Include="ErrorType.cs" />
+    <Compile Include="Powershell\Cmdlets\CmdletBaseWithOptionalInputObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Windows\Core\Interop\CoreAPIs.cs" />
+    <Compile Include="Windows\Core\ProcessExtensions.cs" />
     <Compile Include="Text\ByteArrayExtensions.cs" />
     <Compile Include="Powershell\PipelineControl.cs" />
     <Compile Include="Text\EncodingFactory.cs" />
-    <Compile Include="Win32\AttachThreadInputScope.cs" />
-    <Compile Include="Win32\Interop\Win32APIs.cs" />
-    <Compile Include="Win32\Interop\Win32Consts.cs" />
-    <Compile Include="Win32\Interop\Win32Msg.cs" />
-    <Compile Include="Win32\Interop\Win32MsgIds.cs" />
-    <Compile Include="Win32\Interop\Win32Point.cs" />
-    <Compile Include="Win32\Interop\Win32RECT.cs" />
-    <Compile Include="Win32\Interop\Win32ScrollInfo.cs" />
-    <Compile Include="Win32\Interop\Win32Size.cs" />
-    <Compile Include="Win32\Interop\Win32WindowPlacement.cs" />
-    <Compile Include="Win32\WindowControl.cs" />
+    <Compile Include="Windows\Win32\AttachThreadInputScope.cs" />
+    <Compile Include="Windows\Win32\Interop\Win32APIs.cs" />
+    <Compile Include="Windows\Win32\Interop\Win32Consts.cs" />
+    <Compile Include="Windows\Win32\Interop\Win32Msg.cs" />
+    <Compile Include="Windows\Win32\Interop\Win32MsgIds.cs" />
+    <Compile Include="Windows\Win32\Interop\Win32Point.cs" />
+    <Compile Include="Windows\Win32\Interop\Win32RECT.cs" />
+    <Compile Include="Windows\Win32\Interop\Win32ScrollInfo.cs" />
+    <Compile Include="Windows\Win32\Interop\Win32Size.cs" />
+    <Compile Include="Windows\Win32\Interop\Win32WindowPlacement.cs" />
+    <Compile Include="Windows\Win32\WindowControl.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

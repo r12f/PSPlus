@@ -1,4 +1,4 @@
-﻿using PSPlus.Core.Win32.Interop;
+﻿using PSPlus.Core.Windows.Win32.Interop;
 using System.Management.Automation;
 
 namespace PSPlus.Modules.Win32

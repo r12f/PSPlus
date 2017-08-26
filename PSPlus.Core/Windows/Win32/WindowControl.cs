@@ -1,9 +1,9 @@
-﻿using PSPlus.Core.Win32.Interop;
+﻿using PSPlus.Core.Windows.Win32.Interop;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PSPlus.Core.Win32
+namespace PSPlus.Core.Windows.Win32
 {
     public class WindowControl
     {

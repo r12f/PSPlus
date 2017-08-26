@@ -1,4 +1,4 @@
-﻿using PSPlus.Core.Win32;
+﻿using PSPlus.Core.Windows.Win32;
 using System;
 using System.Management.Automation;
 

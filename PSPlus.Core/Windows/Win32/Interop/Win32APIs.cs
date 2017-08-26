@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace PSPlus.Core.Win32.Interop
+namespace PSPlus.Core.Windows.Win32.Interop
 {
     public unsafe static class Win32APIs
     {
