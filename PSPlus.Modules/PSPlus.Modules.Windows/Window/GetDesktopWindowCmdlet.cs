@@ -1,7 +1,7 @@
-﻿using PSPlus.Core.Windows.Win32;
+﻿using PSPlus.Core.Windows.Window;
 using System.Management.Automation;
 
-namespace PSPlus.Modules.Windows.Win32
+namespace PSPlus.Modules.Windows.Window
 {
     [Cmdlet(VerbsCommon.Get, "DesktopWindow")]
     [OutputType(typeof(WindowControl))]

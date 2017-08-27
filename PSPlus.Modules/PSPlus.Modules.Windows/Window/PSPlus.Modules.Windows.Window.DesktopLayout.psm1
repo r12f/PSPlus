@@ -1,5 +1,5 @@
 #
-# PSPlus.Modules.Windows.Win32.DesktopLayout.psm1
+# PSPlus.Modules.Windows.Window.DesktopLayout.psm1
 #
 
 $LayoutRuleFieldMatch = "Match"
@@ -260,12 +260,12 @@ function Restore-DesktopLayoutFromLayoutRules
 
         $windowPlacementFromRule = $firstMatchedRule.$LayoutRuleFieldPlacement
 
-        $windowPlacement = New-Win32WindowPlacement
+        $windowPlacement = New-User32WindowPlacement
         $windowPlacement.Flags = $windowPlacementFromRule.$LayoutRulePlacementFieldWindowFlags
         $windowPlacement.ShowCmd = $windowPlacementFromRule.$LayoutRulePlacementFieldWindowShowCmd
-        $windowPlacement.MinPosition = New-Win32Point $windowPlacementFromRule.$LayoutRulePlacementFieldWindowMinPositionX $windowPlacementFromRule.$LayoutRulePlacementFieldWindowMinPositionY
-        $windowPlacement.MaxPosition = New-Win32Point $windowPlacementFromRule.$LayoutRulePlacementFieldWindowMaxPositionX $windowPlacementFromRule.$LayoutRulePlacementFieldWindowMaxPositionY
-        $windowPlacement.NormalPosition = New-Win32Rect $windowPlacementFromRule.$LayoutRulePlacementFieldWindowNormalPositionLeft $windowPlacementFromRule.$LayoutRulePlacementFieldWindowNormalPositionTop $windowPlacementFromRule.$LayoutRulePlacementFieldWindowNormalPositionRight $windowPlacementFromRule.$LayoutRulePlacementFieldWindowNormalPositionBottom 
+        $windowPlacement.MinPosition = New-User32Point $windowPlacementFromRule.$LayoutRulePlacementFieldWindowMinPositionX $windowPlacementFromRule.$LayoutRulePlacementFieldWindowMinPositionY
+        $windowPlacement.MaxPosition = New-User32Point $windowPlacementFromRule.$LayoutRulePlacementFieldWindowMaxPositionX $windowPlacementFromRule.$LayoutRulePlacementFieldWindowMaxPositionY
+        $windowPlacement.NormalPosition = New-User32Rect $windowPlacementFromRule.$LayoutRulePlacementFieldWindowNormalPositionLeft $windowPlacementFromRule.$LayoutRulePlacementFieldWindowNormalPositionTop $windowPlacementFromRule.$LayoutRulePlacementFieldWindowNormalPositionRight $windowPlacementFromRule.$LayoutRulePlacementFieldWindowNormalPositionBottom 
         $window.SetWindowPlacement($windowPlacement)
     }
 }

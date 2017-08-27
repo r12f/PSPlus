@@ -1,7 +1,7 @@
-﻿using PSPlus.Core.Windows.Win32.Interop;
+﻿using PSPlus.Core.Windows.Interop.User32;
 using System;
 
-namespace PSPlus.Core.Windows.Win32
+namespace PSPlus.Core.Windows.Window
 {
     public class AttachThreadInputScope : IDisposable
     {
@@ -16,14 +16,14 @@ namespace PSPlus.Core.Windows.Win32
 #pragma warning restore CS0618 // Type or member is obsolete
 
             _attachToThreadId = threadId;
-            _attached = Win32APIs.AttachThreadInput(_attachThreadId, _attachToThreadId, true);
+            _attached = User32APIs.AttachThreadInput(_attachThreadId, _attachToThreadId, true);
         }
 
         public void Dispose()
         {
             if (_attached)
             {
-                Win32APIs.AttachThreadInput(_attachThreadId, _attachToThreadId, false);
+                User32APIs.AttachThreadInput(_attachThreadId, _attachToThreadId, false);
             }
         }
     }

@@ -1,11 +1,11 @@
-﻿using PSPlus.Core.Windows.Win32.Interop;
+﻿using PSPlus.Core.Windows.Interop.User32;
 using System.Management.Automation;
 
-namespace PSPlus.Modules.Windows.Win32
+namespace PSPlus.Modules.Windows.Window
 {
-    [Cmdlet(VerbsCommon.New, "Win32ScrollInfo")]
-    [OutputType(typeof(Win32ScrollInfo))]
-    public class NewWin32ScrollInfoCmdlet : Cmdlet
+    [Cmdlet(VerbsCommon.New, "User32ScrollInfo")]
+    [OutputType(typeof(User32ScrollInfo))]
+    public class NewUser32ScrollInfoCmdlet : Cmdlet
     {
         [Parameter(Position = 0)]
         public uint Size { get; set; }
@@ -30,7 +30,7 @@ namespace PSPlus.Modules.Windows.Win32
 
         protected override void ProcessRecord()
         {
-            var scrollInfo = new Win32ScrollInfo()
+            var scrollInfo = new User32ScrollInfo()
             {
                 Size = Size,
                 Mask = Mask,

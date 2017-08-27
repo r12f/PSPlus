@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace PSPlus.Core.Windows.Win32.Interop
+namespace PSPlus.Core.Windows.Interop.User32
 {
-    public static class Win32Consts
+    public static class User32Consts
     {
         // GetWindowLong / SetWindowLong
         public const int GWL_WNDPROC = -4;

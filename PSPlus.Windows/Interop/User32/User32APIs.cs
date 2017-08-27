@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace PSPlus.Core.Windows.Win32.Interop
+namespace PSPlus.Core.Windows.Interop.User32
 {
-    public unsafe static class Win32APIs
+    public unsafe static class User32APIs
     {
         // Thread input
         [DllImport("user32.dll")]
@@ -83,13 +83,13 @@ namespace PSPlus.Core.Windows.Win32.Interop
 
         // Window Access Functions
         [DllImport("user32.dll")]
-        public static extern IntPtr WindowFromPoint(Win32Point Point);
+        public static extern IntPtr WindowFromPoint(User32Point Point);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr ChildWindowFromPoint(IntPtr hwnd, Win32Point point);
+        public static extern IntPtr ChildWindowFromPoint(IntPtr hwnd, User32Point point);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr ChildWindowFromPointEx(IntPtr hwnd, Win32Point point, uint uFlags);
+        public static extern IntPtr ChildWindowFromPointEx(IntPtr hwnd, User32Point point, uint uFlags);
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetTopWindow(IntPtr hwnd);
@@ -189,26 +189,26 @@ namespace PSPlus.Core.Windows.Win32.Interop
         public static extern bool BringWindowToTop(IntPtr hwnd);
 
         [DllImport("user32.dll")]
-        public static extern bool GetWindowRect(IntPtr hwnd, Win32Rect* lpRect);
+        public static extern bool GetWindowRect(IntPtr hwnd, User32Rect* lpRect);
 
         [DllImport("user32.dll")]
-        public static extern bool GetClientRect(IntPtr hwnd, Win32Rect* lpRect);
+        public static extern bool GetClientRect(IntPtr hwnd, User32Rect* lpRect);
 
         [DllImport("user32.dll")]
-        public static extern bool GetWindowPlacement(IntPtr hwnd, Win32WindowPlacement* lpwndpl);
+        public static extern bool GetWindowPlacement(IntPtr hwnd, User32WindowPlacement* lpwndpl);
 
         [DllImport("user32.dll")]
-        public static extern bool SetWindowPlacement(IntPtr hwnd, Win32WindowPlacement* lpwndpl);
+        public static extern bool SetWindowPlacement(IntPtr hwnd, User32WindowPlacement* lpwndpl);
 
         // Coordinate Mapping Functions
         [DllImport("user32.dll")]
-        public static extern bool ClientToScreen(IntPtr hwnd, Win32Point* lpPoint);
+        public static extern bool ClientToScreen(IntPtr hwnd, User32Point* lpPoint);
 
         [DllImport("user32.dll")]
-        public static extern bool ScreenToClient(IntPtr hwnd, Win32Point* lpPoint);
+        public static extern bool ScreenToClient(IntPtr hwnd, User32Point* lpPoint);
 
         [DllImport("user32.dll")]
-        public static extern int MapWindowPoints(IntPtr hwnd, IntPtr hWndTo, Win32Point* lpPoint, uint nCount);
+        public static extern int MapWindowPoints(IntPtr hwnd, IntPtr hWndTo, User32Point* lpPoint, uint nCount);
 
         // Update and Painting Functions
         [DllImport("user32.dll")]
@@ -233,7 +233,7 @@ namespace PSPlus.Core.Windows.Win32.Interop
         public static extern void SetRedraw(IntPtr hwnd, bool bRedraw);
 
         [DllImport("user32.dll")]
-        public static extern bool GetUpdateRect(IntPtr hwnd, Win32Rect* lpRect, bool bErase);
+        public static extern bool GetUpdateRect(IntPtr hwnd, User32Rect* lpRect, bool bErase);
 
         [DllImport("user32.dll")]
         public static extern int GetUpdateRgn(IntPtr hwnd, IntPtr hRgn, bool bErase);
@@ -242,10 +242,10 @@ namespace PSPlus.Core.Windows.Win32.Interop
         public static extern bool Invalidate(IntPtr hwnd, bool bErase);
 
         [DllImport("user32.dll")]
-        public static extern bool InvalidateRect(IntPtr hwnd, Win32Rect* lpRect, bool bErase);
+        public static extern bool InvalidateRect(IntPtr hwnd, User32Rect* lpRect, bool bErase);
 
         [DllImport("user32.dll")]
-        public static extern bool ValidateRect(IntPtr hwnd, Win32Rect* lpRect);
+        public static extern bool ValidateRect(IntPtr hwnd, User32Rect* lpRect);
 
         [DllImport("user32.dll")]
         public static extern void InvalidateRgn(IntPtr hwnd, IntPtr hRgn, bool bErase);
@@ -272,7 +272,7 @@ namespace PSPlus.Core.Windows.Win32.Interop
         public static extern bool LockWindowUpdate(IntPtr hwnd, bool bLock);
 
         [DllImport("user32.dll")]
-        public static extern bool RedrawWindow(IntPtr hwnd, Win32Rect* lpRectUpdate, IntPtr hRgnUpdate, uint flags);
+        public static extern bool RedrawWindow(IntPtr hwnd, User32Rect* lpRectUpdate, IntPtr hRgnUpdate, uint flags);
 
         // Timer Functions
         [DllImport("user32.dll")]
@@ -347,10 +347,10 @@ namespace PSPlus.Core.Windows.Win32.Interop
         public static extern bool GetScrollRange(IntPtr hwnd, int nBar, int* lpMinPos, int* lpMaxPos);
 
         [DllImport("user32.dll")]
-        public static extern bool ScrollWindow(IntPtr hwnd, int xAmount, int yAmount, Win32Rect* lpRect, Win32Rect* lpClipRect);
+        public static extern bool ScrollWindow(IntPtr hwnd, int xAmount, int yAmount, User32Rect* lpRect, User32Rect* lpClipRect);
 
         [DllImport("user32.dll")]
-        public static extern int ScrollWindowEx(IntPtr hwnd, int dx, int dy, Win32Rect* lpRectScroll, Win32Rect* lpRectClip, IntPtr hRgnUpdate, Win32Rect* lpRectUpdate, uint uFlags);
+        public static extern int ScrollWindowEx(IntPtr hwnd, int dx, int dy, User32Rect* lpRectScroll, User32Rect* lpRectClip, IntPtr hRgnUpdate, User32Rect* lpRectUpdate, uint uFlags);
 
         [DllImport("user32.dll")]
         public static extern int SetScrollPos(IntPtr hwnd, int nBar, int nPos, bool bRedraw);
@@ -436,13 +436,13 @@ namespace PSPlus.Core.Windows.Win32.Interop
 
         // Misc. Operations
         [DllImport("user32.dll")]
-        public static extern bool GetScrollInfo(IntPtr hwnd, int nBar, Win32ScrollInfo* lpScrollInfo);
+        public static extern bool GetScrollInfo(IntPtr hwnd, int nBar, User32ScrollInfo* lpScrollInfo);
 
         [DllImport("user32.dll")]
-        public static extern int SetScrollInfo(IntPtr hwnd, int nBar, Win32ScrollInfo* lpScrollInfo, bool bRedraw);
+        public static extern int SetScrollInfo(IntPtr hwnd, int nBar, User32ScrollInfo* lpScrollInfo, bool bRedraw);
 
         [DllImport("user32.dll")]
-        public static extern bool IsDialogMessage(IntPtr hwnd, Win32Msg* lpMsg);
+        public static extern bool IsDialogMessage(IntPtr hwnd, User32Msg* lpMsg);
 
         [DllImport("user32.dll")]
         public static extern int GetWindowRgn(IntPtr hwnd, IntPtr hRgn);

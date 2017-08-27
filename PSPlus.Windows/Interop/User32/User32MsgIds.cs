@@ -1,6 +1,6 @@
-﻿namespace PSPlus.Core.Windows.Win32.Interop
+﻿namespace PSPlus.Core.Windows.Interop.User32
 {
-    public static class Win32MsgIds
+    public static class User32MsgIds
     {
         public const uint ACM_ISPLAYING = 0x468;
         public const uint ACM_OPENA = 0x464;

@@ -1,5 +1,6 @@
-﻿using PSPlus.Core.Windows.Core.Interop;
+﻿using PSPlus.Core.Windows.Interop.Ntdll;
 using PSPlus.Windows.Core.Interop;
+using PSPlus.Windows.Interop.Kernel32;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -14,7 +15,7 @@ namespace PSPlus.Core.Windows.Core
             bool isWow64Process = false;
             unsafe
             {
-                CoreAPIs.IsWow64Process(process.Handle, &isWow64Process);
+                Kernel32APIs.IsWow64Process(process.Handle, &isWow64Process);
             }
             return isWow64Process;
         }
@@ -38,7 +39,7 @@ namespace PSPlus.Core.Windows.Core
                 fixed (byte* bufferAddress = buffer)
                 {
                     IntPtr numberOfBytesRead;
-                    if (!CoreAPIs.ReadProcessMemory(process.Handle, address, new IntPtr(bufferAddress), size, new IntPtr(&numberOfBytesRead)))
+                    if (!Kernel32APIs.ReadProcessMemory(process.Handle, address, new IntPtr(bufferAddress), size, new IntPtr(&numberOfBytesRead)))
                     {
                         return null;
                     }
@@ -61,7 +62,7 @@ namespace PSPlus.Core.Windows.Core
             unsafe
             {
                 ProcessBasicInformation basicInfomation;
-                int status = CoreAPIs.NtQueryInformationProcess(process.Handle, (int)ProcessInfoClass.ProcessBasicInformation, new IntPtr(&basicInfomation), (ulong)Marshal.SizeOf(basicInfomation), null);
+                int status = NtdllAPIs.NtQueryInformationProcess(process.Handle, (int)ProcessInfoClass.ProcessBasicInformation, new IntPtr(&basicInfomation), (ulong)Marshal.SizeOf(basicInfomation), null);
                 if (status != 0)
                 {
                     throw new InvalidOperationException(string.Format("Unable to query information from process: Id = {0}.", process.Id));
@@ -72,7 +73,7 @@ namespace PSPlus.Core.Windows.Core
                 {
                     PEB64 peb64;
                     IntPtr numberOfBytesRead;
-                    if (!CoreAPIs.ReadProcessMemory(process.Handle, basicInfomation.PebBaseAddress, new IntPtr(&peb64), sizeof(PEB64), new IntPtr(&numberOfBytesRead)) || sizeof(PEB64) != numberOfBytesRead.ToInt32())
+                    if (!Kernel32APIs.ReadProcessMemory(process.Handle, basicInfomation.PebBaseAddress, new IntPtr(&peb64), sizeof(PEB64), new IntPtr(&numberOfBytesRead)) || sizeof(PEB64) != numberOfBytesRead.ToInt32())
                     {
                         throw new InvalidOperationException(string.Format("Unable to read PEB from process: Id = {0}.", process.Id));
                     }
@@ -82,7 +83,7 @@ namespace PSPlus.Core.Windows.Core
                 {
                     PEB32 peb32;
                     IntPtr numberOfBytesRead;
-                    if (!CoreAPIs.ReadProcessMemory(process.Handle, basicInfomation.PebBaseAddress, new IntPtr(&peb32), sizeof(PEB32), new IntPtr(&numberOfBytesRead)) || sizeof(PEB32) != numberOfBytesRead.ToInt32())
+                    if (!Kernel32APIs.ReadProcessMemory(process.Handle, basicInfomation.PebBaseAddress, new IntPtr(&peb32), sizeof(PEB32), new IntPtr(&numberOfBytesRead)) || sizeof(PEB32) != numberOfBytesRead.ToInt32())
                     {
                         throw new InvalidOperationException(string.Format("Unable to read PEB from process: Id = {0}.", process.Id));
                     }
@@ -94,7 +95,7 @@ namespace PSPlus.Core.Windows.Core
                 {
                     RtlUserProcessParameters64 processParameters64;
                     IntPtr numberOfBytesRead;
-                    if (!CoreAPIs.ReadProcessMemory(process.Handle, processParameterAddress, new IntPtr(&processParameters64), sizeof(RtlUserProcessParameters64), new IntPtr(&numberOfBytesRead)) || sizeof(RtlUserProcessParameters64) != numberOfBytesRead.ToInt32())
+                    if (!Kernel32APIs.ReadProcessMemory(process.Handle, processParameterAddress, new IntPtr(&processParameters64), sizeof(RtlUserProcessParameters64), new IntPtr(&numberOfBytesRead)) || sizeof(RtlUserProcessParameters64) != numberOfBytesRead.ToInt32())
                     {
                         throw new InvalidOperationException(string.Format("Unable to read process parameters from process: Id = {0}.", process.Id));
                     }
@@ -104,7 +105,7 @@ namespace PSPlus.Core.Windows.Core
                 {
                     RtlUserProcessParameters32 processParameters32;
                     IntPtr numberOfBytesRead;
-                    if (!CoreAPIs.ReadProcessMemory(process.Handle, processParameterAddress, new IntPtr(&processParameters32), sizeof(RtlUserProcessParameters32), new IntPtr(&numberOfBytesRead)) || sizeof(RtlUserProcessParameters32) != numberOfBytesRead.ToInt32())
+                    if (!Kernel32APIs.ReadProcessMemory(process.Handle, processParameterAddress, new IntPtr(&processParameters32), sizeof(RtlUserProcessParameters32), new IntPtr(&numberOfBytesRead)) || sizeof(RtlUserProcessParameters32) != numberOfBytesRead.ToInt32())
                     {
                         throw new InvalidOperationException(string.Format("Unable to read process parameters from process: Id = {0}.", process.Id));
                     }

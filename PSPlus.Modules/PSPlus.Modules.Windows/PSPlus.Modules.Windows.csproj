@@ -61,16 +61,16 @@
     <Compile Include="Environments\RemoveEnvironmentVariableCmdlet.cs" />
     <Compile Include="Environments\SetEnvironmentVariableCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Win32\GetDesktopWindowCmdlet.cs" />
-    <Compile Include="Win32\GetForegroundWindowCmdlet.cs" />
-    <Compile Include="Win32\GetWindowFromPointCmdlet.cs" />
-    <Compile Include="Win32\GetWindowsCmdlet.cs" />
-    <Compile Include="Win32\NewWin32PointCmdlet.cs" />
-    <Compile Include="Win32\NewWin32RectCmdlet.cs" />
-    <Compile Include="Win32\NewWin32ScrollInfoCmdlet.cs" />
-    <Compile Include="Win32\NewWin32SizeCmdlet.cs" />
-    <Compile Include="Win32\NewWin32WindowPlacementCmdlet.cs" />
-    <Compile Include="Win32\NewWindowControlCmdlet.cs" />
+    <Compile Include="Window\GetDesktopWindowCmdlet.cs" />
+    <Compile Include="Window\GetForegroundWindowCmdlet.cs" />
+    <Compile Include="Window\GetWindowFromPointCmdlet.cs" />
+    <Compile Include="Window\GetWindowsCmdlet.cs" />
+    <Compile Include="Window\NewUser32PointCmdlet.cs" />
+    <Compile Include="Window\NewUser32RectCmdlet.cs" />
+    <Compile Include="Window\NewUser32ScrollInfoCmdlet.cs" />
+    <Compile Include="Window\NewUser32SizeCmdlet.cs" />
+    <Compile Include="Window\NewUserWindowPlacementCmdlet.cs" />
+    <Compile Include="Window\NewWindowControlCmdlet.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\PSPlus.Core\PSPlus.Core.csproj">
@@ -85,8 +85,8 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="PSPlus.Modules.Windows.psd1" />
-    <None Include="Win32\PSPlus.Modules.Windows.Win32.Consts.psm1" />
-    <None Include="Win32\PSPlus.Modules.Windows.Win32.DesktopLayout.psm1" />
+    <None Include="Window\PSPlus.Modules.Windows.Window.Consts.psm1" />
+    <None Include="Window\PSPlus.Modules.Windows.Window.DesktopLayout.psm1" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

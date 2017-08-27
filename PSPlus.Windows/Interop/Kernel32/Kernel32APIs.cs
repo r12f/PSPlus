@@ -1,17 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace PSPlus.Core.Windows.Core.Interop
+namespace PSPlus.Windows.Interop.Kernel32
 {
-    public static unsafe class CoreAPIs
+    public static unsafe class Kernel32APIs
     {
         [DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool IsWow64Process([In] IntPtr processHandle, [Out] bool* IsWow64Process);
-
-        [DllImport("ntdll.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
-        [return: MarshalAs(UnmanagedType.I4)]
-        public static extern int NtQueryInformationProcess([In] IntPtr processHandle, [In] int processInformationClass, [Out] IntPtr processInformation, [In] ulong processInformationLength, [Out] ulong* returnLength);
 
         [DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
         [return: MarshalAs(UnmanagedType.Bool)]

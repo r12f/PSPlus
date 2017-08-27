@@ -1,10 +1,10 @@
-﻿using PSPlus.Core.Windows.Win32;
+﻿using PSPlus.Core.Windows.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 
-namespace PSPlus.Modules.Windows.Win32
+namespace PSPlus.Modules.Windows.Window
 {
     [Cmdlet(VerbsCommon.Get, "Windows")]
     [OutputType(typeof(WindowControl))]

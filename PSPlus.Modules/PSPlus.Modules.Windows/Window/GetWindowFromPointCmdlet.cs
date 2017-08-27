@@ -1,16 +1,16 @@
-﻿using PSPlus.Core.Windows.Win32;
-using PSPlus.Core.Windows.Win32.Interop;
+﻿using PSPlus.Core.Windows.Window;
+using PSPlus.Core.Windows.Interop.User32;
 using System;
 using System.Management.Automation;
 
-namespace PSPlus.Modules.Windows.Win32
+namespace PSPlus.Modules.Windows.Window
 {
     [Cmdlet(VerbsCommon.Get, "WindowFromPoint")]
     [OutputType(typeof(WindowControl))]
     public class GetWindowFromPointCmdlet : Cmdlet
     {
         [Parameter(Position = 0, ValueFromPipeline = true, Mandatory = true)]
-        public Win32Point Point { get; set; }
+        public User32Point Point { get; set; }
 
         [Parameter(Position = 1)]
         public IntPtr Parent { get; set; }

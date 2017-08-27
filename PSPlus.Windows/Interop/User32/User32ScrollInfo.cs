@@ -1,9 +1,9 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace PSPlus.Core.Windows.Win32.Interop
+namespace PSPlus.Core.Windows.Interop.User32
 {
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct Win32ScrollInfo
+    public unsafe struct User32ScrollInfo
     {
         public uint Size;
         public uint Mask;

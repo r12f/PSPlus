@@ -1,9 +1,9 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace PSPlus.Core.Windows.Win32.Interop
+namespace PSPlus.Core.Windows.Interop.User32
 {
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct Win32Rect
+    public unsafe struct User32Rect
     {
         public int Left;
         public int Top;

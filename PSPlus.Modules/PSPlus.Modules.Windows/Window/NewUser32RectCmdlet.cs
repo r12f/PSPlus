@@ -1,11 +1,11 @@
-﻿using PSPlus.Core.Windows.Win32.Interop;
+﻿using PSPlus.Core.Windows.Interop.User32;
 using System.Management.Automation;
 
-namespace PSPlus.Modules.Windows.Win32
+namespace PSPlus.Modules.Windows.Window
 {
-    [Cmdlet(VerbsCommon.New, "Win32Rect")]
-    [OutputType(typeof(Win32Rect))]
-    public class NewWin32RectCmdlet : Cmdlet
+    [Cmdlet(VerbsCommon.New, "User32Rect")]
+    [OutputType(typeof(User32Rect))]
+    public class NewUser32RectCmdlet : Cmdlet
     {
         [Parameter(Position = 0)]
         public int Left { get; set; }
@@ -21,7 +21,7 @@ namespace PSPlus.Modules.Windows.Win32
 
         protected override void ProcessRecord()
         {
-            WriteObject(new Win32Rect() { Left = Left, Top = Top, Right = Right, Bottom = Bottom });
+            WriteObject(new User32Rect() { Left = Left, Top = Top, Right = Right, Bottom = Bottom });
         }
     }
 }

@@ -1,53 +1,53 @@
 ﻿Import-Module "$PSScriptRoot\..\..\Output\Publish\PSPlus.psd1" -Force
 
-Describe "Windows.Win32" {
-    Context "When trying to create the win32 data structures" {
-        It "Should be able to create Win32 point" {
-            $win32Point = New-Win32Point 100 200
-            $win32Point.X | Should Be 100
-            $win32Point.Y | Should Be 200
+Describe "Windows.Window" {
+    Context "When trying to create the user32 data structures" {
+        It "Should be able to create user32 point" {
+            $User32Point = New-User32Point 100 200
+            $User32Point.X | Should Be 100
+            $User32Point.Y | Should Be 200
         }
 
-        It "Should be able to create Win32 rect" {
-            $win32Rect = New-Win32Rect 100 200 300 400
-            $win32Rect.Left | Should Be 100
-            $win32Rect.Top | Should Be 200
-            $win32Rect.Right | Should Be 300
-            $win32Rect.Bottom | Should Be 400
+        It "Should be able to create user32 rect" {
+            $User32Rect = New-User32Rect 100 200 300 400
+            $User32Rect.Left | Should Be 100
+            $User32Rect.Top | Should Be 200
+            $User32Rect.Right | Should Be 300
+            $User32Rect.Bottom | Should Be 400
         }
 
-        It "Should be able to create Win32 scroll info" {
-            $win32ScrollInfo = New-Win32ScrollInfo 100 $Win32Consts::SIF_ALL 10 200 800 150 120
-            $win32ScrollInfo.Size | Should Be 100
-            $win32ScrollInfo.Mask | Should Be $Win32Consts::SIF_ALL
-            $win32ScrollInfo.Min | Should Be 10
-            $win32ScrollInfo.Max | Should Be 200
-            $win32ScrollInfo.Page | Should Be 800
-            $win32ScrollInfo.Pos | Should Be 150
-            $win32ScrollInfo.TrackPos | Should Be 120
+        It "Should be able to create user32 scroll info" {
+            $User32ScrollInfo = New-User32ScrollInfo 100 $User32Consts::SIF_ALL 10 200 800 150 120
+            $User32ScrollInfo.Size | Should Be 100
+            $User32ScrollInfo.Mask | Should Be $User32Consts::SIF_ALL
+            $User32ScrollInfo.Min | Should Be 10
+            $User32ScrollInfo.Max | Should Be 200
+            $User32ScrollInfo.Page | Should Be 800
+            $User32ScrollInfo.Pos | Should Be 150
+            $User32ScrollInfo.TrackPos | Should Be 120
         }
 
-        It "Should be able to create Win32 size" {
-            $win32Size = New-Win32Size 100 200
-            $win32Size.Cx | Should be 100
-            $win32Size.Cy | Should be 200
+        It "Should be able to create user32 size" {
+            $User32Size = New-User32Size 100 200
+            $User32Size.Cx | Should be 100
+            $User32Size.Cy | Should be 200
         }
 
-        It "Should be able to create Win32 window placement" {
-            $win32WindowPlacement = New-Win32WindowPlacement 
-            $win32WindowPlacement | Should Not Be $null
-            $win32WindowPlacement.Length | Should Not Be 0
+        It "Should be able to create user32 window placement" {
+            $User32WindowPlacement = New-User32WindowPlacement 
+            $User32WindowPlacement | Should Not Be $null
+            $User32WindowPlacement.Length | Should Not Be 0
 
             # We cannot assign the values in the nested structures directly:
             # See MSDN: https://msdn.microsoft.com/en-us/library/aa288471(v=vs.71).aspx
-            $win32WindowPlacement.MinPosition.X = 1
-            $win32WindowPlacement.MinPosition.X | Should Be 0
-            $win32WindowPlacement.MinPosition.Y = 2
-            $win32WindowPlacement.MinPosition.Y | Should Be 0
+            $User32WindowPlacement.MinPosition.X = 1
+            $User32WindowPlacement.MinPosition.X | Should Be 0
+            $User32WindowPlacement.MinPosition.Y = 2
+            $User32WindowPlacement.MinPosition.Y | Should Be 0
 
-            $win32WindowPlacement.MinPosition = New-Win32Point 1 2
-            $win32WindowPlacement.MinPosition.X | Should Be 1
-            $win32WindowPlacement.MinPosition.Y | Should Be 2
+            $User32WindowPlacement.MinPosition = New-User32Point 1 2
+            $User32WindowPlacement.MinPosition.X | Should Be 1
+            $User32WindowPlacement.MinPosition.Y | Should Be 2
         }
     }
 
@@ -67,8 +67,8 @@ Describe "Windows.Win32" {
 
                 # We need to check both the parent and the child style to make sure a window is a top level window,
                 # because some windows like "ComboLBox" will have WS_CHILD style but no parent.
-                $hasChildStyle = ($topLevelWindow.GetWindowLong($Win32Consts::GWL_STYLE) -band $Win32Consts::WS_CHILD) -ne 0
-                $hasParent = $topLevelWindow.GetWindowLongPtr($Win32Consts::GWLP_HWNDPARENT) -ne 0
+                $hasChildStyle = ($topLevelWindow.GetWindowLong($User32Consts::GWL_STYLE) -band $User32Consts::WS_CHILD) -ne 0
+                $hasParent = $topLevelWindow.GetWindowLongPtr($User32Consts::GWLP_HWNDPARENT) -ne 0
                 $hasChildStyle -and $hasParent | Should Be $false
             }
         }
@@ -99,22 +99,22 @@ Describe "Windows.Win32" {
         }
 
         It "Should be able to get window data" {
-            $style32 = $notepadWindowControl.GetWindowLong($Win32Consts::GWL_STYLE)
+            $style32 = $notepadWindowControl.GetWindowLong($User32Consts::GWL_STYLE)
             $style32 | Should Not Be 0
 
             $newStyle32 = $style32 -band (-bnot 0x10000);
             $notepadWindowControl.SetWindowLong(-16, $newStyle32) | Should Be $style32
 
-            $style32 = $notepadWindowControl.GetWindowLong($Win32Consts::GWL_STYLE)
+            $style32 = $notepadWindowControl.GetWindowLong($User32Consts::GWL_STYLE)
             $style32 | Should Be $newStyle32
 
-            $style64 = $notepadWindowControl.GetWindowLongPtr($Win32Consts::GWL_STYLE)
+            $style64 = $notepadWindowControl.GetWindowLongPtr($User32Consts::GWL_STYLE)
             $style64 | Should Not Be 0
 
             $newStyle64 = $style64 -bor 0x10000;
-            $notepadWindowControl.SetWindowLongPtr($Win32Consts::GWL_STYLE, $newStyle64) | Should Be $style64
+            $notepadWindowControl.SetWindowLongPtr($User32Consts::GWL_STYLE, $newStyle64) | Should Be $style64
 
-            $style64 = $notepadWindowControl.GetWindowLongPtr($Win32Consts::GWL_STYLE)
+            $style64 = $notepadWindowControl.GetWindowLongPtr($User32Consts::GWL_STYLE)
             $style64 | Should Be $newStyle64
         }
 
@@ -167,7 +167,7 @@ Describe "Windows.Win32" {
         }
 
         It "Should be able to get the child window" {
-            $childWindow = $notepadWindowControl.GetWindow($Win32Consts::GW_CHILD)
+            $childWindow = $notepadWindowControl.GetWindow($User32Consts::GW_CHILD)
             $childWindow.IsWindow() | Should Be $true
 
             $notepadWindowControl.IsChild($childWindow.Hwnd) | Should Be $true
@@ -178,10 +178,10 @@ Describe "Windows.Win32" {
         }
 
         It "Should be able to enumerate the sibiling windows" {
-            $nextWindow = $notepadWindowControl.GetWindow($Win32Consts::GW_HWNDNEXT)
+            $nextWindow = $notepadWindowControl.GetWindow($User32Consts::GW_HWNDNEXT)
             $nextWindow.IsWindow() | Should Be $true
 
-            $currentWindow = $nextWindow.GetWindow($Win32Consts::GW_HWNDPREV)
+            $currentWindow = $nextWindow.GetWindow($User32Consts::GW_HWNDPREV)
             $currentWindow.IsWindow() | Should Be $true
             $currentWindow.Hwnd | Should Be $notepadWindowControl.Hwnd
         }
@@ -226,7 +226,7 @@ Describe "Windows.Win32" {
         }
 
         It "Should be able to get the class long" {
-            $wndProc = $notepadWindowControl.GetClassLongPtr($Win32Consts::GCLP_WNDPROC)
+            $wndProc = $notepadWindowControl.GetClassLongPtr($User32Consts::GCLP_WNDPROC)
             $wndProc | Should Not Be $null
         }
 
@@ -239,34 +239,34 @@ Describe "Windows.Win32" {
         }
 
         It "Should be able to get and change the visibility state" {
-            $notepadWindowControl.ShowWindow($Win32Consts::SW_SHOWNORMAL);
+            $notepadWindowControl.ShowWindow($User32Consts::SW_SHOWNORMAL);
             $isVisible = $notepadWindowControl.IsWindowVisible()
             $isVisible | Should Be $true
 
-            $notepadWindowControl.ShowWindow($Win32Consts::SW_HIDE);
+            $notepadWindowControl.ShowWindow($User32Consts::SW_HIDE);
             $isVisible = $notepadWindowControl.IsWindowVisible()
             $isVisible | Should Be $false
 
-            $notepadWindowControl.ShowWindow($Win32Consts::SW_SHOWNORMAL);
+            $notepadWindowControl.ShowWindow($User32Consts::SW_SHOWNORMAL);
             $isVisible = $notepadWindowControl.IsWindowVisible()
             $isVisible | Should Be $true
         }
 
 
         It "Should be able to check and change the minimized and maximized state" {
-            $notepadWindowControl.ShowWindow($Win32Consts::SW_SHOWMAXIMIZED);
+            $notepadWindowControl.ShowWindow($User32Consts::SW_SHOWMAXIMIZED);
             $isMaximized = $notepadWindowControl.IsZoomed()
             $isMaximized | Should Be $true
 
-            $notepadWindowControl.ShowWindow($Win32Consts::SW_SHOWNORMAL);
+            $notepadWindowControl.ShowWindow($User32Consts::SW_SHOWNORMAL);
             $isMaximized = $notepadWindowControl.IsZoomed()
             $isMaximized | Should Be $false
 
-            $notepadWindowControl.ShowWindow($Win32Consts::SW_SHOWMINIMIZED);
+            $notepadWindowControl.ShowWindow($User32Consts::SW_SHOWMINIMIZED);
             $isMinimized = $notepadWindowControl.IsIconic()
             $isMinimized | Should Be $true
 
-            $notepadWindowControl.ShowWindow($Win32Consts::SW_SHOWNORMAL);
+            $notepadWindowControl.ShowWindow($User32Consts::SW_SHOWNORMAL);
             $isMinimized = $notepadWindowControl.IsIconic()
             $isMinimized | Should Be $false
         }
@@ -290,7 +290,7 @@ Describe "Windows.Win32" {
             $clientRectInClientCoord.Top | Should Be $clientRect.Top
             $clientRectInClientCoord.Bottom | Should Be $clientRect.Bottom
 
-            $screenPoint = New-Win32Point $clientRectInScreenCoord.Left $clientRectInScreenCoord.Top
+            $screenPoint = New-User32Point $clientRectInScreenCoord.Left $clientRectInScreenCoord.Top
             $clientPoint = $notepadWindowControl.ScreenToClient($screenPoint)
             $clientPoint.X | Should Be $clientRect.Left
             $clientPoint.Y | Should Be $clientRect.Top
@@ -308,7 +308,7 @@ Describe "Windows.Win32" {
             $windowRect.Right | Should Be 640
             $windowRect.Bottom | Should Be 480
 
-            $notepadWindowControl.SetWindowPos(0, 100, 200, 300, 200, $Win32Consts.SWP_NOZORDER)
+            $notepadWindowControl.SetWindowPos(0, 100, 200, 300, 200, $User32Consts.SWP_NOZORDER)
             $windowRect = $notepadWindowControl.GetWindowRect()
             $windowRect.Left | Should Be 100
             $windowRect.Top | Should Be 200
@@ -318,7 +318,7 @@ Describe "Windows.Win32" {
 
         It "Should be able to send the message" {
             $notepadWindowControl.IsWindow() | Should Be $true
-            #$notepadWindowControl.SendMessageW($Win32MsgIds::WM_CLOSE, 0, 0);
+            #$notepadWindowControl.SendMessageW($User32MsgIds::WM_CLOSE, 0, 0);
             #$notepadWindowControl.IsWindow() | Should Be $false
         }
 
