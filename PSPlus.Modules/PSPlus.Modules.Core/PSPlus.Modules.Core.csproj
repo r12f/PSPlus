@@ -4,21 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7FD09637-9B45-4A36-8501-6EABC62787E7}</ProjectGuid>
+    <ProjectGuid>{08FBC63A-8E44-4736-8B0C-65872A4FBE6C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PSPlus.Core</RootNamespace>
-    <AssemblyName>PSPlus.Core</AssemblyName>
+    <RootNamespace>PSPlus.Modules.Core</RootNamespace>
+    <AssemblyName>PSPlus.Modules.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Output\Binaries\Debug\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\PSPlus.Core\</BaseIntermediateOutputPath>
+    <OutputPath>..\..\Output\Binaries\Debug\</OutputPath>
+    <BaseIntermediateOutputPath>..\..\Output\Objects\PSPlus.Modules.Core\</BaseIntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,8 +25,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Output\Binaries\Release\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\PSPlus.Core\</BaseIntermediateOutputPath>
+    <OutputPath>..\..\Output\Binaries\Release\</OutputPath>
+    <BaseIntermediateOutputPath>..\..\Output\Objects\PSPlus.Modules.Core\</BaseIntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,7 +35,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.PowerShell.3.ReferenceAssemblies.1.0.0\lib\net4\System.Management.Automation.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.PowerShell.3.ReferenceAssemblies.1.0.0\lib\net4\System.Management.Automation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
@@ -46,21 +45,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Crypto\Base64.cs" />
-    <Compile Include="Crypto\HashAlgorithmFactory.cs" />
-    <Compile Include="Crypto\HashGenerator.cs" />
-    <Compile Include="Crypto\HashResult.cs" />
-    <Compile Include="ErrorType.cs" />
-    <Compile Include="Powershell\Cmdlets\CmdletBase.cs" />
-    <Compile Include="Powershell\Cmdlets\CmdletBaseWithInputObject.cs" />
-    <Compile Include="Powershell\Cmdlets\CmdletBaseWithOptionalInputObject.cs" />
-    <Compile Include="Powershell\PipelineControl.cs" />
+    <Compile Include="Crypto\ConvertFromBase64Cmdlet.cs" />
+    <Compile Include="Crypto\ConvertFromBase64ToByteArrayCmdlet.cs" />
+    <Compile Include="Crypto\ConvertToBase64Cmdlet.cs" />
+    <Compile Include="Crypto\ConvertToBase64FromByteArrayCmdlet.cs" />
+    <Compile Include="Crypto\GetStringHashCmdlet.cs" />
+    <Compile Include="IO\GetFileExtensionCmdlet.cs" />
+    <Compile Include="IO\RenameFileExtensionCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Text\ByteArrayExtensions.cs" />
-    <Compile Include="Text\EncodingFactory.cs" />
+    <Compile Include="Reflection\GetTypeCmdlet.cs" />
+    <Compile Include="Text\ConvertToHexStringCmdlet.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PSPlus.Core\PSPlus.Core.csproj">
+      <Project>{7fd09637-9b45-4a36-8501-6eabc62787e7}</Project>
+      <Name>PSPlus.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Collection\PSPlus.Modules.Core.Collection.psm1" />
+    <None Include="Functional\PSPlus.Modules.Core.Functional.psm1" />
+    <None Include="Runtime\PSPlus.Modules.Core.Runtime.Loader.psm1" />
+    <None Include="Runtime\PSPlus.Modules.Core.Runtime.Pipeline.psm1" />
+    <None Include="PSPlus.Modules.Core.psd1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

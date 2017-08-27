@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1056FB90-1715-464D-B525-FB7FF2586957}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PSPlus.Modules.Windows</RootNamespace>
+    <AssemblyName>PSPlus.Modules.Windows</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Output\Binaries\Debug\</OutputPath>
+    <BaseIntermediateOutputPath>..\..\Output\Objects\PSPlus.Modules.Windows\</BaseIntermediateOutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Output\Binaries\Release\</OutputPath>
+    <BaseIntermediateOutputPath>..\..\Output\Objects\PSPlus.Modules.Windows\</BaseIntermediateOutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.PowerShell.3.ReferenceAssemblies.1.0.0\lib\net4\System.Management.Automation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\TestIs32BitsOSCmdlet.cs" />
+    <Compile Include="Core\TestIs32BitsPowershellCmdlet.cs" />
+    <Compile Include="Core\TestIs32BitsProcessCmdlet.cs" />
+    <Compile Include="Core\TestIs64BitsOSCmdlet.cs" />
+    <Compile Include="Core\TestIs64BitsPowershellCmdlet.cs" />
+    <Compile Include="Core\TestIs64BitsProcessCmdlet.cs" />
+    <Compile Include="Diagnostics\EventTracing\NewEventSourceDefinitionCmdlet.cs" />
+    <Compile Include="Diagnostics\EventTracing\NewEventWatcherOptionsCmdlet.cs" />
+    <Compile Include="Diagnostics\EventTracing\WatchETWEventsCmdlet.cs" />
+    <Compile Include="Environments\RemoveEnvironmentVariableCmdlet.cs" />
+    <Compile Include="Environments\SetEnvironmentVariableCmdlet.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Win32\GetDesktopWindowCmdlet.cs" />
+    <Compile Include="Win32\GetForegroundWindowCmdlet.cs" />
+    <Compile Include="Win32\GetWindowFromPointCmdlet.cs" />
+    <Compile Include="Win32\GetWindowsCmdlet.cs" />
+    <Compile Include="Win32\NewWin32PointCmdlet.cs" />
+    <Compile Include="Win32\NewWin32RectCmdlet.cs" />
+    <Compile Include="Win32\NewWin32ScrollInfoCmdlet.cs" />
+    <Compile Include="Win32\NewWin32SizeCmdlet.cs" />
+    <Compile Include="Win32\NewWin32WindowPlacementCmdlet.cs" />
+    <Compile Include="Win32\NewWindowControlCmdlet.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PSPlus.Core\PSPlus.Core.csproj">
+      <Project>{7fd09637-9b45-4a36-8501-6eabc62787e7}</Project>
+      <Name>PSPlus.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PSPlus.Windows\PSPlus.Windows.csproj">
+      <Project>{f3fa90fa-a16a-4666-8f4c-961933ea9889}</Project>
+      <Name>PSPlus.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="PSPlus.Modules.Windows.psd1" />
+    <None Include="Win32\PSPlus.Modules.Windows.Win32.Consts.psm1" />
+    <None Include="Win32\PSPlus.Modules.Windows.Win32.DesktopLayout.psm1" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

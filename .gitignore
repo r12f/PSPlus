@@ -3,3 +3,4 @@ Output
 packages
 *.dll
 Microsoft.Diagnostics.Tracing.TraceEvent.xml
+TestResults

@@ -28,16 +28,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="PSPlus.Modules.Crypto.tests.ps1" />
-    <Compile Include="PSPlus.Modules.IO.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Runtime.Environments.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Runtime.Functional.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Runtime.Loader.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Runtime.Collections.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Diagnostics.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Runtime.Reflection.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Runtime.Text.tests.ps1" />
-    <Compile Include="PSPlus.Modules.Win32.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Crypto.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.IO.tests.ps1" />
+    <Compile Include="Windows\PSPlus.Modules.Windows.Core.tests.ps1" />
+    <Compile Include="Windows\PSPlus.Modules.Windows.Environments.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Functional.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Loader.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Collections.tests.ps1" />
+    <Compile Include="Windows\PSPlus.Modules.Windows.Diagnostics.EventTracing.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Reflection.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Text.tests.ps1" />
+    <Compile Include="Windows\PSPlus.Modules.Windows.Win32.tests.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="Windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />

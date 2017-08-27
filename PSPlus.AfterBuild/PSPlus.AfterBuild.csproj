@@ -48,25 +48,13 @@
     <None Include="Publish-ToOutput.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PSPlus.Modules\PSPlus.Modules.Crypto\PSPlus.Modules.Crypto.csproj">
-      <Project>{d34b45f8-d144-4245-9760-966d1917c210}</Project>
-      <Name>PSPlus.Modules.Crypto</Name>
+    <ProjectReference Include="..\PSPlus.Modules\PSPlus.Modules.Core\PSPlus.Modules.Core.csproj">
+      <Project>{08fbc63a-8e44-4736-8b0c-65872a4fbe6c}</Project>
+      <Name>PSPlus.Modules.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PSPlus.Modules\PSPlus.Modules.Diagnostics\PSPlus.Modules.Diagnostics.csproj">
-      <Project>{77ec0c34-6977-42f8-b5ef-26c34d9b08a4}</Project>
-      <Name>PSPlus.Modules.Diagnostics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PSPlus.Modules\PSPlus.Modules.IO\PSPlus.Modules.IO.csproj">
-      <Project>{6e77cfa6-e96e-4b77-b46e-39d4f4dc137e}</Project>
-      <Name>PSPlus.Modules.IO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PSPlus.Modules\PSPlus.Modules.Runtime\PSPlus.Modules.Runtime.csproj">
-      <Project>{ff952e88-bdb0-48ec-be35-04e0686f24a0}</Project>
-      <Name>PSPlus.Modules.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PSPlus.Modules\PSPlus.Modules.Win32\PSPlus.Modules.Win32.csproj">
-      <Project>{8d5e5409-975a-4b1f-87b3-9de6903997b1}</Project>
-      <Name>PSPlus.Modules.Win32</Name>
+    <ProjectReference Include="..\PSPlus.Modules\PSPlus.Modules.Windows\PSPlus.Modules.Windows.csproj">
+      <Project>{1056fb90-1715-464d-b525-fb7ff2586957}</Project>
+      <Name>PSPlus.Modules.Windows</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

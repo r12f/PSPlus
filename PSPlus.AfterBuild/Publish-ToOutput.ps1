@@ -32,6 +32,7 @@ Write-Host "Copy all module scripts under module root $moduleFolderRootPath ..."
 Get-ChildItem $moduleFolderRootPath | ForEach-Object {
     $moduleFolderPath = $_.FullName
     Write-Host "Copy module scripts under folder $moduleFolderPath to $publishFolderPath ..."
-    Copy-Item "$moduleFolderPath\*" $publishFolderPath -Filter *.psd1
-    Copy-Item "$moduleFolderPath\*" $publishFolderPath -Filter *.psm1
+    Get-ChildItem $moduleFolderPath -Recurse -Include *.psd1,*.psm1 | ForEach-Object {
+        Copy-Item $_ $publishFolderPath
+    }
 }
