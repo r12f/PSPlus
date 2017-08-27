@@ -54,6 +54,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Interop\CoreAPIs.cs" />
+    <Compile Include="Core\Interop\PEB32.cs" />
+    <Compile Include="Core\Interop\PEB64.cs" />
+    <Compile Include="Core\Interop\ProcessBasicInformation.cs" />
+    <Compile Include="Core\Interop\ProcessInfoClass.cs" />
+    <Compile Include="Core\Interop\RtlUserProcessParameters32.cs" />
+    <Compile Include="Core\Interop\RtlUserProcessParameters64.cs" />
+    <Compile Include="Core\Interop\UnicodeString.cs" />
     <Compile Include="Core\ProcessExtensions.cs" />
     <Compile Include="Diagnostics\EventTracing\EventSourceDefinition.cs" />
     <Compile Include="Diagnostics\EventTracing\EventWatcher.cs" />
