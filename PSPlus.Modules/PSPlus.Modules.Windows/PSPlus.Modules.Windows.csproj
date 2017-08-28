@@ -49,11 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diagnostics\ProcessControl\GetProcessCommandLineCmdlet.cs" />
-    <Compile Include="Core\TestIs32BitsOSCmdlet.cs" />
-    <Compile Include="Core\TestIs32BitsPowershellCmdlet.cs" />
+    <Compile Include="Environments\TestIs32BitsOSCmdlet.cs" />
+    <Compile Include="Environments\TestIs32BitsPowershellCmdlet.cs" />
     <Compile Include="Diagnostics\ProcessControl\TestIs32BitsProcessCmdlet.cs" />
-    <Compile Include="Core\TestIs64BitsOSCmdlet.cs" />
-    <Compile Include="Core\TestIs64BitsPowershellCmdlet.cs" />
+    <Compile Include="Environments\TestIs64BitsOSCmdlet.cs" />
+    <Compile Include="Environments\TestIs64BitsPowershellCmdlet.cs" />
     <Compile Include="Diagnostics\ProcessControl\TestIs64BitsProcessCmdlet.cs" />
     <Compile Include="Diagnostics\EventTracing\NewEventSourceDefinitionCmdlet.cs" />
     <Compile Include="Diagnostics\EventTracing\NewEventWatcherOptionsCmdlet.cs" />

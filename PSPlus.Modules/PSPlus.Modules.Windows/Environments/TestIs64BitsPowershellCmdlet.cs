@@ -2,7 +2,7 @@
 using System;
 using System.Management.Automation;
 
-namespace PSPlus.Modules.Windows.Core
+namespace PSPlus.Modules.Windows.Environments
 {
     [Cmdlet(VerbsDiagnostic.Test, "Is64BitsPowershell")]
     [OutputType(typeof(bool))]

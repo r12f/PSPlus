@@ -2,15 +2,15 @@
 using System;
 using System.Management.Automation;
 
-namespace PSPlus.Modules.Windows.Core
+namespace PSPlus.Modules.Windows.Environments
 {
-    [Cmdlet(VerbsDiagnostic.Test, "Is32BitsPowershell")]
+    [Cmdlet(VerbsDiagnostic.Test, "Is32BitsOS")]
     [OutputType(typeof(bool))]
-    public class TestIs32BitsPowershellCmdlet : CmdletBase
+    public class TestIs32BitsOSCmdlet : CmdletBase
     {
         protected override void ProcessRecordInEH()
         {
-            WriteObject(!Environment.Is64BitProcess);
+            WriteObject(!Environment.Is64BitOperatingSystem);
         }
     }
 }
