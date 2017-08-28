@@ -1,5 +1,5 @@
-﻿using PSPlus.Core.Windows.Window;
-using PSPlus.Core.Windows.Interop.User32;
+﻿using PSPlus.Core.Windows.Interop.User32;
+using PSPlus.Core.Windows.Window;
 using System;
 using System.Management.Automation;
 

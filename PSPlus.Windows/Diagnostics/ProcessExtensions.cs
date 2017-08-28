@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace PSPlus.Core.Windows.Core
+namespace PSPlus.Core.Windows.Diagnostics
 {
     public static class ProcessExtensions
     {

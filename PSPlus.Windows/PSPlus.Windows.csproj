@@ -61,7 +61,7 @@
     <Compile Include="Interop\Ntdll\RtlUserProcessParameters32.cs" />
     <Compile Include="Interop\Ntdll\RtlUserProcessParameters64.cs" />
     <Compile Include="Interop\Ntdll\UnicodeString.cs" />
-    <Compile Include="Core\ProcessExtensions.cs" />
+    <Compile Include="Diagnostics\ProcessExtensions.cs" />
     <Compile Include="Diagnostics\EventTracing\EventSourceDefinition.cs" />
     <Compile Include="Diagnostics\EventTracing\EventWatcher.cs" />
     <Compile Include="Diagnostics\EventTracing\EventWatcherManager.cs" />

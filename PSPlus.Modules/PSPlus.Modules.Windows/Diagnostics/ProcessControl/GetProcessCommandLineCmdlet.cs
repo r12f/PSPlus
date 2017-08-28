@@ -1,10 +1,10 @@
 ﻿using PSPlus.Core.Powershell.Cmdlets;
-using PSPlus.Core.Windows.Core;
+using PSPlus.Core.Windows.Diagnostics;
 using System;
 using System.Diagnostics;
 using System.Management.Automation;
 
-namespace PSPlus.Modules.Windows.Core
+namespace PSPlus.Modules.Windows.Diagnostics.ProcessControl
 {
     [Cmdlet(VerbsCommon.Get, "ProcessCommandLine")]
     [OutputType(typeof(bool))]

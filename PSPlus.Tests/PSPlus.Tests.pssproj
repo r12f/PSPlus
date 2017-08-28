@@ -31,6 +31,7 @@
     <Compile Include="Core\PSPlus.Modules.Core.Crypto.tests.ps1" />
     <Compile Include="Core\PSPlus.Modules.Core.IO.tests.ps1" />
     <Compile Include="Windows\PSPlus.Modules.Windows.Core.tests.ps1" />
+    <Compile Include="Windows\PSPlus.Modules.Windows.Diagnostics.ProcessControl.tests.ps1" />
     <Compile Include="Windows\PSPlus.Modules.Windows.Environments.tests.ps1" />
     <Compile Include="Core\PSPlus.Modules.Core.Functional.tests.ps1" />
     <Compile Include="Core\PSPlus.Modules.Core.Loader.tests.ps1" />
