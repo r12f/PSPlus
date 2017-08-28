@@ -33,19 +33,27 @@ Describe "Windows.Environments" {
         }
 
         It "Should be able to set environment variable for current user." {
-            # Set-EnvironmentVariable "TestKey" "TestValue" -Target "User"
-            # $env:TestKey | Should Be "TestValue"
+            Set-EnvironmentVariable "TestKey" "TestValue" -Target User
+            Get-EnvironmentVariable "TestKey" -Target User | Should Be "TestValue"
+            $env:TestKey | Should Be "TestValue"
 
-            # Remove-EnvironmentVariable "TestKey" -Target "User"
-            # $env:TestKey | Should Be $null
+            Remove-EnvironmentVariable "TestKey" -Target User
+            Get-EnvironmentVariable "TestKey" -Target User | Should Be $null
+            $env:TestKey | Should Be $null
         }
 
-        It "Should be able to set environment variable for machine." {
-            # Set-EnvironmentVariable "TestKey" "TestValue" -Target "Machine"
-            # $env:TestKey | Should Be "TestValue"
+        # It "Should be able to set environment variable for machine." {
+        #     Set-EnvironmentVariable "TestKey" "TestValue" -Target Machine
+        #     Get-EnvironmentVariable "TestKey" -Target Machine | Should Be "TestValue"
+        #     $env:TestKey | Should Be "TestValue"
 
-            # Remove-EnvironmentVariable "TestKey" -Target "Machine"
-            # $env:TestKey | Should Be $null
+        #     Remove-EnvironmentVariable "TestKey" -Target Machine
+        #     Get-EnvironmentVariable "TestKey" -Target Machine | Should Be $null
+        #     $env:TestKey | Should Be $null
+        # }
+
+        It "Should be able to update environment variable in system." {
+            Update-EnvironmentVariablesInSystem -Async
         }
     }
 }

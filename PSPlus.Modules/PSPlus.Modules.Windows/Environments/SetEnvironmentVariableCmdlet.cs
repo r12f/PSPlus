@@ -1,4 +1,5 @@
 ﻿using PSPlus.Core.Powershell.Cmdlets;
+using PSPlus.Windows.Environments;
 using System;
 using System.Management.Automation;
 
@@ -31,7 +32,7 @@ namespace PSPlus.Modules.Windows.Environments
                     break;
             }
 
-            Environment.SetEnvironmentVariable(Key, Value, target);
+            EnvironmentVariableUtils.Set(Key, Value, target);
 
             if (target != EnvironmentVariableTarget.Process)
             {

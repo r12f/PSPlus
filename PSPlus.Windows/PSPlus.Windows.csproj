@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Environments\EnvironmentVariableUtils.cs" />
     <Compile Include="Interop\Ntdll\NtdllAPIss.cs" />
     <Compile Include="Interop\Ntdll\PEB32.cs" />
     <Compile Include="Interop\Ntdll\PEB64.cs" />

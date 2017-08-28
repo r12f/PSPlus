@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diagnostics\ProcessControl\GetProcessCommandLineCmdlet.cs" />
+    <Compile Include="Environments\GetEnvironmentVariableCmdlet.cs" />
+    <Compile Include="Environments\UpdateEnvironmentVariablesInSystemCmdlet.cs" />
     <Compile Include="Environments\TestIs32BitsOSCmdlet.cs" />
     <Compile Include="Environments\TestIs32BitsPowershellCmdlet.cs" />
     <Compile Include="Diagnostics\ProcessControl\TestIs32BitsProcessCmdlet.cs" />

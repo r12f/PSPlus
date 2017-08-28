@@ -4,6 +4,8 @@ namespace PSPlus.Core.Windows.Interop.User32
 {
     public static class User32Consts
     {
+        public static readonly IntPtr HWND_BROADCAST = (IntPtr)0xFFFF;
+
         // GetWindowLong / SetWindowLong
         public const int GWL_WNDPROC = -4;
         public const int GWL_HINSTANCE = -6;

@@ -5,8 +5,9 @@ using System.Management.Automation;
 
 namespace PSPlus.Modules.Windows.Environments
 {
-    [Cmdlet(VerbsCommon.Remove, "EnvironmentVariable")]
-    public class RemoveEnvironmentVariableCmdlet : CmdletBase
+    [Cmdlet(VerbsCommon.Get, "EnvironmentVariable")]
+    [OutputType(typeof(string))]
+    public class GetEnvironmentVariableCmdlet : CmdletBase
     {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = true, Mandatory = true)]
         public string Key { get; set; }
@@ -28,13 +29,9 @@ namespace PSPlus.Modules.Windows.Environments
                     target = EnvironmentVariableTarget.Machine;
                     break;
             }
-
-            EnvironmentVariableUtils.Set(Key, null, target);
-
-            if (target != EnvironmentVariableTarget.Process)
-            {
-                Environment.SetEnvironmentVariable(Key, null);
-            }
+            
+            string value = EnvironmentVariableUtils.Get(Key, target);
+            WriteObject(value);
         }
     }
 }
