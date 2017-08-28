@@ -7,7 +7,7 @@ namespace PSPlus.Windows.Core.Interop
     {
         public fixed byte Reserved1[16];
         public fixed long Reserved2[10];
-        public UnicodeString ImagePathName;
-        public UnicodeString CommandLine;
+        public UnicodeString64 ImagePathName;
+        public UnicodeString64 CommandLine;
     }
 }

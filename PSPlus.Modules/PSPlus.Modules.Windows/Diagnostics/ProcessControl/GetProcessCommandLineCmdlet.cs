@@ -13,6 +13,14 @@ namespace PSPlus.Modules.Windows.Diagnostics.ProcessControl
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
         public int Id { get; set; } = 0;
 
+        [Parameter(Mandatory = false)]
+        public SwitchParameter OutputProcessNameWhenError
+        {
+            get { return _outputProcessNameWhenError; }
+            set { _outputProcessNameWhenError = value; }
+        }
+        private bool _outputProcessNameWhenError = false;
+
         protected override void ProcessRecordInEH()
         {
             Process process = InputObject;
@@ -27,8 +35,22 @@ namespace PSPlus.Modules.Windows.Diagnostics.ProcessControl
                 process = Process.GetProcessById(Id);
             }
 
-            string commandLine = process.GetCommandLine();
-            WriteObject(commandLine);
+            try
+            {
+                string commandLine = process.GetCommandLine();
+                WriteObject(commandLine);
+            }
+            catch
+            {
+                if (_outputProcessNameWhenError)
+                {
+                    WriteObject(process.ProcessName);
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
     }
 }

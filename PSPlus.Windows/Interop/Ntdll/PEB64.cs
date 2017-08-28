@@ -12,13 +12,13 @@ namespace PSPlus.Windows.Core.Interop
 
         // PVOID Reserved3[2];
         public fixed long Reserved3[2];
-        public IntPtr Ldr;
-        public IntPtr ProcessParameters;
+        public long Ldr;
+        public long ProcessParameters;
         public fixed byte Reserved4[104];
 
         // PVOID Reserved5[52];
         public fixed long Reserved5[52];
-        public IntPtr PostProcessInitRoutine;
+        public long PostProcessInitRoutine;
         public fixed byte Reserved6[128];
 
         // PVOID Reserved7[1];

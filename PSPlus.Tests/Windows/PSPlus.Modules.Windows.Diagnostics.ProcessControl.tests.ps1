@@ -23,12 +23,55 @@ Describe "Windows.Diagnostics.ProcessControl" {
             $notepad.Kill()
         }
 
-        It "Should be able to get the process command line" {
+        It "Should be able to get the process command line in the same arch" {
             $testProgram = "$env:WINDIR\system32\cmd.exe"
             $testArguments = "/?"
             $testProcess = Start-Process $testProgram -ArgumentList $testArguments -PassThru
 
             Get-ProcessCommandLine $testProcess | Should Be """C:\WINDOWS\system32\cmd.exe"" /? "
+
+            $testProcess.Kill()
+            $testProcess.Close()
+        }
+
+        It "Should be able to get the process command line of wow64 process." {
+            if (-not (Test-Is64BitsOS)) {
+                return
+            }
+
+            $testProgram = "$env:WINDIR\SysWOW64\cmd.exe"
+            $testArguments = "/?"
+            $testProcess = Start-Process $testProgram -ArgumentList $testArguments -PassThru
+
+            Get-ProcessCommandLine $testProcess | Should Be """C:\WINDOWS\SysWOW64\cmd.exe"" /? "
+
+            $testProcess.Kill()
+            $testProcess.Close()
+        }
+
+        It "Should be unable to get the process command line of amd64 process from x86 process." {
+            if (-not (Test-Is64BitsOS)) {
+                return
+            }
+
+            if (-not (Test-Is32BitsPowershell)) {
+                return
+            }
+
+            $testProgram = "$env:WINDIR\sysnative\cmd.exe"
+            $testArguments = "/?"
+            $testProcess = Start-Process $testProgram -ArgumentList $testArguments -PassThru
+
+            $exceptionThrown = $false
+            try
+            {
+                Get-ProcessCommandLine $testProcess
+            }
+            catch
+            {
+                $exceptionThrown = $true
+            }
+            $exceptionThrown | Should Be $true
 
             $testProcess.Kill()
             $testProcess.Close()

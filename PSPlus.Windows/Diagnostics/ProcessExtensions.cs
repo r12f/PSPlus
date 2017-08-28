@@ -77,20 +77,29 @@ namespace PSPlus.Core.Windows.Diagnostics
                     {
                         throw new InvalidOperationException(string.Format("Unable to read PEB from process: Id = {0}.", process.Id));
                     }
-                    processParameterAddress = peb64.ProcessParameters;
+                    processParameterAddress = (IntPtr)peb64.ProcessParameters;
                 }
                 else
                 {
+                    // It looks like Wow64 processes have 2 PEBs. And to get the right one is very tricky.
+                    // https://stackoverflow.com/questions/34736009/get-32bit-peb-of-another-process-from-a-x64-process.
+                    IntPtr pebAddress = basicInfomation.PebBaseAddress;
+                    if (Environment.Is64BitOperatingSystem && Environment.Is64BitProcess)
+                    {
+                        pebAddress += 0x1000;
+                    }
+
                     PEB32 peb32;
                     IntPtr numberOfBytesRead;
-                    if (!Kernel32APIs.ReadProcessMemory(process.Handle, basicInfomation.PebBaseAddress, new IntPtr(&peb32), sizeof(PEB32), new IntPtr(&numberOfBytesRead)) || sizeof(PEB32) != numberOfBytesRead.ToInt32())
+                    if (!Kernel32APIs.ReadProcessMemory(process.Handle, pebAddress, new IntPtr(&peb32), sizeof(PEB32), new IntPtr(&numberOfBytesRead)) || sizeof(PEB32) != numberOfBytesRead.ToInt32())
                     {
                         throw new InvalidOperationException(string.Format("Unable to read PEB from process: Id = {0}.", process.Id));
                     }
-                    processParameterAddress = peb32.ProcessParameters;
+                    processParameterAddress = (IntPtr)peb32.ProcessParameters;
                 }
 
-                UnicodeString commandLineUnicodeString;
+                IntPtr commandLineBufferAddress;
+                int commandLineLength;
                 if (isProcess64Bit)
                 {
                     RtlUserProcessParameters64 processParameters64;
@@ -99,7 +108,8 @@ namespace PSPlus.Core.Windows.Diagnostics
                     {
                         throw new InvalidOperationException(string.Format("Unable to read process parameters from process: Id = {0}.", process.Id));
                     }
-                    commandLineUnicodeString = processParameters64.CommandLine;
+                    commandLineBufferAddress = (IntPtr)processParameters64.CommandLine.Buffer;
+                    commandLineLength = processParameters64.CommandLine.Length;
                 }
                 else
                 {
@@ -109,16 +119,17 @@ namespace PSPlus.Core.Windows.Diagnostics
                     {
                         throw new InvalidOperationException(string.Format("Unable to read process parameters from process: Id = {0}.", process.Id));
                     }
-                    commandLineUnicodeString = processParameters32.CommandLine;
+                    commandLineBufferAddress = (IntPtr)processParameters32.CommandLine.Buffer;
+                    commandLineLength = processParameters32.CommandLine.Length;
                 }
 
-                byte[] commandLineBuffer = process.ReadProcessMemory(commandLineUnicodeString.Buffer, commandLineUnicodeString.Length);
+                byte[] commandLineBuffer = process.ReadProcessMemory(commandLineBufferAddress, commandLineLength);
                 if (commandLineBuffer == null)
                 {
                     throw new InvalidOperationException(string.Format("Unable to reach command line buffer from process: Id = {0}.", process.Id));
                 }
 
-                commandLine = Encoding.Unicode.GetString(commandLineBuffer, 0, commandLineUnicodeString.Length);
+                commandLine = Encoding.Unicode.GetString(commandLineBuffer, 0, commandLineLength);
             }
 
             return commandLine;
