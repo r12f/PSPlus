@@ -54,6 +54,7 @@
     <Compile Include="Powershell\Cmdlets\CmdletBase.cs" />
     <Compile Include="Powershell\Cmdlets\CmdletBaseWithInputObject.cs" />
     <Compile Include="Powershell\Cmdlets\CmdletBaseWithOptionalInputObject.cs" />
+    <Compile Include="Powershell\NativeFunctionSignature.cs" />
     <Compile Include="Powershell\PipelineControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\ByteArrayExtensions.cs" />

@@ -1,9 +1,6 @@
 ﻿using Microsoft.Win32;
 using PSPlus.Core.Windows.Interop.User32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PSPlus.Windows.Environments
 {

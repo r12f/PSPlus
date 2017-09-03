@@ -54,6 +54,7 @@
     <Compile Include="IO\RenameFileExtensionCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\GetTypeCmdlet.cs" />
+    <Compile Include="Runtime\NewNativeFunctionSignatureCmdlet.cs" />
     <Compile Include="Text\ConvertToHexStringCmdlet.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,11 +64,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Collection\ConvertTo-Dictionary.ps1" />
+    <None Include="Collection\ConvertTo-Set.ps1" />
+    <None Include="Collection\New-GenericDictionary.ps1" />
+    <None Include="Collection\New-GenericList.ps1" />
+    <None Include="Collection\New-GenericQueue.ps1" />
+    <None Include="Collection\New-GenericSet.ps1" />
+    <None Include="Collection\New-GenericStack.ps1" />
+    <None Include="Functional\Test-All.ps1" />
+    <None Include="Functional\Test-Any.ps1" />
     <None Include="packages.config" />
-    <None Include="Collection\PSPlus.Modules.Core.Collection.psm1" />
-    <None Include="Functional\PSPlus.Modules.Core.Functional.psm1" />
-    <None Include="Runtime\PSPlus.Modules.Core.Runtime.Loader.psm1" />
-    <None Include="Runtime\PSPlus.Modules.Core.Runtime.Pipeline.psm1" />
+    <None Include="PSPlus.Modules.Core.psm1" />
+    <None Include="Runtime\Import-NativeFunctions.ps1" />
+    <None Include="Runtime\Stop-UpstreamCommands.ps1" />
     <None Include="PSPlus.Modules.Core.psd1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

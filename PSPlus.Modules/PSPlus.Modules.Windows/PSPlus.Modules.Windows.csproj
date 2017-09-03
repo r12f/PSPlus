@@ -86,9 +86,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="PSPlus.Modules.Windows.Consts.psm1" />
     <None Include="PSPlus.Modules.Windows.psd1" />
-    <None Include="Window\PSPlus.Modules.Windows.Window.Consts.psm1" />
-    <None Include="Window\PSPlus.Modules.Windows.Window.DesktopLayout.psm1" />
+    <None Include="PSPlus.Modules.Windows.psm1" />
+    <None Include="Window\DesktopLayout\New-DesktopLayoutRulesFromCurrentLayout.ps1" />
+    <None Include="Window\DesktopLayout\Restore-DesktopLayout.ps1" />
+    <None Include="Window\DesktopLayout\Restore-DesktopLayoutFromLayoutRules.ps1" />
+    <None Include="Window\DesktopLayout\Save-DesktopLayout.ps1" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

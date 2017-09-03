@@ -82,6 +82,7 @@
     <Compile Include="Interop\User32\User32ScrollInfo.cs" />
     <Compile Include="Interop\User32\User32Size.cs" />
     <Compile Include="Interop\User32\User32WindowPlacement.cs" />
+    <Compile Include="Window\DesktopLayout\LayoutRuleFieldNames.cs" />
     <Compile Include="Window\WindowControl.cs" />
   </ItemGroup>
   <ItemGroup>

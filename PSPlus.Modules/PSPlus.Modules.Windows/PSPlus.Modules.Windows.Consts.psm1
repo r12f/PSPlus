@@ -1,5 +1,5 @@
 #
-# PSPlus.Modules.Win32.Consts.psm1
+# PSPlus.Modules.Windows.Consts.psm1
 #
 
 $User32Consts = [PSPlus.Core.Windows.Interop.User32.User32Consts]
