@@ -32,8 +32,14 @@ function New-DesktopLayoutRulesFromCurrentLayout
 
         $isVisible = $window.IsWindowVisible()
         $windowPid = $window.GetWindowProcessId()
+        $parentWindow = $window.GetParent()
         $className = $window.GetClassName()
         $windowPlacement = $window.GetWindowPlacement()
+        $windowScreenRect = $window.GetWindowRect()
+
+        if ($parentWindow.IsWindow()) {
+            return
+        }
 
         if (-not $window.IsWindow()) {
             return
@@ -41,6 +47,13 @@ function New-DesktopLayoutRulesFromCurrentLayout
 
         # If the window is not visible, ignore. (Minimized windows will still have WS_VISIBLE style)
         if (-not $isVisible) {
+            return
+        }
+
+        if (($windowPlacement.NormalPosition.Left -eq 0) -and
+            ($windowPlacement.NormalPosition.Top -eq 0) -and
+            ($windowPlacement.NormalPosition.Right -eq 0) -and
+            ($windowPlacement.NormalPosition.Bottom -eq 0)) {
             return
         }
 
@@ -75,12 +88,14 @@ function New-DesktopLayoutRulesFromCurrentLayout
                 $LayoutRuleFieldNames::PlacementWindowMinPositionY = $windowPlacement.MinPosition.Y
                 $LayoutRuleFieldNames::PlacementWindowMaxPositionX = $windowPlacement.MaxPosition.X
                 $LayoutRuleFieldNames::PlacementWindowMaxPositionY = $windowPlacement.MaxPosition.Y
-                $LayoutRuleFieldNames::PlacementWindowNormalPositionLeft = $windowPlacement.NormalPosition.Left
-                $LayoutRuleFieldNames::PlacementWindowNormalPositionTop = $windowPlacement.NormalPosition.Top
-                $LayoutRuleFieldNames::PlacementWindowNormalPositionRight = $windowPlacement.NormalPosition.Right
-                $LayoutRuleFieldNames::PlacementWindowNormalPositionBottom = $windowPlacement.NormalPosition.Bottom
+                $LayoutRuleFieldNames::PlacementWindowNormalPositionLeft = $windowScreenRect.Left
+                $LayoutRuleFieldNames::PlacementWindowNormalPositionTop = $windowScreenRect.Top
+                $LayoutRuleFieldNames::PlacementWindowNormalPositionRight = $windowScreenRect.Right
+                $LayoutRuleFieldNames::PlacementWindowNormalPositionBottom = $windowScreenRect.Bottom
             }
         }
+
+        Write-Host ("Generating rules for window {0} of process {1} at ({2}, {3}) - ({4}, {5})." -f $className, $windowProcessName, $windowScreenRect.Left, $windowScreenRect.Top, $windowScreenRect.Right, $windowScreenRect.Bottom)
 
         return $windowLayoutRule
     } 

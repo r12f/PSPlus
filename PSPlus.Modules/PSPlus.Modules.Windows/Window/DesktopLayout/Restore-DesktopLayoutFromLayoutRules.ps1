@@ -25,6 +25,7 @@ function Restore-DesktopLayoutFromLayoutRules
         $isVisible = $window.IsWindowVisible()
         $windowPid = $window.GetWindowProcessId()
         $className = $window.GetClassName()
+        $windowTitle = $window.GetWindowText()
         $windowPlacement = $window.GetWindowPlacement()
 
         if (-not $window.IsWindow()) {
@@ -72,7 +73,7 @@ function Restore-DesktopLayoutFromLayoutRules
             }
 
             if ($matchRule.($LayoutRuleFieldNames::MatchWindowTitlePattern) -ne $null) {
-                $isWindowTitleMatches = Select-String -InputObject $className -Pattern $matchRule.($LayoutRuleFieldNames::MatchWindowTitlePattern)  -Quiet
+                $isWindowTitleMatches = Select-String -InputObject $windowTitle -Pattern $matchRule.($LayoutRuleFieldNames::MatchWindowTitlePattern)  -Quiet
                 if (-not $isWindowTitleMatches) {
                     return $false
                 }
@@ -93,6 +94,10 @@ function Restore-DesktopLayoutFromLayoutRules
         $windowPlacement.MinPosition = New-User32Point $windowPlacementFromRule.($LayoutRuleFieldNames::PlacementWindowMinPositionX) $windowPlacementFromRule.($LayoutRuleFieldNames::PlacementWindowMinPositionY)
         $windowPlacement.MaxPosition = New-User32Point $windowPlacementFromRule.($LayoutRuleFieldNames::PlacementWindowMaxPositionX) $windowPlacementFromRule.($LayoutRuleFieldNames::PlacementWindowMaxPositionY)
         $windowPlacement.NormalPosition = New-User32Rect $windowPlacementFromRule.($LayoutRuleFieldNames::PlacementWindowNormalPositionLeft) $windowPlacementFromRule.($LayoutRuleFieldNames::PlacementWindowNormalPositionTop) $windowPlacementFromRule.($LayoutRuleFieldNames::PlacementWindowNormalPositionRight) $windowPlacementFromRule.($LayoutRuleFieldNames::PlacementWindowNormalPositionBottom) 
-        $window.SetWindowPlacement($windowPlacement)
+
+        Write-Host ("Restoring window {0} of process {1} at ({2}, {3}) - ({4}, {5})." -f $className, $windowProcessName, $windowPlacement.NormalPosition.Left, $windowPlacement.NormalPosition.Top, $windowPlacement.NormalPosition.Right, $windowPlacement.NormalPosition.Bottom)
+        if (-not $window.SetWindowPlacement($windowPlacement)) {
+            Write-Host "Restoring failed."
+        }
     }
 }

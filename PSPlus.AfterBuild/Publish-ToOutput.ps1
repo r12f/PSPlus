@@ -16,7 +16,7 @@ Write-Host "Stopping PowerShellToolsProcessHost.exe and vstest.executionengine*.
 Get-Process | ? { ($_.ProcessName -eq 'PowerShellToolsProcessHost') -or ($_.ProcessName.StartsWith('vstest.executionengine')) } | Stop-Process -Force
 
 # Remove everything under publish folder
-if (Test-Path $publishFolderPath -IsValid) {
+if (Test-Path $publishFolderPath) {
     Write-Host "Removing folder $publishFolderPath ..."
     Remove-Item -Recurse -Force $publishFolderPath
 
