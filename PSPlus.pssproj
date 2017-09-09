@@ -12,8 +12,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Output\Binaries\Debug\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\</BaseIntermediateOutputPath>
+    <OutputPath>Output\Binaries\Debug\</OutputPath>
+    <BaseIntermediateOutputPath>Output\Objects\PSPlus\</BaseIntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -21,8 +21,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Output\Binaries\Release\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\</BaseIntermediateOutputPath>
+    <OutputPath>Output\Binaries\Release\</OutputPath>
+    <BaseIntermediateOutputPath>Output\Objects\PSPlus\</BaseIntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
