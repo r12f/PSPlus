@@ -1,5 +1,6 @@
 .vs
 Output
+Publish
 packages
 *.dll
 Microsoft.Diagnostics.Tracing.TraceEvent.xml

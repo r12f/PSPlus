@@ -2,47 +2,46 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{400f6615-4ba4-4902-af86-ea9d77a73a23}</ProjectGuid>
+    <ProjectGuid>6CAFC0C6-A428-4d30-A9F9-700E829FEA51</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>MyApplication</RootNamespace>
     <AssemblyName>MyApplication</AssemblyName>
     <Name>PSPlus.Tests</Name>
+    <OutputPath>..\Output\$(Configuration)\Binaries\Common</OutputPath>
+    <IntermediateOutputPath>..\Output\$(Configuration)\Objects\$(AssemblyName)\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Output\Binaries\Debug\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\PSPlus.Tests\</BaseIntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Output\Binaries\Release\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\PSPlus.Tests\</BaseIntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Core\PSPlus.Modules.Core.Crypto.tests.ps1" />
-    <Compile Include="Core\PSPlus.Modules.Core.IO.tests.ps1" />
-    <Compile Include="Windows\PSPlus.Modules.Windows.Diagnostics.ProcessControl.tests.ps1" />
-    <Compile Include="Windows\PSPlus.Modules.Windows.Environments.tests.ps1" />
-    <Compile Include="Core\PSPlus.Modules.Core.Functional.tests.ps1" />
-    <Compile Include="Core\PSPlus.Modules.Core.Loader.tests.ps1" />
-    <Compile Include="Core\PSPlus.Modules.Core.Collections.tests.ps1" />
-    <Compile Include="Windows\PSPlus.Modules.Windows.Diagnostics.EventTracing.tests.ps1" />
-    <Compile Include="Core\PSPlus.Modules.Core.Reflection.tests.ps1" />
-    <Compile Include="Core\PSPlus.Modules.Core.Text.tests.ps1" />
-    <Compile Include="Windows\PSPlus.Modules.Windows.Window.tests.ps1" />
+    <Folder Include="Core\" />
+    <Folder Include="Tfs\" />
+    <Folder Include="Windows\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\" />
-    <Folder Include="Windows\" />
+    <Compile Include="Core\PSPlus.Modules.Core.Collections.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Crypto.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Functional.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.IO.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Loader.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Reflection.tests.ps1" />
+    <Compile Include="Core\PSPlus.Modules.Core.Text.tests.ps1" />
+    <Compile Include="Tfs\PSPlus.Modules.Tfs.TeamProject.tests.ps1" />
+    <Compile Include="Tfs\PSPlus.Modules.Tfs.TeamProjectCollection.tests.ps1" />
+    <Compile Include="Windows\PSPlus.Modules.Windows.Diagnostics.EventTracing.tests.ps1" />
+    <Compile Include="Windows\PSPlus.Modules.Windows.Diagnostics.ProcessControl.tests.ps1" />
+    <Compile Include="Windows\PSPlus.Modules.Windows.Environments.tests.ps1" />
+    <Compile Include="Windows\PSPlus.Modules.Windows.Window.tests.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />

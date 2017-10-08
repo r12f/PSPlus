@@ -4,32 +4,27 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E24E32C6-DC92-4B10-9B5F-4112D1BAFF8F}</ProjectGuid>
+    <ProjectGuid>{5460FAE5-A39D-470A-B6BE-C91759349DBA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PSPlus.AfterBuild</RootNamespace>
-    <AssemblyName>PSPlus.AfterBuild</AssemblyName>
+    <RootNamespace>PSPlus.Publish</RootNamespace>
+    <AssemblyName>PSPlus.Publish</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <OutputPath>..\Output\$(Configuration)\Binaries\Common</OutputPath>
+    <IntermediateOutputPath>..\Output\$(Configuration)\Objects\$(AssemblyName)\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\Output\Binaries\Debug\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\PSPlus.AfterBuild\</BaseIntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Output\Binaries\Release\</OutputPath>
-    <BaseIntermediateOutputPath>..\Output\Objects\PSPlus.AfterBuild\</BaseIntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,25 +39,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Publish-ToOutput.ps1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PSPlus.Modules\PSPlus.Modules.Core\PSPlus.Modules.Core.csproj">
-      <Project>{08fbc63a-8e44-4736-8b0c-65872a4fbe6c}</Project>
-      <Name>PSPlus.Modules.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PSPlus.Modules\PSPlus.Modules.Windows\PSPlus.Modules.Windows.csproj">
-      <Project>{1056fb90-1715-464d-b525-fb7ff2586957}</Project>
-      <Name>PSPlus.Modules.Windows</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>powershell -ExecutionPolicy ByPass $(SolutionDir)PSPlus.BuildScripts\Publish-FromOutput.ps1 $(TargetDir)..\Packages $(SolutionDir)Publish</PostBuildEvent>
+  </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>powershell -ExecutionPolicy ByPass $(ProjectDir)Publish-ToOutput.ps1 $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

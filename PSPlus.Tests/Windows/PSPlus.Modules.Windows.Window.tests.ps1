@@ -1,4 +1,4 @@
-﻿Import-Module "$PSScriptRoot\..\..\Output\Publish\PSPlus.psd1" -Force
+﻿Import-Module "$PSScriptRoot\..\..\Publish\PSPlus\PSPlus.psd1" -Force
 
 Describe "Windows.Window" {
     Context "When trying to create the user32 data structures" {

@@ -11,25 +11,21 @@
     <AssemblyName>PSPlus.Modules.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <OutputPath>..\..\Output\$(Configuration)\Binaries\Packages\PSPlus</OutputPath>
+    <IntermediateOutputPath>..\..\Output\$(Configuration)\Objects\$(AssemblyName)\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Output\Binaries\Debug\</OutputPath>
-    <BaseIntermediateOutputPath>..\..\Output\Objects\PSPlus.Modules.Core\</BaseIntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Output\Binaries\Release\</OutputPath>
-    <BaseIntermediateOutputPath>..\..\Output\Objects\PSPlus.Modules.Core\</BaseIntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -74,10 +70,17 @@
     <None Include="Functional\Test-All.ps1" />
     <None Include="Functional\Test-Any.ps1" />
     <None Include="packages.config" />
-    <None Include="PSPlus.Modules.Core.psm1" />
+    <None Include="PSPlus.Modules.Core.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Runtime\Import-NativeFunctions.ps1" />
     <None Include="Runtime\Stop-UpstreamCommands.ps1" />
-    <None Include="PSPlus.Modules.Core.psd1" />
+    <None Include="PSPlus.Modules.Core.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>powershell -ExecutionPolicy ByPass $(SolutionDir)PSPlus.BuildScripts\Publish-FunctionsToOutput.ps1 $(ProjectDir) $(TargetDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

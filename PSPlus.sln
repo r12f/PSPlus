@@ -3,19 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "PSPlus", "PSPlus.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PSPlus.Modules", "PSPlus.Modules", "{9645F942-489A-45D3-9300-40FA868ADF57}"
-EndProject
-Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "PSPlus.Tests", "PSPlus.Tests\PSPlus.Tests.pssproj", "{400F6615-4BA4-4902-AF86-EA9D77A73A23}"
-	ProjectSection(ProjectDependencies) = postProject
-		{E24E32C6-DC92-4B10-9B5F-4112D1BAFF8F} = {E24E32C6-DC92-4B10-9B5F-4112D1BAFF8F}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPlus.AfterBuild", "PSPlus.AfterBuild\PSPlus.AfterBuild.csproj", "{E24E32C6-DC92-4B10-9B5F-4112D1BAFF8F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51} = {6CAFC0C6-A428-4D30-A9F9-700E829FEA51}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPlus.Core", "PSPlus.Core\PSPlus.Core.csproj", "{7FD09637-9B45-4A36-8501-6EABC62787E7}"
 EndProject
@@ -25,24 +13,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPlus.Modules.Core", "PSPl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPlus.Modules.Windows", "PSPlus.Modules\PSPlus.Modules.Windows\PSPlus.Modules.Windows.csproj", "{1056FB90-1715-464D-B525-FB7FF2586957}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPlus.Modules.Tfs", "PSPlus.Modules\PSPlus.Modules.TFS\PSPlus.Modules.Tfs.csproj", "{D219D60B-05EE-4ADD-8D98-64E688BA1E21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPlus.Tfs", "PSPlus.Tfs\PSPlus.Tfs.csproj", "{39CE251F-974A-414D-9C1F-6005725BE8A9}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "PSPlus.BuildScripts", "PSPlus.BuildScripts\PSPlus.BuildScripts.pssproj", "{D8297AD2-58DB-4F66-A825-85D7B49D4846}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPlus.Publish", "PSPlus.Publish\PSPlus.Publish.csproj", "{5460FAE5-A39D-470A-B6BE-C91759349DBA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D219D60B-05EE-4ADD-8D98-64E688BA1E21} = {D219D60B-05EE-4ADD-8D98-64E688BA1E21}
+		{08FBC63A-8E44-4736-8B0C-65872A4FBE6C} = {08FBC63A-8E44-4736-8B0C-65872A4FBE6C}
+		{1056FB90-1715-464D-B525-FB7FF2586957} = {1056FB90-1715-464D-B525-FB7FF2586957}
+	EndProjectSection
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "PSPlus.Tests", "PSPlus.Tests\PSPlus.Tests.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{400F6615-4BA4-4902-AF86-EA9D77A73A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{400F6615-4BA4-4902-AF86-EA9D77A73A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{400F6615-4BA4-4902-AF86-EA9D77A73A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{400F6615-4BA4-4902-AF86-EA9D77A73A23}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E24E32C6-DC92-4B10-9B5F-4112D1BAFF8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E24E32C6-DC92-4B10-9B5F-4112D1BAFF8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E24E32C6-DC92-4B10-9B5F-4112D1BAFF8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E24E32C6-DC92-4B10-9B5F-4112D1BAFF8F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7FD09637-9B45-4A36-8501-6EABC62787E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FD09637-9B45-4A36-8501-6EABC62787E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FD09637-9B45-4A36-8501-6EABC62787E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,6 +50,26 @@ Global
 		{1056FB90-1715-464D-B525-FB7FF2586957}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1056FB90-1715-464D-B525-FB7FF2586957}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1056FB90-1715-464D-B525-FB7FF2586957}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D219D60B-05EE-4ADD-8D98-64E688BA1E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D219D60B-05EE-4ADD-8D98-64E688BA1E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D219D60B-05EE-4ADD-8D98-64E688BA1E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D219D60B-05EE-4ADD-8D98-64E688BA1E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39CE251F-974A-414D-9C1F-6005725BE8A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39CE251F-974A-414D-9C1F-6005725BE8A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39CE251F-974A-414D-9C1F-6005725BE8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39CE251F-974A-414D-9C1F-6005725BE8A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8297AD2-58DB-4F66-A825-85D7B49D4846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8297AD2-58DB-4F66-A825-85D7B49D4846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8297AD2-58DB-4F66-A825-85D7B49D4846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8297AD2-58DB-4F66-A825-85D7B49D4846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5460FAE5-A39D-470A-B6BE-C91759349DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5460FAE5-A39D-470A-B6BE-C91759349DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5460FAE5-A39D-470A-B6BE-C91759349DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5460FAE5-A39D-470A-B6BE-C91759349DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +77,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{08FBC63A-8E44-4736-8B0C-65872A4FBE6C} = {9645F942-489A-45D3-9300-40FA868ADF57}
 		{1056FB90-1715-464D-B525-FB7FF2586957} = {9645F942-489A-45D3-9300-40FA868ADF57}
+		{D219D60B-05EE-4ADD-8D98-64E688BA1E21} = {9645F942-489A-45D3-9300-40FA868ADF57}
 	EndGlobalSection
 EndGlobal

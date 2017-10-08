@@ -1,8 +1,8 @@
-﻿Import-Module "$PSScriptRoot\..\..\Output\Publish\PSPlus.psd1" -Force
+﻿Import-Module "$PSScriptRoot\..\..\Publish\PSPlus\PSPlus.psd1" -Force
 
 Describe "Core.IO" {
     Context "When trying to get or change file extension" {
-        $testPath = Resolve-Path "$PSScriptRoot\..\..\Output\Publish\PSPlus.psd1"
+        $testPath = Resolve-Path "$PSScriptRoot\..\..\Publish\PSPlus\PSPlus.psd1"
 
         It "Should be able to get the file extension." {
             Get-FileExtension $testPath | Should Be ".psd1"

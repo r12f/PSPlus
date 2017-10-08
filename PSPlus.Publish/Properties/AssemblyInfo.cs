@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PSPlus.AfterBuild")]
+[assembly: AssemblyTitle("PSPlus.Publish")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PSPlus.AfterBuild")]
+[assembly: AssemblyProduct("PSPlus.Publish")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e24e32c6-dc92-4b10-9b5f-4112d1baff8f")]
+[assembly: Guid("5460fae5-a39d-470a-b6be-c91759349dba")]
 
 // Version information for an assembly consists of the following four values:
 //

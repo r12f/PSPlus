@@ -1,4 +1,4 @@
-﻿Import-Module "$PSScriptRoot\..\..\Output\Publish\PSPlus.psd1" -Force
+﻿Import-Module "$PSScriptRoot\..\..\Publish\PSPlus\PSPlus.psd1" -Force
 
 Describe "Core.Text" {
     Context "When trying to convert object to hex string" {
