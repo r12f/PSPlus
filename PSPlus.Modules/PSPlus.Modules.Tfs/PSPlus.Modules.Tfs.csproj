@@ -233,6 +233,6 @@
     <Error Condition="!Exists('..\..\packages\Microsoft.TeamFoundationServer.ExtendedClient.15.122.0-preview\build\Microsoft.TeamFoundationServer.ExtendedClient.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.TeamFoundationServer.ExtendedClient.15.122.0-preview\build\Microsoft.TeamFoundationServer.ExtendedClient.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>powershell -ExecutionPolicy ByPass $(SolutionDir)PSPlus.BuildScripts\Publish-FunctionsToOutput.ps1 $(ProjectDir) $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>powershell -ExecutionPolicy ByPass $(SolutionDir)PSPlus.BuildScripts\Copy-FunctionsToOutputFolder.ps1 $(ProjectDir) $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

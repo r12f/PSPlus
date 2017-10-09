@@ -1,5 +1,5 @@
 #
-# Publish-FromOutput.ps1
+# Copy-ModulesToPublishFolder.ps1
 #
 
 param(

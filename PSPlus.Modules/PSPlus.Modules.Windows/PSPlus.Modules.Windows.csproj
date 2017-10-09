@@ -102,6 +102,6 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>powershell -ExecutionPolicy ByPass $(SolutionDir)PSPlus.BuildScripts\Publish-FunctionsToOutput.ps1 $(ProjectDir) $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>powershell -ExecutionPolicy ByPass $(SolutionDir)PSPlus.BuildScripts\Copy-FunctionsToOutputFolder.ps1 $(ProjectDir) $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

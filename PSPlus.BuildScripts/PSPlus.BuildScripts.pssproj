@@ -27,8 +27,8 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="Publish-FromOutput.ps1" />
-    <Compile Include="Publish-FunctionsToOutput.ps1" />
+    <Compile Include="Copy-ModulesToPublishFolder.ps1" />
+    <Compile Include="Copy-FunctionsToOutputFolder.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />

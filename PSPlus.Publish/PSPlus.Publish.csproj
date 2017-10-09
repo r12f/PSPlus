@@ -41,7 +41,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>powershell -ExecutionPolicy ByPass $(SolutionDir)PSPlus.BuildScripts\Publish-FromOutput.ps1 $(TargetDir)..\Packages $(SolutionDir)Publish</PostBuildEvent>
+    <PostBuildEvent>powershell -ExecutionPolicy ByPass $(SolutionDir)PSPlus.BuildScripts\Copy-ModulesToPublishFolder.ps1 $(TargetDir)..\Packages $(SolutionDir)Publish</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

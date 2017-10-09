@@ -1,5 +1,5 @@
 ﻿#
-# Publish-FunctionsToOutput.ps1
+# Copy-FunctionsToOutputFolder.ps1
 #
 param(
     [Parameter(Position = 0, Mandatory = $true)]
