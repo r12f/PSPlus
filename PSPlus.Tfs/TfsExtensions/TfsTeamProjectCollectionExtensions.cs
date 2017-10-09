@@ -1,8 +1,8 @@
-﻿using Microsoft.TeamFoundation.Client;
-using Microsoft.TeamFoundation.WorkItemTracking.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Management.Automation;
+using Microsoft.TeamFoundation.Client;
+using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
 namespace PSPlus.Tfs.TfsExtensions
 {
@@ -10,12 +10,12 @@ namespace PSPlus.Tfs.TfsExtensions
     {
         public static WorkItemStore GetWorkItemStore(this TfsTeamProjectCollection collection)
         {
-            return collection.GetService<WorkItemStore>();
+            return new WorkItemStore(collection);
         }
 
         public static ProjectCollection GetProjectCollection(this TfsTeamProjectCollection collection)
         {
-            return collection.GetService<ProjectCollection>();
+            return collection.GetWorkItemStore().Projects;
         }
 
         public static IEnumerable<Project> GetProjects(this TfsTeamProjectCollection collection, string namePattern)

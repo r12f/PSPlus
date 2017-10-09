@@ -7,5 +7,6 @@ namespace PSPlus.Tfs
     {
         public static TfsTeamProjectCollection Collection { get; set; }
         public static WorkItemStore WorkItemStore { get; set; }
+        public static Project Project { get; set; }
     }
 }

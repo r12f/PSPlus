@@ -1,8 +1,8 @@
-﻿using PSPlus.Core.Powershell.Cmdlets;
-using PSPlus.Core.Windows.Diagnostics;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Management.Automation;
+using PSPlus.Core.Powershell.Cmdlets;
+using PSPlus.Core.Windows.Diagnostics;
 
 namespace PSPlus.Modules.Windows.Diagnostics.ProcessControl
 {

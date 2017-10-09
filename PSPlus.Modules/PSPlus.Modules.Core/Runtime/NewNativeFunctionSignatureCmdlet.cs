@@ -1,6 +1,6 @@
-﻿using PSPlus.Core.Powershell;
+﻿using System.Management.Automation;
+using PSPlus.Core.Powershell;
 using PSPlus.Core.Powershell.Cmdlets;
-using System.Management.Automation;
 
 namespace PSPlus.Modules.Core.Runtime
 {

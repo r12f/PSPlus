@@ -1,5 +1,5 @@
-﻿using PSPlus.Core.Windows.Window;
-using System.Management.Automation;
+﻿using System.Management.Automation;
+using PSPlus.Core.Windows.Window;
 
 namespace PSPlus.Modules.Windows.Window
 {

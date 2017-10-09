@@ -1,7 +1,7 @@
-﻿using PSPlus.Core.Powershell.Cmdlets;
-using PSPlus.Windows.Environments;
-using System;
+﻿using System;
 using System.Management.Automation;
+using PSPlus.Core.Powershell.Cmdlets;
+using PSPlus.Windows.Environments;
 
 namespace PSPlus.Modules.Windows.Environments
 {

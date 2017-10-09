@@ -1,6 +1,6 @@
-﻿using PSPlus.Windows.Diagnostics.EventTracing;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Management.Automation;
+using PSPlus.Windows.Diagnostics.EventTracing;
 
 namespace PSPlus.Modules.Windows.Diagnostics.EventTracing
 {
