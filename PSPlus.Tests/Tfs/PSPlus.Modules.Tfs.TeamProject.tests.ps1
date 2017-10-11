@@ -2,7 +2,7 @@
 
 Describe "PSPlus.Tfs.TeamProject" {
     Context "When operating on team project" {
-        $tpcURL = Read-Host "Team Project Collection URL: "
+        $tpcURL = Read-Host "Team Project Collection URL"
         $tpc = Get-TfsTeamProjectCollection -URL $tpcURL
 
         It "Should be able to get team projects." {

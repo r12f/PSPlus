@@ -4,7 +4,7 @@ using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using PSPlus.Core.Powershell.Cmdlets;
 using PSPlus.Tfs;
-using PSPlus.Tfs.TfsExtensions;
+using PSPlus.Tfs.TfsUtils;
 
 namespace PSPlus.Modules.Tfs
 {

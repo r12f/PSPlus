@@ -4,7 +4,7 @@ using System.Linq;
 using System.Management.Automation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using PSPlus.Tfs;
-using PSPlus.Tfs.TfsExtensions;
+using PSPlus.Tfs.TfsUtils;
 
 namespace PSPlus.Modules.Tfs.Connection
 {

@@ -187,9 +187,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletContext.cs" />
-    <Compile Include="TfsExtensions\TfsTeamProjectCollectionExtensions.cs" />
+    <Compile Include="TfsUtils\TfsTeamProjectCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TfsExtensions\WorkItemStoreExtensions.cs" />
+    <Compile Include="TfsUtils\TfsTeamProjectExtensions.cs" />
+    <Compile Include="TfsUtils\WorkItemStoreExtensions.cs" />
+    <Compile Include="WIQLUtils\WIQLSystemFieldNames.cs" />
+    <Compile Include="WIQLUtils\WIQLQueryBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

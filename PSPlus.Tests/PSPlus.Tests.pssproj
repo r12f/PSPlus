@@ -38,6 +38,7 @@
     <Compile Include="Core\PSPlus.Modules.Core.Text.tests.ps1" />
     <Compile Include="Tfs\PSPlus.Modules.Tfs.TeamProject.tests.ps1" />
     <Compile Include="Tfs\PSPlus.Modules.Tfs.TeamProjectCollection.tests.ps1" />
+    <Compile Include="Tfs\PSPlus.Modules.Tfs.Work.tests.tests.ps1" />
     <Compile Include="Windows\PSPlus.Modules.Windows.Diagnostics.EventTracing.tests.ps1" />
     <Compile Include="Windows\PSPlus.Modules.Windows.Diagnostics.ProcessControl.tests.ps1" />
     <Compile Include="Windows\PSPlus.Modules.Windows.Environments.tests.ps1" />

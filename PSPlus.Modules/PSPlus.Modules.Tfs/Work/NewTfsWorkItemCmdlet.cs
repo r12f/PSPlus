@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Management.Automation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
+using PSPlus.Tfs.TfsUtils;
 
-namespace PSPlus.Modules.Tfs.Work.WorkItem
+namespace PSPlus.Modules.Tfs.Work
 {
     [Cmdlet(VerbsCommon.New, "TfsWorkItem")]
-    [OutputType(typeof(Microsoft.TeamFoundation.WorkItemTracking.Client.WorkItem))]
-    public class NewTfsWorkItemCmdlet : TfsCmdletBase
+    [OutputType(typeof(WorkItem))]
+    public class NewTfsWorkItemCmdlet : TfsProjectCmdletBase
     {
-        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Team project.")]
-        public Project Project { get; set; }
-
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = true, Mandatory = true, HelpMessage = "Work item type.")]
-        [Alias("t", "Type")]
-        public string WorkItemType { get; set; }
+        [Alias("t")]
+        public object Type { get; set; }
 
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = true, Mandatory = true, HelpMessage = "Work item title.")]
         public string Title { get; set; }
@@ -33,7 +33,9 @@ namespace PSPlus.Modules.Tfs.Work.WorkItem
 
         protected override void ProcessRecordInEH()
         {
-            WorkItemType workItemType = EnsureWorkItemType();
+            Project project = EnsureProject();
+
+            WorkItemType workItemType = EnsureWorkItemType(Project);
 
             var workItem = workItemType.NewWorkItem();
             workItem.Title = Title;
@@ -67,17 +69,30 @@ namespace PSPlus.Modules.Tfs.Work.WorkItem
             WriteObject(workItem);
         }
 
-        private WorkItemType EnsureWorkItemType()
+        private WorkItemType EnsureWorkItemType(Project project)
         {
-            foreach (WorkItemType workItemType in Project.WorkItemTypes)
+            if (Type is WorkItemType)
             {
-                if (string.Compare(workItemType.Name, WorkItemType, true) == 0)
+                return Type as WorkItemType;
+            }
+            else if (Type is string)
+            {
+                string workItemTypeName = Type as string;
+
+                List<WorkItemType> workItemTypes = project.GetWorkItemTypes(workItemTypeName).ToList();
+                if (workItemTypes.Count == 0)
                 {
-                    return workItemType;
+                    throw new ArgumentException(string.Format("Invalid work item type: {0}.", workItemTypeName));
                 }
+                else if (workItemTypes.Count > 1)
+                {
+                    throw new ArgumentException(string.Format("More than 1 work item types are matched with type: {0}.", workItemTypeName));
+                }
+
+                return workItemTypes[0];
             }
 
-            throw new ArgumentException(string.Format("Invalid work item type: {0}.", WorkItemType));
+            throw new ArgumentException("The type of WorkItemType must be WorkItemType or string.");
         }
     }
 }

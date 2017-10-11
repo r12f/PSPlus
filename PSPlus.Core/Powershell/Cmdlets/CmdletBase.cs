@@ -3,7 +3,7 @@ using System.Management.Automation;
 
 namespace PSPlus.Core.Powershell.Cmdlets
 {
-    public class CmdletBase : Cmdlet
+    public class CmdletBase : PSCmdlet
     {
         protected override void BeginProcessing()
         {

@@ -4,7 +4,7 @@ using System.Management.Automation;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
-namespace PSPlus.Tfs.TfsExtensions
+namespace PSPlus.Tfs.TfsUtils
 {
     public static class TfsTeamProjectCollectionExtensions
     {
