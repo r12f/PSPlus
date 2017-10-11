@@ -20,19 +20,27 @@ namespace PSPlus.Modules.Tfs.Work
         [Alias("s")]
         public List<string> State { get; set; }
 
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Assigned to.")]
+        [Alias("at")]
+        public List<string> AssginedTo { get; set; }
+
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Work item title.")]
         public string Title { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Area path.")]
+        [Alias("ap", "Area")]
         public string AreaPath { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Under area path.")]
+        [Alias("uap")]
         public string UnderAreaPath { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Iteration path.")]
+        [Alias("ip", "Iteration")]
         public string IterationPath { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Under iteration path.")]
+        [Alias("uip")]
         public string UnderIterationPath { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Conditions in where clause in WIQL query.")]
@@ -54,6 +62,7 @@ namespace PSPlus.Modules.Tfs.Work
             queryBuilder.Ids = Id;
             queryBuilder.WorkItemTypes = Type;
             queryBuilder.States = State;
+            queryBuilder.AssignedTo = AssginedTo;
             queryBuilder.Title = Title;
             queryBuilder.AreaPath = AreaPath;
             queryBuilder.UnderAreaPath = UnderAreaPath;
