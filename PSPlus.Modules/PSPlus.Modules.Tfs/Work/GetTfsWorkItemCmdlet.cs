@@ -71,6 +71,8 @@ namespace PSPlus.Modules.Tfs.Work
             queryBuilder.ExtraFilters = Filter;
 
             string wiqlQuery = queryBuilder.Build();
+            WriteVerbose(string.Format("Query workitems with WIQL query: {0}.", wiqlQuery));
+
             var workItemCollection = workItemStore.Query(wiqlQuery);
             foreach (WorkItem workItem in workItemCollection)
             {

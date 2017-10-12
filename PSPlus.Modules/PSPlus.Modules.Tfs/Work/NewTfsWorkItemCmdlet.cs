@@ -40,7 +40,7 @@ namespace PSPlus.Modules.Tfs.Work
         {
             Project project = EnsureProject();
 
-            WorkItemType workItemType = EnsureWorkItemType(Project);
+            WorkItemType workItemType = EnsureWorkItemType(project);
 
             WorkItem workItem = workItemType.NewWorkItem();
             workItem.Title = Title;

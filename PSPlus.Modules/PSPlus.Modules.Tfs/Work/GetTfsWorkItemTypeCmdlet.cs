@@ -9,12 +9,17 @@ namespace PSPlus.Modules.Tfs.Work
     [OutputType(typeof(WorkItemType))]
     public class GetTfsWorkItemTypeCmdlet : TfsProjectCmdletBase
     {
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = true, Mandatory = true, HelpMessage = "Work item type.")]
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Work item type.")]
         [Alias("t")]
         public object Type { get; set; }
 
         protected override void ProcessRecordInEH()
         {
+            if (Type == null)
+            {
+                Type = "*";
+            }
+
             Project project = EnsureProject();
 
             if (Type is WorkItemType)
@@ -32,6 +37,11 @@ namespace PSPlus.Modules.Tfs.Work
             else if (Type is string)
             {
                 string workItemTypeName = Type as string;
+                if (string.IsNullOrWhiteSpace(workItemTypeName))
+                {
+                    workItemTypeName = "*";
+                }
+
                 foreach (var workItemType in project.GetWorkItemTypes(workItemTypeName))
                 {
                     WriteObject(workItemType);

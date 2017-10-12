@@ -69,7 +69,10 @@ namespace PSPlus.Modules.Tfs.Work
             WorkItemStore workItemStore = EnsureWorkItemStore();
 
             List<WorkItem> deletingWorkItems = QueryWorkItems(workItemStore).ToList();
+
             List<int> idOfDeletingWorkItems = deletingWorkItems.Select(x => x.Id).ToList();
+            WriteVerbose(string.Format("Removing workitems with id: {0}.", string.Join(", ", idOfDeletingWorkItems)));
+
             ICollection<WorkItemOperationError> errors = workItemStore.DestroyWorkItems(idOfDeletingWorkItems);
 
             var errorMap = errors.ToDictionary(x => x.Id, x => x);
@@ -104,6 +107,8 @@ namespace PSPlus.Modules.Tfs.Work
                 queryBuilder.ExtraFilters = Filter;
 
                 string wiqlQuery = queryBuilder.Build();
+                WriteVerbose(string.Format("Query workitems with WIQL query: {0}.", wiqlQuery));
+
                 var workItemCollection = workItemStore.Query(wiqlQuery);
                 foreach (WorkItem workItem in workItemCollection)
                 {
@@ -113,6 +118,8 @@ namespace PSPlus.Modules.Tfs.Work
 
             if (WorkItems != null)
             {
+                WriteVerbose(string.Format("Get workitems from command line argument: Count = {0}.", WorkItems.Count));
+
                 foreach (WorkItem workItem in WorkItems)
                 {
                     yield return workItem;

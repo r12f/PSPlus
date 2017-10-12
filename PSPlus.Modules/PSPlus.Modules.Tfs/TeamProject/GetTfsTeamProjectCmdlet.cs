@@ -9,7 +9,7 @@ namespace PSPlus.Modules.Tfs.TeamProject
     [OutputType(typeof(Project))]
     public class GetTfsTeamProjectCmdlet : TfsCmdletBase
     {
-        [Parameter(Position = 0, ValueFromPipeline = true, Mandatory = true, HelpMessage = "Project name. Support wildcard pattern matching.")]
+        [Parameter(Position = 0, ValueFromPipeline = true, Mandatory = false, HelpMessage = "Project name. Support wildcard pattern matching.")]
         [Alias("n")]
         public string Name { get; set; }
 
@@ -17,7 +17,7 @@ namespace PSPlus.Modules.Tfs.TeamProject
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                throw new ArgumentException("Name cannot be null or empty.");
+                Name = "*";
             }
 
             WorkItemStore workItemStore = EnsureWorkItemStore();

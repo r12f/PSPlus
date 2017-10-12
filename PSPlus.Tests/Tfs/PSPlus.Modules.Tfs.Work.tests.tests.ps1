@@ -9,7 +9,7 @@ Describe "PSPlus.Tfs.Work" {
 
     Context "When manipulating on work item types" {
         It "Should be able to get get work item types." {
-            $workItemTypes = Get-TfsWorkItemType * -Project $tp
+            $workItemTypes = Get-TfsWorkItemType -Project $tp
             $workItemTypes | Should Not Be $null
         }
     }
