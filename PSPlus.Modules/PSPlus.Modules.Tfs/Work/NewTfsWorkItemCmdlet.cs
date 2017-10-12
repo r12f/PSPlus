@@ -25,6 +25,9 @@ namespace PSPlus.Modules.Tfs.Work
         [Alias("at")]
         public string AssignedTo { get; set; }
 
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Tags, connected by \";\". E.g. tag1;tag2")]
+        public string Tags { get; set; }
+
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Area path.")]
         [Alias("ap", "Area")]
         public string AreaPath { get; set; }
@@ -48,6 +51,11 @@ namespace PSPlus.Modules.Tfs.Work
             if (!string.IsNullOrEmpty(AssignedTo))
             {
                 workItem.Fields[WIQLSystemFieldNames.AssignedTo].Value = AssignedTo;
+            }
+
+            if (!string.IsNullOrEmpty(Tags))
+            {
+                workItem.Tags = Tags;
             }
 
             if (!string.IsNullOrEmpty(AreaPath))

@@ -31,7 +31,7 @@ Describe "PSPlus.Tfs.Work" {
         }
 
         It "Should be able to delete work item by work item reference." {
-            $workItem = New-TfsWorkItem Task $workItemName -AssignedTo $tpc.AuthorizedIdentity.DisplayName -Project $tp
+            $workItem = New-TfsWorkItem Task $workItemName -AssignedTo $tpc.AuthorizedIdentity.DisplayName -Tags "tag1;tag2" -Project $tp
             $workItem | Should Not Be $null
             $workItem.Id | Should Not Be 0
             $workItem.Title | Should Be $workItemName
