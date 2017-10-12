@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
+using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using PSPlus.Tfs;
 using PSPlus.Tfs.TfsUtils;
@@ -17,8 +18,12 @@ namespace PSPlus.Modules.Tfs.Connection
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
+        [Parameter(Mandatory = false, HelpMessage = "Return the project object.")]
+        public SwitchParameter PassThru { get; set; }
+
         protected override void ProcessRecordInEH()
         {
+            TfsTeamProjectCollection collection = EnsureCollection();
             WorkItemStore workItemStore = EnsureWorkItemStore();
 
             List<Project> projects = workItemStore.GetProjects(Name).ToList();
@@ -31,9 +36,14 @@ namespace PSPlus.Modules.Tfs.Connection
                 throw new InvalidOperationException(string.Format("More than 1 projects found with name {0}.", Name));
             }
 
+            CmdletContext.Collection = collection;
+            CmdletContext.WorkItemStore = workItemStore;
             CmdletContext.Project = projects[0];
 
-            WriteObject(CmdletContext.Project);
+            if (PassThru.IsPresent)
+            {
+                WriteObject(CmdletContext.Project);
+            }
         }
     }
 }

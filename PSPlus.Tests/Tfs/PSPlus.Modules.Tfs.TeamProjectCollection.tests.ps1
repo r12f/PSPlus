@@ -7,5 +7,10 @@ Describe "PSPlus.Tfs.TeamProjectCollection" {
             $tpc = Get-TfsTeamProjectCollection -URL $tpcURL
             $tpc | Should Not Be $null
         }
+
+        It "Should be able to connect to team project collection." {
+            $tpc = Connect-TfsTeamProjectCollection -URL $tpcURL -PassThru
+            $tpc | Should Not Be $null
+        }
     }
 }

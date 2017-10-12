@@ -16,6 +16,9 @@ namespace PSPlus.Modules.Tfs.Connection
         [Parameter(Position = 0, ValueFromPipeline = true, Mandatory = true, HelpMessage = "Team project collection URL.")]
         public string URL { get; set; }
 
+        [Parameter(Mandatory = false, HelpMessage = "Return the project object.")]
+        public SwitchParameter PassThru { get; set; }
+
         protected override void ProcessRecordInEH()
         {
             if (string.IsNullOrWhiteSpace(URL))
@@ -33,7 +36,10 @@ namespace PSPlus.Modules.Tfs.Connection
             CmdletContext.Collection = collection;
             CmdletContext.WorkItemStore = new WorkItemStore(collection);
 
-            WriteObject(collection);
+            if (PassThru.IsPresent)
+            {
+                WriteObject(collection);
+            }
         }
     }
 }
