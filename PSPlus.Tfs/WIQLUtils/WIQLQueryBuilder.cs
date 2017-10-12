@@ -9,6 +9,7 @@ namespace PSPlus.Tfs.WIQLUtils
         {
         }
 
+        public List<string> QueryFields { get; set; }
         public List<int> Ids { get; set; }
         public List<string> WorkItemTypes { get; set; }
         public List<string> States { get; set; }
@@ -25,7 +26,7 @@ namespace PSPlus.Tfs.WIQLUtils
             StringBuilder wiqlConditionsBuilder = new StringBuilder();
             if (Ids != null && Ids.Count > 0)
             {
-                wiqlConditionsBuilder.AppendFormat("{0} In ({1})", WIQLSystemFieldNames.Id, string.Join(",", Ids));
+                wiqlConditionsBuilder.AppendFormat("[{0}] In ({1})", WIQLSystemFieldNames.Id, string.Join(",", Ids));
             }
 
             if (WorkItemTypes != null && WorkItemTypes.Count > 0)
@@ -43,37 +44,42 @@ namespace PSPlus.Tfs.WIQLUtils
             if (AssignedTo != null && AssignedTo.Count > 0)
             {
                 AppendAndConnectorIfNeeded(wiqlConditionsBuilder);
-                BuildInStringListCondition(wiqlConditionsBuilder, WIQLSystemFieldNames.State, AssignedTo);
+                BuildInStringListCondition(wiqlConditionsBuilder, WIQLSystemFieldNames.AssignedTo, AssignedTo);
             }
 
             if (!string.IsNullOrEmpty(Title))
             {
                 AppendAndConnectorIfNeeded(wiqlConditionsBuilder);
-                wiqlConditionsBuilder.AppendFormat("{0} CONTAINS '{1}'", WIQLSystemFieldNames.Title, Title);
+                wiqlConditionsBuilder.AppendFormat("[{0}] CONTAINS ", WIQLSystemFieldNames.Title);
+                AppendStringValue(wiqlConditionsBuilder, Title);
             }
 
             if (!string.IsNullOrWhiteSpace(AreaPath))
             {
                 AppendAndConnectorIfNeeded(wiqlConditionsBuilder);
-                wiqlConditionsBuilder.AppendFormat("{0} = '{1}'", WIQLSystemFieldNames.AreaPath, AreaPath);
+                wiqlConditionsBuilder.AppendFormat("[{0}] = ", WIQLSystemFieldNames.AreaPath);
+                AppendStringValue(wiqlConditionsBuilder, AreaPath);
             }
 
             if (!string.IsNullOrWhiteSpace(UnderAreaPath))
             {
                 AppendAndConnectorIfNeeded(wiqlConditionsBuilder);
-                wiqlConditionsBuilder.AppendFormat("{0} UNDER '{1}'", WIQLSystemFieldNames.AreaPath, UnderAreaPath);
+                wiqlConditionsBuilder.AppendFormat("[{0}] UNDER ", WIQLSystemFieldNames.AreaPath);
+                AppendStringValue(wiqlConditionsBuilder, UnderAreaPath);
             }
 
             if (!string.IsNullOrWhiteSpace(IterationPath))
             {
                 AppendAndConnectorIfNeeded(wiqlConditionsBuilder);
-                wiqlConditionsBuilder.AppendFormat("{0} = '{1}'", WIQLSystemFieldNames.IterationPath, IterationPath);
+                wiqlConditionsBuilder.AppendFormat("[{0}] = ", WIQLSystemFieldNames.IterationPath);
+                AppendStringValue(wiqlConditionsBuilder, IterationPath);
             }
 
             if (!string.IsNullOrWhiteSpace(UnderIterationPath))
             {
                 AppendAndConnectorIfNeeded(wiqlConditionsBuilder);
-                wiqlConditionsBuilder.AppendFormat("{0} UNDER '{1}'", WIQLSystemFieldNames.IterationPath, UnderIterationPath);
+                wiqlConditionsBuilder.AppendFormat("[{0}] UNDER ", WIQLSystemFieldNames.IterationPath);
+                AppendStringValue(wiqlConditionsBuilder, UnderIterationPath);
             }
 
             if (!string.IsNullOrWhiteSpace(ExtraFilters))
@@ -83,7 +89,31 @@ namespace PSPlus.Tfs.WIQLUtils
             }
 
             StringBuilder wiqlQueryBuilder = new StringBuilder();
-            wiqlQueryBuilder.Append("SELECT * FROM workitems");
+            wiqlQueryBuilder.Append("SELECT ");
+
+            if (QueryFields != null && QueryFields.Count > 0)
+            {
+                bool isFirstQueryField = true;
+                foreach (var queryField in QueryFields)
+                {
+                    if (!isFirstQueryField)
+                    {
+                        wiqlConditionsBuilder.Append(", ");
+                    }
+                    else
+                    {
+                        isFirstQueryField = false;
+                    }
+
+                    wiqlQueryBuilder.Append(queryField);
+                }
+            }
+            else
+            {
+                wiqlQueryBuilder.Append("*");
+            }
+
+            wiqlQueryBuilder.Append(" FROM workitems");
 
             if (wiqlConditionsBuilder.Length > 0)
             {
@@ -112,6 +142,45 @@ namespace PSPlus.Tfs.WIQLUtils
             }
 
             s.Append(")");
+        }
+
+        private static void AppendStringValue(StringBuilder s, string fieldValue)
+        {
+            bool needQuote = true;
+            if (fieldValue.Length > 0)
+            {
+                // "@" for variable. It is the same restriction for visual studio online webpage.
+                // Only the values with @ in the beginning will be treated as expressions.
+                if (fieldValue[0] == '@')
+                {
+                    needQuote = false;
+                }
+            }
+
+            // In scenarios where we are not quoting, we can be injected, but since the visual studio online allows the same thing, it is ok to do it here.
+            if (needQuote)
+            {
+                s.Append("'");
+
+                foreach (char fieldValueChar in fieldValue)
+                {
+                    switch (fieldValueChar)
+                    {
+                        // Escape "'" to "''"
+                        case '\'':
+                            s.Append('\'');
+                            break;
+                    }
+
+                    s.Append(fieldValueChar);
+                }
+
+                s.Append("'");
+            }
+            else
+            {
+                s.Append(fieldValue);
+            }
         }
     }
 }
