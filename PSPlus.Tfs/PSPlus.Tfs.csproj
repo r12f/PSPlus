@@ -190,6 +190,7 @@
     <Compile Include="TfsUtils\TfsTeamProjectCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TfsUtils\TfsTeamProjectExtensions.cs" />
+    <Compile Include="TfsUtils\TfsWorkItemSystemLinkTypeNames.cs" />
     <Compile Include="TfsUtils\WorkItemStoreExtensions.cs" />
     <Compile Include="WIQLUtils\WIQLSystemFieldNames.cs" />
     <Compile Include="WIQLUtils\WIQLQueryBuilder.cs" />

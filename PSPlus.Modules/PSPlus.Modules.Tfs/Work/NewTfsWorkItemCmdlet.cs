@@ -36,6 +36,9 @@ namespace PSPlus.Modules.Tfs.Work
         [Alias("ip", "Iteration")]
         public string IterationPath { get; set; }
 
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Parent work item id.")]
+        public int Parent { get; set; }
+
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Other properties.")]
         public Hashtable Properties { get; set; }
 
@@ -66,6 +69,18 @@ namespace PSPlus.Modules.Tfs.Work
             if (!string.IsNullOrEmpty(IterationPath))
             {
                 workItem.IterationPath = IterationPath;
+            }
+
+            if (Parent > 0)
+            {
+                WorkItemLinkTypeEndCollection linkTypeCollection = project.Store.WorkItemLinkTypes.LinkTypeEnds;
+                if (!linkTypeCollection.Contains(TfsWorkItemSystemLinkTypeNames.SystemLinkTypesHiearachyReverse))
+                {
+                    throw new InvalidOperationException("Parent work item link type doesn't exist, cannot create links to connect to parent work item.");
+                }
+
+                WorkItemLinkTypeEnd linkTypeEnd = project.Store.WorkItemLinkTypes.LinkTypeEnds[TfsWorkItemSystemLinkTypeNames.SystemLinkTypesHiearachyReverse];
+                workItem.Links.Add(new RelatedLink(linkTypeEnd, Parent));
             }
 
             if (Properties != null)

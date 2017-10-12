@@ -16,6 +16,7 @@ Describe "PSPlus.Tfs.Work" {
 
     Context "When manipulating on work items" {
         $workItemName = "Test work item " + (Get-Random)
+        $childWorkItemName = "Child test work item " + (Get-Random)
 
         It "Should be able to get and delete work item by id." {
             $workItem = New-TfsWorkItem Task $workItemName -Project $tp
@@ -41,6 +42,20 @@ Describe "PSPlus.Tfs.Work" {
             $removeResults.WorkItem | Should Not Be $null
             $removeResults.WorkItem.Id | Should Be $workItem.Id
             $removeResults.Error | Should Be $null
+        }
+
+        It "Should be able to create child work item." {
+            $workItem = New-TfsWorkItem Task $workItemName -Project $tp
+            $workItem | Should Not Be $null
+            $workItem.Id | Should Not Be 0
+            $workItem.Title | Should Be $workItemName
+
+            $childWorkItem = New-TfsWorkItem Task $childWorkItemName -Parent $workItem.Id -Project $tp
+            $childWorkItem | Should Not Be $null
+            $childWorkItem.Id | Should Not Be 0
+            $childWorkItem.Title | Should Be $childWorkItemName
+
+            $removeResults = Remove-TfsWorkItem -WorkItems $workItem,$childWorkItem -Collection $tpc
         }
 
         It "Should fail when deleting work item without filters." {
