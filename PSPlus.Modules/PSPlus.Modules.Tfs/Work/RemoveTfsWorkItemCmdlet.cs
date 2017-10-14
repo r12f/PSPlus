@@ -57,11 +57,11 @@ namespace PSPlus.Modules.Tfs.Work
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Work items.")]
         [Alias("w")]
-        public List<WorkItem> WorkItems { get; set; }
+        public List<WorkItem> WorkItem { get; set; }
 
         protected override void ProcessRecordInEH()
         {
-            if (ParameterSetName != "QueryByWIQL" && (WorkItems == null || WorkItems.Count == 0))
+            if (ParameterSetName != "QueryByWIQL" && (WorkItem == null || WorkItem.Count == 0))
             {
                 throw new ArgumentException("No filter has been specified. Please specify at least 1 filter for removing the work items.");
             }
@@ -69,7 +69,6 @@ namespace PSPlus.Modules.Tfs.Work
             WorkItemStore workItemStore = EnsureWorkItemStore();
 
             List<WorkItem> deletingWorkItems = QueryWorkItems(workItemStore).ToList();
-
             List<int> idOfDeletingWorkItems = deletingWorkItems.Select(x => x.Id).ToList();
             WriteVerbose(string.Format("Removing workitems with id: {0}.", string.Join(", ", idOfDeletingWorkItems)));
 
@@ -116,11 +115,11 @@ namespace PSPlus.Modules.Tfs.Work
                 }
             }
 
-            if (WorkItems != null)
+            if (WorkItem != null)
             {
-                WriteVerbose(string.Format("Get workitems from command line argument: Count = {0}.", WorkItems.Count));
+                WriteVerbose(string.Format("Get workitems from command line argument: Count = {0}.", WorkItem.Count));
 
-                foreach (WorkItem workItem in WorkItems)
+                foreach (WorkItem workItem in WorkItem)
                 {
                     yield return workItem;
                 }

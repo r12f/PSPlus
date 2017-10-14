@@ -18,7 +18,7 @@ namespace PSPlus.Modules.Tfs.Work
         [Alias("t")]
         public object Type { get; set; }
 
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = true, Mandatory = true, HelpMessage = "Work item title.")]
+        [Parameter(Position = 1, ValueFromPipeline = true, Mandatory = true, HelpMessage = "Work item title.")]
         public string Title { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Assigned to.")]

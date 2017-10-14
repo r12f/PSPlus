@@ -26,7 +26,7 @@ namespace PSPlus.Modules.Tfs.Connection
             TfsTeamProjectCollection collection = EnsureCollection();
             WorkItemStore workItemStore = EnsureWorkItemStore();
 
-            List<Project> projects = workItemStore.GetProjects(Name).ToList();
+            List<Project> projects = workItemStore.MatchProjects(Name).ToList();
             if (projects.Count == 0)
             {
                 throw new InvalidOperationException(string.Format("Cannot find project named {0}.", Name));

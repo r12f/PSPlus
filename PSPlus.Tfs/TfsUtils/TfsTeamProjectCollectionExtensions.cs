@@ -28,7 +28,7 @@ namespace PSPlus.Tfs.TfsUtils
                 throw new InvalidOperationException("Access denied when getting work item store.");
             }
 
-            return workItemStore.GetProjects(namePattern);
+            return workItemStore.MatchProjects(namePattern);
         }
     }
 }

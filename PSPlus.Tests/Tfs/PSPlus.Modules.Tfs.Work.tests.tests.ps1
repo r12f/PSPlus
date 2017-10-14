@@ -8,17 +8,37 @@ Describe "PSPlus.Tfs.Work" {
     $tp = Get-TfsTeamProject -Collection $tpc -Name $tpName
 
     Context "When manipulating on work item types" {
-        It "Should be able to get get work item types." {
+        It "Should be able to get work item types." {
             $workItemTypes = Get-TfsWorkItemType -Project $tp
             $workItemTypes | Should Not Be $null
         }
     }
 
-    Context "When manipulating on work items" {
+    Context "When manipulating on registered types" {
+        It "Should be able to get registered types." {
+            $registeredLinkTypes = Get-TfsRegisteredLinkType -Collection $tpc
+            $registeredLinkTypes | Should Not Be $null
+
+            $registeredLinkTypes = @($registeredLinkTypes)
+            $registeredLinkTypes.Count | Should Not Be 0
+        }
+    }
+
+    Context "When manipulating on work item link types" {
+        It "Should be able to get work item link types." {
+            $workItemLinkTypeEnds = Get-TfsWorkItemLinkTypeEnd -Collection $tpc
+            $workItemLinkTypeEnds | Should Not Be $null
+
+            $workItemLinkTypeEnds = @($workItemLinkTypeEnds)
+            $workItemLinkTypeEnds.Count | Should Not Be 0
+        }
+    }
+
+    Context "When creating and removing work items" {
         $workItemName = "Test work item " + (Get-Random)
         $childWorkItemName = "Child test work item " + (Get-Random)
 
-        It "Should be able to get and delete work item by id." {
+        It "Should be able to create work item and remove it by id." {
             $workItem = New-TfsWorkItem Task $workItemName -Project $tp
             $workItem | Should Not Be $null
             $workItem.Id | Should Not Be 0
@@ -31,7 +51,7 @@ Describe "PSPlus.Tfs.Work" {
             $removeResults.Error | Should Be $null
         }
 
-        It "Should be able to delete work item by work item reference." {
+        It "Should be able to remove work item by work item reference." {
             $workItem = New-TfsWorkItem Task $workItemName -AssignedTo $tpc.AuthorizedIdentity.DisplayName -Tags "tag1;tag2" -Project $tp
             $workItem | Should Not Be $null
             $workItem.Id | Should Not Be 0
@@ -44,21 +64,44 @@ Describe "PSPlus.Tfs.Work" {
             $removeResults.Error | Should Be $null
         }
 
-        It "Should be able to create child work item." {
+        It "Should be able to create and link child work item." {
+            # Create parent work item
             $workItem = New-TfsWorkItem Task $workItemName -Project $tp
             $workItem | Should Not Be $null
             $workItem.Id | Should Not Be 0
             $workItem.Title | Should Be $workItemName
 
+            # Create child work item
             $childWorkItem = New-TfsWorkItem Task $childWorkItemName -Parent $workItem.Id -Project $tp
             $childWorkItem | Should Not Be $null
             $childWorkItem.Id | Should Not Be 0
             $childWorkItem.Title | Should Be $childWorkItemName
+            $childWorkItem.Links.Count | Should Be 1
+            $childWorkItem.Links[0].RelatedWorkItemId | Should Be $workItem.Id
 
-            $removeResults = Remove-TfsWorkItem -WorkItems $workItem,$childWorkItem -Collection $tpc
+            $workItem.SyncToLatest()
+            $workItem.Links.Count | Should Be 1
+            $workItem.Links[0].RelatedWorkItemId | Should Be $childWorkItem.Id
+
+            # Remove parent work item link
+            Remove-TfsWorkItemLink -WorkItem $childWorkItem -WorkItemRelationType Parent -Collection $tpc
+            $childWorkItem.Links.Count | Should Be 0
+            $workItem.Links.Count | Should Be 1
+            $workItem.SyncToLatest()
+            $workItem.Links.Count | Should Be 0
+
+            # Create parent work item link
+            New-TfsWorkItemLink -WorkItem $childWorkItem -WorkItemRelationType Parent -RelatedWorkItemId $workItem.Id -Collection $tpc
+            $childWorkItem.Links.Count | Should Be 1
+            $workItem.Links.Count | Should Be 0
+            $workItem.SyncToLatest()
+            $workItem.Links.Count | Should Be 1
+
+            # Clean up
+            $removeResults = Remove-TfsWorkItem -WorkItem $workItem,$childWorkItem -Collection $tpc
         }
 
-        It "Should fail when deleting work item without filters." {
+        It "Should fail when removing work item without filters." {
             $failure = $null
 
             try {

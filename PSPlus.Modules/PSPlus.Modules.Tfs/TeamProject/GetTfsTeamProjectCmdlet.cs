@@ -21,7 +21,7 @@ namespace PSPlus.Modules.Tfs.TeamProject
             }
 
             WorkItemStore workItemStore = EnsureWorkItemStore();
-            foreach (var project in workItemStore.GetProjects(Name))
+            foreach (var project in workItemStore.MatchProjects(Name))
             {
                 WriteObject(project);
             }

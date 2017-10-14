@@ -9,7 +9,7 @@ namespace PSPlus.Modules.Tfs.Work
     [OutputType(typeof(WorkItemType))]
     public class GetTfsWorkItemTypeCmdlet : TfsProjectCmdletBase
     {
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Work item type.")]
+        [Parameter(Position = 0, ValueFromPipeline = true, Mandatory = false, HelpMessage = "Work item type.")]
         [Alias("t")]
         public object Type { get; set; }
 
