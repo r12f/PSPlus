@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Diagnostics.Tracing;
+﻿using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Session;
+using System;
+using System.Collections.Generic;
 
 namespace PSPlus.Windows.Diagnostics.EventTracing
 {

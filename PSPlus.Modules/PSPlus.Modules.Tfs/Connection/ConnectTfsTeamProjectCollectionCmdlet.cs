@@ -1,11 +1,11 @@
-﻿using System;
-using System.Management.Automation;
-using Microsoft.TeamFoundation.Client;
+﻿using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using Microsoft.VisualStudio.Services.Client;
 using Microsoft.VisualStudio.Services.Common;
 using PSPlus.Core.Powershell.Cmdlets;
 using PSPlus.Tfs;
+using System;
+using System.Management.Automation;
 
 namespace PSPlus.Modules.Tfs.Connection
 {

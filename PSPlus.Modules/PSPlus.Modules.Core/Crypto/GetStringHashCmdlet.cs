@@ -1,10 +1,10 @@
-﻿using System;
+﻿using PSPlus.Core.Crypto;
+using PSPlus.Core.Powershell.Cmdlets;
+using PSPlus.Core.Text;
+using System;
 using System.Management.Automation;
 using System.Security.Cryptography;
 using System.Text;
-using PSPlus.Core.Crypto;
-using PSPlus.Core.Powershell.Cmdlets;
-using PSPlus.Core.Text;
 
 namespace PSPlus.Modules.Core.Crypto
 {

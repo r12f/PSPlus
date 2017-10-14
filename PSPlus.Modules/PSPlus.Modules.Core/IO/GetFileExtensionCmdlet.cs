@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PSPlus.Core.Powershell.Cmdlets;
+using System;
 using System.IO;
 using System.Management.Automation;
-using PSPlus.Core.Powershell.Cmdlets;
 
 namespace PSPlus.Modules.Core.IO
 {
