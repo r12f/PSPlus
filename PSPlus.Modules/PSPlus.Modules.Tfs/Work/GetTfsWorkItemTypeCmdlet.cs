@@ -1,7 +1,7 @@
-﻿using Microsoft.TeamFoundation.WorkItemTracking.Client;
-using PSPlus.Tfs.TfsUtils;
-using System;
+﻿using System;
 using System.Management.Automation;
+using Microsoft.TeamFoundation.WorkItemTracking.Client;
+using PSPlus.Tfs.TfsUtils;
 
 namespace PSPlus.Modules.Tfs.Work
 {

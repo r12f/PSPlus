@@ -1,6 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using Microsoft.Win32;
 using PSPlus.Core.Windows.Interop.User32;
-using System;
 
 namespace PSPlus.Windows.Environments
 {

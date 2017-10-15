@@ -1,6 +1,6 @@
-﻿using PSPlus.Core.Powershell.Cmdlets;
-using System;
+﻿using System;
 using System.Management.Automation;
+using PSPlus.Core.Powershell.Cmdlets;
 
 namespace PSPlus.Modules.Core.Crypto
 {

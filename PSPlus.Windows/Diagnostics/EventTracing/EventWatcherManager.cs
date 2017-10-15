@@ -1,11 +1,11 @@
-﻿using Microsoft.Diagnostics.Tracing;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Diagnostics.Tracing;
 
 namespace PSPlus.Windows.Diagnostics.EventTracing
 {

@@ -1,5 +1,5 @@
-﻿using PSPlus.Core.Windows.Interop.User32;
-using System;
+﻿using System;
+using PSPlus.Core.Windows.Interop.User32;
 
 namespace PSPlus.Core.Windows.Window
 {
