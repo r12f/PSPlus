@@ -7,6 +7,7 @@
         public const string Title = "System.Title";
         public const string State = "System.State";
         public const string AssignedTo = "System.AssignedTo";
+        public const string Priority = "Microsoft.VSTS.Common.Priority";
         public const string AreaPath = "System.AreaPath";
         public const string IterationPath = "System.IterationPath";
     }

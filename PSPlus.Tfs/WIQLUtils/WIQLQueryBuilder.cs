@@ -7,6 +7,7 @@ namespace PSPlus.Tfs.WIQLUtils
     {
         public WIQLQueryBuilder()
         {
+            Priority = -1;
         }
 
         public List<string> QueryFields { get; set; }
@@ -15,6 +16,7 @@ namespace PSPlus.Tfs.WIQLUtils
         public List<string> States { get; set; }
         public List<string> AssignedTo { get; set; }
         public string Title { get; set; }
+        public int Priority { get; set; }
         public string AreaPath { get; set; }
         public string UnderAreaPath { get; set; }
         public string IterationPath { get; set; }
@@ -52,6 +54,12 @@ namespace PSPlus.Tfs.WIQLUtils
                 AppendAndConnectorIfNeeded(wiqlConditionsBuilder);
                 wiqlConditionsBuilder.AppendFormat("[{0}] CONTAINS ", WIQLSystemFieldNames.Title);
                 AppendStringValue(wiqlConditionsBuilder, Title);
+            }
+
+            if (Priority >= 0)
+            {
+                AppendAndConnectorIfNeeded(wiqlConditionsBuilder);
+                wiqlConditionsBuilder.AppendFormat("[{0}] = {1}", WIQLSystemFieldNames.Priority, Priority);
             }
 
             if (!string.IsNullOrWhiteSpace(AreaPath))

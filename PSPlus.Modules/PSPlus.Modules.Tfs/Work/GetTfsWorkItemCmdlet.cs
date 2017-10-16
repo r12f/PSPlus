@@ -27,6 +27,9 @@ namespace PSPlus.Modules.Tfs.Work
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Work item title.")]
         public string Title { get; set; }
 
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Priority.")]
+        public int Priority { get; set; } = -1;
+
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Area path.")]
         [Alias("ap", "Area")]
         public string AreaPath { get; set; }
@@ -64,6 +67,7 @@ namespace PSPlus.Modules.Tfs.Work
             queryBuilder.States = State;
             queryBuilder.AssignedTo = AssginedTo;
             queryBuilder.Title = Title;
+            queryBuilder.Priority = Priority;
             queryBuilder.AreaPath = AreaPath;
             queryBuilder.UnderAreaPath = UnderAreaPath;
             queryBuilder.IterationPath = IterationPath;

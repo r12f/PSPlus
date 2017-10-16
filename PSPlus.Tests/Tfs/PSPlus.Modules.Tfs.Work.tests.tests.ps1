@@ -52,10 +52,12 @@ Describe "PSPlus.Tfs.Work" {
         }
 
         It "Should be able to remove work item by work item reference." {
-            $workItem = New-TfsWorkItem Task $workItemName -AssignedTo $tpc.AuthorizedIdentity.DisplayName -Tags "tag1;tag2" -Project $tp
+            $workItem = New-TfsWorkItem Task $workItemName -AssignedTo $tpc.AuthorizedIdentity.DisplayName -Tags "tag1;tag2" -Priority 1 -Project $tp
             $workItem | Should Not Be $null
             $workItem.Id | Should Not Be 0
             $workItem.Title | Should Be $workItemName
+            $workItem.Tags | Should Be "tag1; tag2"
+            $workItem.Fields[[PSPlus.Tfs.WIQLUtils.WIQLSystemFieldNames]::Priority].Value | Should Be 1
 
             $removeResults = Remove-TfsWorkItem -w $workItem -Collection $tpc
             $removeResults | Should Not Be $null
@@ -116,7 +118,7 @@ Describe "PSPlus.Tfs.Work" {
 
     Context "When querying work items" {
         $workItemName = "Test work item " + (Get-Random)
-        $workItem = New-TfsWorkItem Task $workItemName -Project $tp
+        $workItem = New-TfsWorkItem Task $workItemName -Priority 1 -Project $tp
 
         It "Get work item by id" {
             $workItemFromQuery = Get-TfsWorkItem -Collection $tpc -Id $workItem.Id
@@ -138,6 +140,15 @@ Describe "PSPlus.Tfs.Work" {
             $workItemFromQuery.Id | Should Be $workItem.Id
 
             $workItemFromQuery = Get-TfsWorkItem -Collection $tpc -Type Bug -Title $workItemName
+            $workItemFromQuery | Should Be $null
+        }
+
+        It "Get work item by priority" {
+            $workItemFromQuery = Get-TfsWorkItem -Collection $tpc -Priority 1 -Title $workItemName
+            $workItemFromQuery | Should Not Be $null
+            $workItemFromQuery.Id | Should Be $workItem.Id
+
+            $workItemFromQuery = Get-TfsWorkItem -Collection $tpc -Priority 2 -Title $workItemName
             $workItemFromQuery | Should Be $null
         }
 

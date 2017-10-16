@@ -28,6 +28,9 @@ namespace PSPlus.Modules.Tfs.Work
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Tags, connected by \";\". E.g. tag1;tag2")]
         public string Tags { get; set; }
 
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Priority.")]
+        public int Priority { get; set; } = -1;
+
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Area path.")]
         [Alias("ap", "Area")]
         public string AreaPath { get; set; }
@@ -54,6 +57,16 @@ namespace PSPlus.Modules.Tfs.Work
             if (!string.IsNullOrEmpty(AssignedTo))
             {
                 workItem.Fields[WIQLSystemFieldNames.AssignedTo].Value = AssignedTo;
+            }
+
+            if (Priority >= 0)
+            {
+                var priorityField = workItem.Fields[WIQLSystemFieldNames.Priority];
+                if (priorityField == null)
+                {
+                    throw new ArgumentException("This project doesn't support the default priority field.");
+                }
+                priorityField.Value = Priority;
             }
 
             if (!string.IsNullOrEmpty(Tags))
