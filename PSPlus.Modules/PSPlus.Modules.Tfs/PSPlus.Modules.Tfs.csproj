@@ -196,11 +196,14 @@
     <Compile Include="TfsCmdletBase.cs" />
     <Compile Include="TfsProjectCmdletBase.cs" />
     <Compile Include="Work\GetTfsRegisteredLinkTypeCmdlet.cs" />
+    <Compile Include="Work\GetTfsWorkItemAreaCmdlet.cs" />
+    <Compile Include="Work\NewTfsWorkItemAreaCmdlet.cs" />
     <Compile Include="Work\NewTfsWorkItemLinkCmdlet.cs" />
     <Compile Include="Work\GetTfsWorkItemLinkTypeEndCmdlet.cs" />
     <Compile Include="Work\GetTfsWorkItemTypeCmdlet.cs" />
     <Compile Include="Work\GetTfsWorkItemCmdlet.cs" />
     <Compile Include="Work\NewTfsWorkItemCmdlet.cs" />
+    <Compile Include="Work\RemoveTfsWorkItemAreaCmdlet.cs" />
     <Compile Include="Work\RemoveTfsWorkItemCmdlet.cs" />
     <Compile Include="Work\RemoveTfsWorkItemLinkCmdlet.cs" />
     <Compile Include="Work\TfsWorkItemLinkCmdletBase.cs" />

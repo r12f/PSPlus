@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Management.Automation;
+using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
 namespace PSPlus.Tfs.TfsUtils
 {
     public static class TfsTeamProjectExtensions
     {
+        public static TfsTeamProjectCollection GetTeamProjectCollection(this Project project)
+        {
+            return project.Store.TeamProjectCollection;
+        }
+
         public static IEnumerable<WorkItemType> GetWorkItemTypes(this Project project, string namePattern)
         {
             if (string.IsNullOrEmpty(namePattern))

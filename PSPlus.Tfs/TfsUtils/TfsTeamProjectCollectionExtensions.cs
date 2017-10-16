@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.TeamFoundation.Client;
+using Microsoft.TeamFoundation.Server;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
 namespace PSPlus.Tfs.TfsUtils
@@ -11,6 +12,11 @@ namespace PSPlus.Tfs.TfsUtils
         public static WorkItemStore GetWorkItemStore(this TfsTeamProjectCollection collection)
         {
             return new WorkItemStore(collection);
+        }
+
+        public static ICommonStructureService GetCommonStructureService(this TfsTeamProjectCollection collection)
+        {
+            return collection.GetService(typeof(ICommonStructureService)) as ICommonStructureService;
         }
 
         public static ProjectCollection GetProjectCollection(this TfsTeamProjectCollection collection)
