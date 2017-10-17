@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\ByteArrayExtensions.cs" />
     <Compile Include="Text\EncodingFactory.cs" />
+    <Compile Include="Text\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

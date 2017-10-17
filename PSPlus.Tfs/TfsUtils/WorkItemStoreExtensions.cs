@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
+using PSPlus.Core.Text;
 
 namespace PSPlus.Tfs.TfsUtils
 {
@@ -8,6 +9,13 @@ namespace PSPlus.Tfs.TfsUtils
     {
         public static IEnumerable<Project> MatchProjects(this WorkItemStore workItemStore, string namePattern)
         {
+            if (!namePattern.ContainsWildcardPattern())
+            {
+                Project project = workItemStore.Projects[namePattern];
+                yield return project;
+                yield break;
+            }
+
             WildcardPattern parsedNamePattern = new WildcardPattern(namePattern, WildcardOptions.Compiled | WildcardOptions.CultureInvariant | WildcardOptions.IgnoreCase);
 
             ProjectCollection projectCollection = workItemStore.Projects;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Management.Automation;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
@@ -18,10 +17,8 @@ namespace PSPlus.Tfs.TfsUtils
             return collection.GetWorkItemStore().Projects;
         }
 
-        public static IEnumerable<Project> GetProjects(this TfsTeamProjectCollection collection, string namePattern)
+        public static IEnumerable<Project> MatchProjects(this TfsTeamProjectCollection collection, string namePattern)
         {
-            WildcardPattern parsedNamePattern = new WildcardPattern(namePattern, WildcardOptions.Compiled | WildcardOptions.CultureInvariant | WildcardOptions.IgnoreCase);
-
             var workItemStore = new WorkItemStore(collection);
             if (workItemStore == null)
             {
