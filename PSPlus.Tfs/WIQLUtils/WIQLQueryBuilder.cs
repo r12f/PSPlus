@@ -144,9 +144,19 @@ namespace PSPlus.Tfs.WIQLUtils
         {
             s.AppendFormat("{0} IN (", fieldName);
 
+            bool isFirstField = true;
             foreach (var fieldValue in fieldValues)
             {
-                s.AppendFormat("'{0}'", fieldValue);
+                if (isFirstField)
+                {
+                    isFirstField = false;
+                }
+                else
+                {
+                    s.Append(", ");
+                }
+
+                AppendStringValue(s, fieldValue);
             }
 
             s.Append(")");
