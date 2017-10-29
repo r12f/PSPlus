@@ -1,5 +1,4 @@
-﻿using System;
-using System.Management.Automation;
+﻿using System.Management.Automation;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using PSPlus.Core.Powershell.Cmdlets;
@@ -24,7 +23,7 @@ namespace PSPlus.Modules.Tfs
 
             if (collection == null)
             {
-                throw new ArgumentException("Collection is not specified. Please use Connect-TfsTreamProjectCollection to connect to your collection, or use -Collection option to specify one.");
+                throw new PSArgumentException("Collection is not specified. Please use Connect-TfsTreamProjectCollection to connect to your collection, or use -Collection option to specify one.");
             }
 
             return collection;
@@ -46,7 +45,7 @@ namespace PSPlus.Modules.Tfs
 
             if (workItemStore == null)
             {
-                throw new ArgumentException("Collection is not specified. Please use Connect-TfsTreamProjectCollection to connect to your collection, or use -Collection option to specify one.");
+                throw new PSArgumentException("Collection is not specified. Please use Connect-TfsTreamProjectCollection to connect to your collection, or use -Collection option to specify one.");
             }
 
             return workItemStore;

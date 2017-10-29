@@ -1,5 +1,4 @@
-﻿using System;
-using System.Management.Automation;
+﻿using System.Management.Automation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using PSPlus.Tfs.TfsUtils;
 
@@ -31,7 +30,7 @@ namespace PSPlus.Modules.Tfs.Work
                 }
                 else
                 {
-                    throw new ArgumentException(string.Format("Project {0} doesn't have type {1}.", project.Name, rawType.Name));
+                    throw new PSArgumentException(string.Format("Project {0} doesn't have type {1}.", project.Name, rawType.Name));
                 }
             }
             else if (Type is string)
@@ -49,7 +48,7 @@ namespace PSPlus.Modules.Tfs.Work
             }
             else
             {
-                throw new ArgumentException("The type of WorkItemType must be WorkItemType or string.");
+                throw new PSArgumentException("The type of WorkItemType must be WorkItemType or string.");
             }
         }
     }

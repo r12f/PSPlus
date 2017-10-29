@@ -18,12 +18,12 @@ namespace PSPlus.Windows.Diagnostics.EventTracing
 
             if (string.IsNullOrWhiteSpace(SessionName))
             {
-                throw new ArgumentException("SessionName cannot be empty.");
+                throw new PSArgumentException("SessionName cannot be empty.");
             }
 
             if (EventSources.Count == 0)
             {
-                throw new ArgumentException("No event source is specified.");
+                throw new PSArgumentException("No event source is specified.");
             }
 
             if (OnEvent == null)

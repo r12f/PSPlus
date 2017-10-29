@@ -1,11 +1,9 @@
-﻿using Microsoft.TeamFoundation.WorkItemTracking.Client;
-using PSPlus.Tfs.WIQLUtils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.TeamFoundation.WorkItemTracking.Client;
+using PSPlus.Tfs.WIQLUtils;
 
 namespace PSPlus.Modules.Tfs.Work
 {

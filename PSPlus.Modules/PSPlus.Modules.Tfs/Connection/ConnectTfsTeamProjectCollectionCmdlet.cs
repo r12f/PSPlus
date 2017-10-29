@@ -23,7 +23,7 @@ namespace PSPlus.Modules.Tfs.Connection
         {
             if (string.IsNullOrWhiteSpace(URL))
             {
-                throw new ArgumentException("URL cannot be null or empty.");
+                throw new PSArgumentException("URL cannot be null or empty.");
             }
 
             VssCredentials creds = new VssClientCredentials();

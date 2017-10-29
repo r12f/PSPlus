@@ -51,13 +51,40 @@ Describe "PSPlus.Tfs.Work" {
             $removeResults.Error | Should Be $null
         }
 
-        It "Should be able to remove work item by work item reference." {
-            $workItem = New-TfsWorkItem Task $workItemName -AssignedTo $tpc.AuthorizedIdentity.DisplayName -Tags "tag1;tag2" -Priority 1 -Project $tp
+        It "Should be able to create work with tags and priority, and be able to remove work item by work item reference." {
+            $workItem = New-TfsWorkItem Task $workItemName -Tags "tag1;tag2" -Priority 1 -Project $tp
             $workItem | Should Not Be $null
             $workItem.Id | Should Not Be 0
             $workItem.Title | Should Be $workItemName
             $workItem.Tags | Should Be "tag1; tag2"
             $workItem.Fields[[PSPlus.Tfs.WIQLUtils.WIQLSystemFieldNames]::Priority].Value | Should Be 1
+
+            $removeResults = Remove-TfsWorkItem -w $workItem -Collection $tpc
+            $removeResults | Should Not Be $null
+            $removeResults.WorkItem | Should Not Be $null
+            $removeResults.WorkItem.Id | Should Be $workItem.Id
+            $removeResults.Error | Should Be $null
+        }
+
+        It "Should be able to create work with assigned to as email." {
+            $workItem = New-TfsWorkItem Task $workItemName -AssignedTo $tpc.AuthorizedIdentity.UniqueName -Project $tp
+            $workItem | Should Not Be $null
+            $workItem.Id | Should Not Be 0
+
+            $removeResults = Remove-TfsWorkItem -w $workItem -Collection $tpc
+            $removeResults | Should Not Be $null
+            $removeResults.WorkItem | Should Not Be $null
+            $removeResults.WorkItem.Id | Should Be $workItem.Id
+            $removeResults.Error | Should Be $null
+        }
+
+        It "Should be able to create work with assigned to as identity." {
+            $userIdentity = Get-TfsUserIdentity $tpc.AuthorizedIdentity.UniqueName -Collection $tpc
+            $userIdentity | Should Not Be $null
+
+            $workItem = New-TfsWorkItem Task $workItemName -AssignedTo $userIdentity -Project $tp
+            $workItem | Should Not Be $null
+            $workItem.Id | Should Not Be 0
 
             $removeResults = Remove-TfsWorkItem -w $workItem -Collection $tpc
             $removeResults | Should Not Be $null

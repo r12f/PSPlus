@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
@@ -70,7 +69,7 @@ namespace PSPlus.Modules.Tfs.Work
             string linkTypeEndName = CalculateWorkItemLinkTypeEndName();
             if (linkTypeEndName == null && RelatedWorkItemId <= 0 && string.IsNullOrWhiteSpace(Hyperlink))
             {
-                throw new ArgumentException("Please specify at least one condition of link type, related work item id and hyperlink to determine which link to remove.");
+                throw new PSArgumentException("Please specify at least one condition of link type, related work item id and hyperlink to determine which link to remove.");
             }
 
             if (linkTypeEndName != null)
@@ -101,7 +100,7 @@ namespace PSPlus.Modules.Tfs.Work
                 return linkTypeEnd.Name;
             }
 
-            throw new ArgumentException("WorkItemRelationType must be either a string or a WorkItemLinkTypeEnd object.");
+            throw new PSArgumentException("WorkItemRelationType must be either a string or a WorkItemLinkTypeEnd object.");
         }
 
         private bool NeedsToBeRemovedDueToWorkItemRelationMatched(RelatedLink relatedLink)

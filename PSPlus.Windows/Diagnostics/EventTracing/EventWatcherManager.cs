@@ -34,12 +34,12 @@ namespace PSPlus.Windows.Diagnostics.EventTracing
         {
             if (string.IsNullOrWhiteSpace(watcherOptions.SessionName))
             {
-                throw new ArgumentException("SessionName cannot be empty.");
+                throw new PSArgumentException("SessionName cannot be empty.");
             }
 
             if (_watchers.ContainsKey(watcherOptions.SessionName))
             {
-                throw new ArgumentException(string.Format("Session {0} already exists! Please choose another session name.", watcherOptions.SessionName));
+                throw new PSArgumentException(string.Format("Session {0} already exists! Please choose another session name.", watcherOptions.SessionName));
             }
 
             _watchers.Add(watcherOptions.SessionName, new EventWatcher(this, watcherOptions));

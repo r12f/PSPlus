@@ -1,5 +1,4 @@
-﻿using System;
-using System.Management.Automation;
+﻿using System.Management.Automation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using PSPlus.Core.Powershell.Cmdlets;
 using PSPlus.Tfs;
@@ -21,7 +20,7 @@ namespace PSPlus.Modules.Tfs
 
             if (project == null)
             {
-                throw new ArgumentException("Project is not specified. Please use Connect-TfsTreamProject to connect to your project, or use -Project option to specify one.");
+                throw new PSArgumentException("Project is not specified. Please use Connect-TfsTreamProject to connect to your project, or use -Project option to specify one.");
             }
 
             return project;

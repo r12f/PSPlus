@@ -21,9 +21,9 @@ namespace PSPlus.Modules.Tfs.Work
         [Parameter(Position = 1, ValueFromPipeline = true, Mandatory = true, HelpMessage = "Work item title.")]
         public string Title { get; set; }
 
-        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Assigned to.")]
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Assigned to (TeamFoundationIdentity or user email address).")]
         [Alias("at")]
-        public string AssignedTo { get; set; }
+        public object AssignedTo { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Tags, connected by \";\". E.g. tag1;tag2")]
         public string Tags { get; set; }
@@ -54,9 +54,11 @@ namespace PSPlus.Modules.Tfs.Work
             WorkItem workItem = workItemType.NewWorkItem();
             workItem.Title = Title;
 
-            if (!string.IsNullOrEmpty(AssignedTo))
+            Field assignedToField = workItem.Fields[WIQLSystemFieldNames.AssignedTo];
+            string assignedToUserPart = TfsWorkCmdletArgumentParser.ParseUserDisplayPartForWorkItemIdentityField("Assigned To", project.GetCollection(), assignedToField, AssignedTo);
+            if (assignedToUserPart != null)
             {
-                workItem.Fields[WIQLSystemFieldNames.AssignedTo].Value = AssignedTo;
+                assignedToField.Value = assignedToUserPart;
             }
 
             if (Priority >= 0)
@@ -64,7 +66,7 @@ namespace PSPlus.Modules.Tfs.Work
                 var priorityField = workItem.Fields[WIQLSystemFieldNames.Priority];
                 if (priorityField == null)
                 {
-                    throw new ArgumentException("This project doesn't support the default priority field.");
+                    throw new PSArgumentException("This project doesn't support the default priority field.");
                 }
                 priorityField.Value = Priority;
             }
@@ -105,7 +107,7 @@ namespace PSPlus.Modules.Tfs.Work
                     Field propertyValue = workItem.Fields[propertyKey];
                     if (propertyValue == null)
                     {
-                        throw new ArgumentException(string.Format("Unexpected property: {0}.", propertyKey));
+                        throw new PSArgumentException(string.Format("Unexpected property: {0}.", propertyKey));
                     }
 
                     propertyValue.Value = property.Value;
@@ -145,17 +147,17 @@ namespace PSPlus.Modules.Tfs.Work
                 List<WorkItemType> workItemTypes = project.GetWorkItemTypes(workItemTypeName).ToList();
                 if (workItemTypes.Count == 0)
                 {
-                    throw new ArgumentException(string.Format("Invalid work item type: {0}.", workItemTypeName));
+                    throw new PSArgumentException(string.Format("Invalid work item type: {0}.", workItemTypeName));
                 }
                 else if (workItemTypes.Count > 1)
                 {
-                    throw new ArgumentException(string.Format("More than 1 work item types are matched with type: {0}.", workItemTypeName));
+                    throw new PSArgumentException(string.Format("More than 1 work item types are matched with type: {0}.", workItemTypeName));
                 }
 
                 return workItemTypes[0];
             }
 
-            throw new ArgumentException("The type of WorkItemType must be WorkItemType or string.");
+            throw new PSArgumentException("The type of WorkItemType must be WorkItemType or string.");
         }
     }
 }

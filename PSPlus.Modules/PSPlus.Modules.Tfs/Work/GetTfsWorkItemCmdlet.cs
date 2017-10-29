@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Management.Automation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using PSPlus.Tfs.WIQLUtils;
@@ -20,15 +21,15 @@ namespace PSPlus.Modules.Tfs.Work
         [Alias("s")]
         public List<string> State { get; set; }
 
-        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Assigned to.")]
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Assigned to (TeamFoundationIdentity or user email address).")]
         [Alias("at")]
-        public List<string> AssginedTo { get; set; }
+        public List<object> AssignedTo { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Work item title.")]
         public string Title { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Priority.")]
-        public int Priority { get; set; } = -1;
+        public List<int> Priority { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, HelpMessage = "Area path.")]
         [Alias("ap", "Area")]
@@ -65,7 +66,7 @@ namespace PSPlus.Modules.Tfs.Work
             queryBuilder.Ids = Id;
             queryBuilder.WorkItemTypes = Type;
             queryBuilder.States = State;
-            queryBuilder.AssignedTo = AssginedTo;
+            queryBuilder.AssignedTo = TfsWorkCmdletArgumentParser.ParseUserIdentities("Assigned To", workItemStore.TeamProjectCollection, AssignedTo).Select(x => x.UniqueName).ToList();
             queryBuilder.Title = Title;
             queryBuilder.Priority = Priority;
             queryBuilder.AreaPath = AreaPath;

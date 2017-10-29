@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PSPlus.Tfs.WIQLUtils
@@ -7,7 +8,6 @@ namespace PSPlus.Tfs.WIQLUtils
     {
         public WIQLQueryBuilder()
         {
-            Priority = -1;
         }
 
         public List<string> QueryFields { get; set; }
@@ -16,7 +16,7 @@ namespace PSPlus.Tfs.WIQLUtils
         public List<string> States { get; set; }
         public List<string> AssignedTo { get; set; }
         public string Title { get; set; }
-        public int Priority { get; set; }
+        public List<int> Priority { get; set; }
         public string AreaPath { get; set; }
         public string UnderAreaPath { get; set; }
         public string IterationPath { get; set; }
@@ -56,10 +56,10 @@ namespace PSPlus.Tfs.WIQLUtils
                 AppendStringValue(wiqlConditionsBuilder, Title);
             }
 
-            if (Priority >= 0)
+            if (Priority != null && Priority.Count > 0)
             {
                 AppendAndConnectorIfNeeded(wiqlConditionsBuilder);
-                wiqlConditionsBuilder.AppendFormat("[{0}] = {1}", WIQLSystemFieldNames.Priority, Priority);
+                BuildInIntListCondition(wiqlConditionsBuilder, WIQLSystemFieldNames.Priority, Priority);
             }
 
             if (!string.IsNullOrWhiteSpace(AreaPath))
@@ -138,6 +138,11 @@ namespace PSPlus.Tfs.WIQLUtils
             {
                 s.Append(" AND ");
             }
+        }
+
+        private static void BuildInIntListCondition(StringBuilder s, string fieldName, IEnumerable<int> fieldValues)
+        {
+            BuildInStringListCondition(s, fieldName, fieldValues.Select(x => x.ToString()));
         }
 
         private static void BuildInStringListCondition(StringBuilder s, string fieldName, IEnumerable<string> fieldValues)

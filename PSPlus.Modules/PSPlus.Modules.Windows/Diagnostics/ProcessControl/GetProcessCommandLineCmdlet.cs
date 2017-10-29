@@ -28,7 +28,7 @@ namespace PSPlus.Modules.Windows.Diagnostics.ProcessControl
             {
                 if (Id == 0)
                 {
-                    throw new ArgumentException("Both InputObject and Id is not specified.");
+                    throw new PSArgumentException("Both InputObject and Id is not specified.");
                 }
 
                 // If the process doesn't exist, it will throw an exception, so we don't need to do a null check afterwards.

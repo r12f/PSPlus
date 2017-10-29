@@ -29,13 +29,13 @@ namespace PSPlus.Modules.Core.Crypto
             Encoding encoding = EncodingFactory.Get(encodingName);
             if (encoding == null)
             {
-                throw new ArgumentException(string.Format("Unsupported encoding: {0}", encodingName));
+                throw new PSArgumentException(string.Format("Unsupported encoding: {0}", encodingName));
             }
 
             HashAlgorithm algorithm = HashAlgorithmFactory.Create(Algorithm);
             if (algorithm == null)
             {
-                throw new ArgumentException(string.Format("Unsupported algorithm: {0}", Algorithm));
+                throw new PSArgumentException(string.Format("Unsupported algorithm: {0}", Algorithm));
             }
 
             byte[] hashBuffer = HashGenerator.ComputeStringHash(InputObject, algorithm, encoding);

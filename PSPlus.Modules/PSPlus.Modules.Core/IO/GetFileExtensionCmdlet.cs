@@ -13,7 +13,7 @@ namespace PSPlus.Modules.Core.IO
         {
             if (string.IsNullOrWhiteSpace(InputObject))
             {
-                throw new ArgumentException("InputObject cannot be null or empty.");
+                throw new PSArgumentException("InputObject cannot be null or empty.");
             }
 
             string extension = Path.GetExtension(InputObject);

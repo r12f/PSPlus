@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
@@ -28,15 +27,15 @@ namespace PSPlus.Modules.Tfs.Work
         [Alias("s")]
         public List<string> State { get; set; }
 
-        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, ParameterSetName = "QueryByWIQL", HelpMessage = "Assigned to.")]
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, ParameterSetName = "QueryByWIQL", HelpMessage = "Assigned to (TeamFoundationIdentity or user email address).")]
         [Alias("at")]
-        public List<string> AssginedTo { get; set; }
+        public List<object> AssignedTo { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, ParameterSetName = "QueryByWIQL", HelpMessage = "Work item title.")]
         public string Title { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, ParameterSetName = "QueryByWIQL", HelpMessage = "Priority.")]
-        public int Priority { get; set; } = -1;
+        public List<int> Priority { get; set; }
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, ParameterSetName = "QueryByWIQL", HelpMessage = "Area path.")]
         [Alias("ap", "Area")]
@@ -66,7 +65,7 @@ namespace PSPlus.Modules.Tfs.Work
         {
             if (ParameterSetName != "QueryByWIQL" && (WorkItem == null || WorkItem.Count == 0))
             {
-                throw new ArgumentException("No filter has been specified. Please specify at least 1 filter for removing the work items.");
+                throw new PSArgumentException("No filter has been specified. Please specify at least 1 filter for removing the work items.");
             }
 
             WorkItemStore workItemStore = EnsureWorkItemStore();
@@ -100,7 +99,7 @@ namespace PSPlus.Modules.Tfs.Work
                 queryBuilder.Ids = Id;
                 queryBuilder.WorkItemTypes = Type;
                 queryBuilder.States = State;
-                queryBuilder.AssignedTo = AssginedTo;
+                queryBuilder.AssignedTo = TfsWorkCmdletArgumentParser.ParseUserIdentities("Assigned To", workItemStore.TeamProjectCollection, AssignedTo).Select(x => x.UniqueName).ToList();
                 queryBuilder.Title = Title;
                 queryBuilder.Priority = Priority;
                 queryBuilder.AreaPath = AreaPath;

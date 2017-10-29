@@ -36,7 +36,7 @@ namespace PSPlus.Core.Powershell.Cmdlets
             {
                 action();
             }
-            catch (ArgumentException e)
+            catch (PSArgumentException e)
             {
                 ThrowTerminatingError(new ErrorRecord(e, ErrorType.InvalidArgument, ErrorCategory.InvalidArgument, this));
             }

@@ -24,7 +24,7 @@ namespace PSPlus.Modules.Windows.Diagnostics.EventTracing
         {
             if (WatcherOptions.Length == 0)
             {
-                throw new ArgumentException("No watcher options is specified.");
+                throw new PSArgumentException("No watcher options is specified.");
             }
 
             _allWatcherOptions.AddRange(WatcherOptions);

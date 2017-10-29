@@ -37,7 +37,7 @@ namespace PSPlus.Modules.Tfs.Work
             WorkItem relatedWorkItem = workItemStore.GetWorkItem(RelatedWorkItemId);
             if (relatedWorkItem == null)
             {
-                throw new ArgumentException(string.Format("Invalid to work item id: {0}.", RelatedWorkItemId));
+                throw new PSArgumentException(string.Format("Invalid to work item id: {0}.", RelatedWorkItemId));
             }
 
             foreach (var workItem in workItems)
@@ -72,7 +72,7 @@ namespace PSPlus.Modules.Tfs.Work
             }
             else
             {
-                throw new ArgumentException("Work item link type only must be a string or WorkItemLinkTypeEnd object.");
+                throw new PSArgumentException("Work item link type only must be a string or WorkItemLinkTypeEnd object.");
             }
 
             return linkTypeEnd;

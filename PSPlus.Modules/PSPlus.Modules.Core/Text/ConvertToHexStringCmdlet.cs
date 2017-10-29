@@ -144,13 +144,13 @@ namespace PSPlus.Modules.Core.Text
                 Encoding encoding = EncodingFactory.Get(Encoding);
                 if (encoding == null)
                 {
-                    throw new ArgumentException(string.Format("Unsupported encoding type: {0}.", Encoding));
+                    throw new PSArgumentException(string.Format("Unsupported encoding type: {0}.", Encoding));
                 }
 
                 return encoding.GetBytes(baseObject as string);
             }
 
-            throw new ArgumentException(string.Format("Unsupported object type: {0}", baseObject.GetType().FullName));
+            throw new PSArgumentException(string.Format("Unsupported object type: {0}", baseObject.GetType().FullName));
         }
     }
 }

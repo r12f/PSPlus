@@ -25,7 +25,7 @@ namespace PSPlus.Modules.Core.Crypto
             Encoding encoding = EncodingFactory.Get(encodingName);
             if (encoding == null)
             {
-                throw new ArgumentException(string.Format("Unsupported encoding: {0}", encodingName));
+                throw new PSArgumentException(string.Format("Unsupported encoding: {0}", encodingName));
             }
 
             string encodedString = Base64.EncodeString(InputObject, encoding);

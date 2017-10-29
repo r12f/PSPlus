@@ -188,11 +188,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Identity\GetTfsUserIdentityCmdlet.cs" />
     <Compile Include="Connection\ConnectTfsTeamProjectCmdlet.cs" />
     <Compile Include="Connection\ConnectTfsTeamProjectCollectionCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamProjectCollection\GetTfsTeamProjectCollectionCmdlet.cs" />
     <Compile Include="TeamProject\GetTfsTeamProjectCmdlet.cs" />
+    <Compile Include="Work\NewTfsRelatedWorkItemLinkCmdlet.cs" />
+    <Compile Include="Work\TfsWorkCmdletArgumentParser.cs" />
     <Compile Include="TfsCmdletBase.cs" />
     <Compile Include="TfsProjectCmdletBase.cs" />
     <Compile Include="Work\GetTfsRegisteredLinkTypeCmdlet.cs" />
