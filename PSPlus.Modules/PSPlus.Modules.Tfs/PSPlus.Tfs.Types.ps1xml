@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Types>
+    <Type>
+        <Name>Microsoft.TeamFoundation.WorkItemTracking.Client.WorkItem</Name>
+        <Members>
+            <ScriptProperty>
+                <Name>TypeName</Name>
+                <GetScriptBlock>$this.Type.Name</GetScriptBlock>
+            </ScriptProperty>
+            <ScriptProperty>
+                <Name>AssignedTo</Name>
+                <GetScriptBlock>
+                    $this.Fields[[PSPlus.Tfs.WIQLUtils.WIQLSystemFieldNames]::AssignedTo].Value
+                </GetScriptBlock>
+                <SetScriptBlock>
+                    $this.Fields[[PSPlus.Tfs.WIQLUtils.WIQLSystemFieldNames]::AssignedTo].Value = $args[0]
+                </SetScriptBlock>
+            </ScriptProperty>
+            <ScriptProperty>
+                <Name>ProjectName</Name>
+                <GetScriptBlock>$this.Project.Name</GetScriptBlock>
+            </ScriptProperty>
+            <ScriptProperty>
+                <Name>SiteUri</Name>
+                <GetScriptBlock>("{0}{1}/_workitems/edit/{2}" -f $this.Project.Store.TeamProjectCollection.Uri.AbsoluteUri, $this.Project.Name, $this.Id)</GetScriptBlock>
+            </ScriptProperty>
+        </Members>
+    </Type>
+    <Type>
+        <Name>Microsoft.TeamFoundation.WorkItemTracking.Client.Link</Name>
+        <Members>
+            <ScriptProperty>
+                <Name>LinkType</Name>
+                <GetScriptBlock>
+                    if (-not ($this -is [Microsoft.TeamFoundation.WorkItemTracking.Client.RelatedLink])) {
+                        return $this.ArtifactLinkType.Name
+                    } else {
+                        return $this.LinkTypeEnd.Name
+                    }
+                </GetScriptBlock>
+            </ScriptProperty>
+            <ScriptProperty>
+                <Name>Target</Name>
+                <GetScriptBlock>
+                    if ($this -is [Microsoft.TeamFoundation.WorkItemTracking.Client.Hyperlink]) {
+                        return $this.Location
+                    } elseif ($this -is [Microsoft.TeamFoundation.WorkItemTracking.Client.ExternalLink]) {
+                        return $this.LinkedArtifactUri
+                    } elseif ($this -is [Microsoft.TeamFoundation.WorkItemTracking.Client.RelatedLink]) {
+                        return $this.RelatedWorkItemId.ToString()
+                    }
+                </GetScriptBlock>
+            </ScriptProperty>
+        </Members>
+    </Type>
+</Types>

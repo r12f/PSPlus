@@ -130,6 +130,10 @@
                         <Width>15</Width>
                     </TableColumnHeader>
                     <TableColumnHeader>
+                        <Label>Title</Label>
+                        <Width>60</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
                         <Label>Created</Label>
                         <Width>22</Width>
                     </TableColumnHeader>
@@ -138,11 +142,7 @@
                         <Width>22</Width>
                     </TableColumnHeader>
                     <TableColumnHeader>
-                        <Label>Title</Label>
-                        <Width>50</Width>
-                    </TableColumnHeader>
-                    <TableColumnHeader>
-                        <Label>Uri</Label>
+                        <Label>SiteUri</Label>
                     </TableColumnHeader>
                 </TableHeaders>
                 <TableRowEntries>
@@ -152,13 +152,16 @@
                                 <PropertyName>Id</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <ScriptBlock>$_.Type.Name</ScriptBlock>
+                                <PropertyName>TypeName</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <PropertyName>State</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <ScriptBlock>$_.Fields[[PSPlus.Tfs.WIQLUtils.WIQLSystemFieldNames]::AssignedTo].Value</ScriptBlock>
+                                <ScriptBlock>$_.AssignedTo</ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Title</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>$_.CreatedDate.ToString()</ScriptBlock>
@@ -167,10 +170,7 @@
                                 <ScriptBlock>$_.ChangedDate.ToString()</ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>Title</PropertyName>
-                            </TableColumnItem>
-                            <TableColumnItem>
-                                <PropertyName>Uri</PropertyName>
+                                <PropertyName>SiteUri</PropertyName>
                             </TableColumnItem>
                         </TableColumnItems>
                     </TableRowEntry>
@@ -207,24 +207,10 @@
                                 <PropertyName>BaseType</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <ScriptBlock>
-                                    if (-not ($_ -is [Microsoft.TeamFoundation.WorkItemTracking.Client.RelatedLink])) {
-                                        return $_.ArtifactLinkType.Name
-                                    } else {
-                                        return $_.LinkTypeEnd.Name
-                                    }
-                                </ScriptBlock>
+                                <PropertyName>LinkType</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <ScriptBlock>
-                                    if ($_ -is [Microsoft.TeamFoundation.WorkItemTracking.Client.Hyperlink]) {
-                                        return $_.Location
-                                    } elseif ($_ -is [Microsoft.TeamFoundation.WorkItemTracking.Client.ExternalLink]) {
-                                        return $_.LinkedArtifactUri
-                                    } elseif ($_ -is [Microsoft.TeamFoundation.WorkItemTracking.Client.RelatedLink]) {
-                                        return $_.RelatedWorkItemId.ToString()
-                                    }
-                                </ScriptBlock>
+                                <PropertyName>Target</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <PropertyName>Comment</PropertyName>
